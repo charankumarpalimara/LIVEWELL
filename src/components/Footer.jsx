@@ -14,6 +14,7 @@ import {
   HeartFilled,
   ArrowUpOutlined
 } from '@ant-design/icons'
+import logo from '../live-well-rehabilitation-network-logo.png'
 
 const { Footer: AntFooter } = Layout
 const { Title, Paragraph } = Typography
@@ -121,9 +122,16 @@ const Footer = () => {
           {/* Company Info */}
           <Col xs={24} md={8}>
             <div style={getSlideFromBottom(0, isVisible('footer'))}>
-              <Title level={4} style={{ color: '#fff', marginBottom: '20px' }}>
-                🏥 Live Well Rehabilitation Network
-              </Title>
+              <div style={{ marginBottom: '20px' }}>
+                <img 
+                  src={logo} 
+                  alt="Live Well Rehabilitation Network" 
+                  style={{ 
+                    maxWidth: '200px', 
+                    height: 'auto',
+                  }} 
+                />
+              </div>
               <Paragraph style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.8', marginBottom: '25px' }}>
                 India's No. 1 Integrated Autism Network dedicated to mainstreaming children with 
                 inclusion, equality, and equity.

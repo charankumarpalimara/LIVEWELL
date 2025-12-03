@@ -14,6 +14,9 @@ import Activities from './pages/Activities'
 import Gallery from './pages/Gallery'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Franchise from './pages/Franchise'
+import Branches from './pages/Branches'
+import Careers from './pages/Careers'
 import { CartProvider } from './context/CartContext'
 
 const { Content } = Layout
@@ -36,6 +39,9 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/franchise" element={<Franchise />} />
+            <Route path="/branches" element={<Branches />} />
+            <Route path="/careers" element={<Careers />} />
           </Routes>
         </Content>
         <Footer />
