@@ -18,6 +18,7 @@ import Contact from './pages/Contact'
 import Franchise from './pages/Franchise'
 import Branches from './pages/Branches'
 import Careers from './pages/Careers'
+import PatronHealthCare from './pages/PatronHealthCare'
 import ServiceDetail from './pages/ServiceDetail'
 import { CartProvider } from './context/CartContext'
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/franchise" element={<Franchise />} />
             <Route path="/branches" element={<Branches />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/patron-health-care" element={<PatronHealthCare />} />
             <Route path="/autism-therapy" element={<ServiceDetail />} />
             <Route path="/speech-therapy" element={<ServiceDetail />} />
             <Route path="/occupational-therapy-for-kids" element={<ServiceDetail />} />

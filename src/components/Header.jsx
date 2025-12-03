@@ -17,7 +17,8 @@ import {
   CloseOutlined,
   GlobalOutlined,
   BranchesOutlined,
-  SolutionOutlined
+  SolutionOutlined,
+  BankOutlined
 } from '@ant-design/icons'
 import { useCart } from '../context/CartContext'
 import logo from '../live-well-rehabilitation-network-logo.png'
@@ -60,22 +61,21 @@ const Header = () => {
       icon: <ShopOutlined />,
       label: <Link to="/products" onClick={() => setDrawerVisible(false)}>Products</Link>,
     },
+    {
+      key: '/patron-health-care',
+      icon: <BankOutlined />,
+      label: <Link to="/patron-health-care" onClick={() => setDrawerVisible(false)}>Patron Health Care</Link>,
+    },
     // {
     //   key: '/appointment',
     //   icon: <UserOutlined />,
     //   label: <Link to="/appointment" onClick={() => setDrawerVisible(false)}>Book Appointment</Link>,
     // },
-    {
-      key: '/programs',
-      icon: <BookOutlined />,
-      label: <Link to="/programs" onClick={() => setDrawerVisible(false)}>Programs</Link>,
-    },
-    {
-      key: '/gallery',
-      icon: <PictureOutlined />,
-      label: <Link to="/gallery" onClick={() => setDrawerVisible(false)}>Gallery</Link>,
-    },
-
+    // {
+    //   key: '/programs',
+    //   icon: <BookOutlined />,
+    //   label: <Link to="/programs" onClick={() => setDrawerVisible(false)}>Programs</Link>,
+    // },
     {
       key: '/branches',
       icon: <BranchesOutlined />,
@@ -90,6 +90,12 @@ const Header = () => {
       key: '/careers',
       icon: <SolutionOutlined />,
       label: <Link to="/careers" onClick={() => setDrawerVisible(false)}>Careers</Link>,
+    },
+
+    {
+      key: '/gallery',
+      icon: <PictureOutlined />,
+      label: <Link to="/gallery" onClick={() => setDrawerVisible(false)}>Gallery</Link>,
     },
     {
       key: '/contact',
