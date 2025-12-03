@@ -13,7 +13,8 @@ import {
   TeamOutlined,
   PictureOutlined,
   ContactsOutlined,
-  AppstoreOutlined
+  AppstoreOutlined,
+  CloseOutlined
 } from '@ant-design/icons'
 import { useCart } from '../context/CartContext'
 import logo from '../live-well-rehabilitation-network-logo.png'
@@ -85,18 +86,37 @@ const Header = () => {
       <div
         style={{
           background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
-          padding: '8px 20px',
+          padding: '10px 20px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '30px',
+          gap: '40px',
           color: '#fff',
           fontSize: '14px',
+          animation: 'slideDown 0.5s ease-out',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '10px',
+            padding: '5px 15px',
+            background: 'rgba(255,255,255,0.15)',
+            borderRadius: '50px',
+            transition: 'all 0.3s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.25)'
+            e.currentTarget.style.transform = 'scale(1.02)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.15)'
+            e.currentTarget.style.transform = 'scale(1)'
+          }}
+        >
           <PhoneOutlined style={{ animation: 'pulse 2s infinite' }} />
-          <span>National Helpline:</span>
+          <span>Helpline:</span>
           <a 
             href="tel:+918977510100" 
             style={{ color: '#fff', fontWeight: 'bold', textDecoration: 'none' }}
@@ -104,8 +124,17 @@ const Header = () => {
             +91 8977510100
           </a>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <span className="animate-wave" style={{ display: 'inline-block' }}>👋</span>
+        <div 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px',
+            padding: '5px 15px',
+            background: 'rgba(255,255,255,0.15)',
+            borderRadius: '50px',
+          }}
+        >
+          <span style={{ animation: 'wave 2s infinite' }}>👋</span>
           <span>Mon - Sat: 8:00 AM - 7:30 PM</span>
         </div>
       </div>
@@ -117,23 +146,34 @@ const Header = () => {
           top: 0,
           zIndex: 1000,
           background: scrolled ? 'rgba(255, 255, 255, 0.98)' : '#fff',
-          boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.1)' : '0 2px 8px rgba(0,0,0,0.05)',
+          boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.1)' : '0 2px 10px rgba(0,0,0,0.05)',
           padding: '0 30px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           height: scrolled ? '70px' : '80px',
-          transition: 'all 0.3s ease',
+          transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
         }}
       >
-        <Link to="/" style={{ textDecoration: 'none' }} className="logo-container">
+        <Link 
+          to="/" 
+          style={{ textDecoration: 'none' }} 
+          className="logo-container"
+        >
           <img 
             src={logo} 
             alt="Live Well Rehabilitation Network" 
             style={{ 
               height: scrolled ? '45px' : '55px',
-              transition: 'height 0.3s ease',
+              transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             }} 
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)'
+            }}
           />
         </Link>
         
@@ -166,6 +206,15 @@ const Header = () => {
                   height: '42px',
                   padding: '0 20px',
                   fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,174,239,0.35)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
                 }}
               >
                 Cart
@@ -183,6 +232,15 @@ const Header = () => {
                 height: '42px',
                 padding: '0 20px',
                 fontWeight: '600',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(227,30,36,0.35)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               Book Now
@@ -195,7 +253,18 @@ const Header = () => {
             style={{
               border: '2px solid #00aeef',
               color: '#00aeef',
-              borderRadius: '8px',
+              borderRadius: '10px',
+              height: '42px',
+              width: '42px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#00aeef'
+              e.currentTarget.style.color = '#fff'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.color = '#00aeef'
             }}
           />
         </div>
@@ -209,15 +278,31 @@ const Header = () => {
         placement="right"
         onClose={() => setDrawerVisible(false)}
         open={drawerVisible}
-        width={280}
+        width={300}
+        closeIcon={<CloseOutlined style={{ fontSize: '18px', color: '#1e3a5f' }} />}
+        styles={{
+          body: { padding: 0 },
+          header: { 
+            borderBottom: '1px solid #f0f0f0',
+            padding: '16px 20px',
+          },
+        }}
       >
         <Menu
           mode="vertical"
           selectedKeys={[location.pathname]}
           items={menuItems}
-          style={{ border: 'none' }}
+          style={{ 
+            border: 'none',
+            fontSize: '15px',
+          }}
         />
-        <div style={{ padding: '20px', borderTop: '1px solid #eee', marginTop: '20px' }}>
+        <div style={{ 
+          padding: '25px', 
+          borderTop: '1px solid #f0f0f0', 
+          marginTop: '10px',
+          background: '#f8fbff',
+        }}>
           <Link to="/appointment" onClick={() => setDrawerVisible(false)}>
             <Button
               type="primary"
@@ -227,24 +312,53 @@ const Header = () => {
                 background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
                 border: 'none',
                 borderRadius: '25px',
-                height: '45px',
+                height: '50px',
                 fontWeight: '600',
+                fontSize: '16px',
               }}
             >
               Book Appointment
             </Button>
           </Link>
-          <div style={{ marginTop: '15px', textAlign: 'center' }}>
-            <PhoneOutlined style={{ color: '#00aeef' }} />
-            <a 
-              href="tel:+918977510100" 
-              style={{ color: '#00aeef', fontWeight: 'bold', marginLeft: '8px' }}
-            >
-              +91 8977510100
-            </a>
+          <div style={{ 
+            marginTop: '20px', 
+            textAlign: 'center',
+            padding: '15px',
+            background: '#fff',
+            borderRadius: '12px',
+            boxShadow: '0 3px 10px rgba(0,0,0,0.05)',
+          }}>
+            <PhoneOutlined style={{ color: '#00aeef', fontSize: '20px' }} />
+            <div style={{ marginTop: '8px' }}>
+              <a 
+                href="tel:+918977510100" 
+                style={{ color: '#1e3a5f', fontWeight: 'bold', fontSize: '18px' }}
+              >
+                +91 8977510100
+              </a>
+            </div>
+            <div style={{ color: '#888', fontSize: '12px', marginTop: '5px' }}>
+              Available Mon-Sat
+            </div>
           </div>
         </div>
       </Drawer>
+
+      <style>{`
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+        }
+        @keyframes wave {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(20deg); }
+          75% { transform: rotate(-20deg); }
+        }
+      `}</style>
     </>
   )
 }

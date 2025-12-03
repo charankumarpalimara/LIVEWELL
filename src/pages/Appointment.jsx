@@ -1,303 +1,618 @@
-import React, { useState } from 'react'
-import { Form, Input, Button, Select, DatePicker, TimePicker, Card, Typography, message, Row, Col } from 'antd'
-import { CalendarOutlined, UserOutlined, PhoneOutlined, MailOutlined, CheckCircleOutlined } from '@ant-design/icons'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Card, Typography, Form, Input, Select, DatePicker, TimePicker, Button, message, Steps } from 'antd'
+import { 
+  UserOutlined, 
+  PhoneOutlined, 
+  MailOutlined, 
+  CalendarOutlined,
+  CheckCircleFilled,
+  ClockCircleOutlined,
+  HeartFilled,
+  SafetyCertificateFilled
+} from '@ant-design/icons'
 import dayjs from 'dayjs'
 
 const { Title, Paragraph } = Typography
-const { TextArea } = Input
 const { Option } = Select
+const { TextArea } = Input
+
+// Custom hook for scroll animations
+const useScrollAnimation = () => {
+  const [visibleElements, setVisibleElements] = useState(new Set())
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleElements((prev) => new Set([...prev, entry.target.dataset.animateId]))
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const elements = document.querySelectorAll('[data-animate-id]')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
+  return visibleElements
+}
 
 const Appointment = () => {
   const [form] = Form.useForm()
+  const [currentStep, setCurrentStep] = useState(0)
   const [loading, setLoading] = useState(false)
+  const visibleElements = useScrollAnimation()
+  const isVisible = (id) => visibleElements.has(id)
 
-  const onFinish = async (values) => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      message.success('Appointment request submitted successfully! We will contact you soon.')
-      form.resetFields()
-    }, 1500)
-  }
+  // Animation styles
+  const getSlideFromLeft = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(-40px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromRight = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(40px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromBottom = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateY(0)' : 'translateY(35px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getScaleIn = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'scale(1)' : 'scale(0.9)',
+    transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
 
   const services = [
-    'Autism Therapy',
+    'Autism Integrated Therapy',
     'Speech Therapy',
     'Occupational Therapy',
-    'Behavior Therapy',
+    'Behavioral Therapy',
     'Special Education',
     'Play Therapy',
     'Music Therapy',
     'ABA Therapy',
     'Early Intervention',
-    'Sensory Integration Therapy',
-    'Physiotherapy',
+    'Sensory Integration',
+    'Pediatric Physiotherapy',
   ]
+
+  const onFinish = (values) => {
+    setLoading(true)
+    setTimeout(() => {
+      message.success('Appointment booked successfully! We will contact you soon.')
+      form.resetFields()
+      setCurrentStep(0)
+      setLoading(false)
+    }, 1500)
+  }
 
   return (
     <div style={{ background: '#fff', minHeight: '80vh' }}>
       {/* Hero Section */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
-          padding: '80px 30px',
+          backgroundImage: 'linear-gradient(135deg, rgba(0,166,81,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=600&fit=crop)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '100px 30px',
           textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
         }}
       >
-        <div style={{
-          position: 'absolute',
-          top: '15%',
-          left: '8%',
-          width: '80px',
-          height: '80px',
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.1)',
-          animation: 'float 4s ease-in-out infinite',
-        }} />
-        
+        <div style={{ 
+          color: 'rgba(255,255,255,0.9)', 
+          fontWeight: '700', 
+          marginBottom: '15px',
+          textTransform: 'uppercase',
+          letterSpacing: '3px',
+          fontSize: '14px',
+          animation: 'slideDown 0.8s ease-out',
+        }}>
+          Book Now
+        </div>
         <Title 
           level={1} 
           style={{ 
             color: '#fff', 
             marginBottom: '20px',
-            fontSize: 'clamp(28px, 5vw, 42px)',
-            animation: 'fadeInUp 0.8s ease-out',
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            animation: 'slideDown 0.8s ease-out 0.2s both',
           }}
         >
-          Book an Appointment 📅
+          Book an Appointment
         </Title>
         <Paragraph 
           style={{ 
             fontSize: '18px', 
-            color: 'rgba(255,255,255,0.95)',
-            animation: 'fadeInUp 0.8s ease-out 0.2s both',
+            color: 'rgba(255,255,255,0.95)', 
+            maxWidth: '700px', 
+            margin: '0 auto',
+            animation: 'slideDown 0.8s ease-out 0.4s both',
           }}
         >
-          Schedule a consultation with our expert therapists
+          Take the first step towards your child's brighter future. Book a consultation today!
         </Paragraph>
-        <div 
-          style={{ 
-            marginTop: '20px', 
-            fontSize: '22px', 
-            color: '#fff', 
-            fontWeight: '700',
-            animation: 'fadeInUp 0.8s ease-out 0.4s both',
-          }}
-        >
-          <PhoneOutlined style={{ marginRight: '10px' }} />
-          National Helpline: +91 8977510100
-        </div>
       </div>
 
-      <div style={{ padding: '60px 30px', maxWidth: '900px', margin: '0 auto' }}>
-        <Card
-          className="card-animated"
-          style={{
-            boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-          }}
-        >
-          <Form
-            form={form}
-            layout="vertical"
-            onFinish={onFinish}
-            size="large"
-          >
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="childName"
-                  label="Child's Name"
-                  rules={[{ required: true, message: "Please enter child's name" }]}
-                >
-                  <Input 
-                    prefix={<UserOutlined style={{ color: '#00aeef' }} />} 
-                    placeholder="Enter child's name" 
-                    style={{ borderRadius: '10px' }}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="age"
-                  label="Age"
-                  rules={[{ required: true, message: 'Please enter age' }]}
-                >
-                  <Input 
-                    type="number" 
-                    placeholder="Enter age" 
-                    min={0} 
-                    max={18} 
-                    style={{ borderRadius: '10px' }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+      <div 
+        data-animate-id="form-section"
+        style={{ padding: '80px 30px', maxWidth: '1200px', margin: '0 auto' }}
+      >
+        <Row gutter={[50, 50]} align="top">
+          {/* Left Side - Info */}
+          <Col xs={24} lg={10}>
+            <div style={getSlideFromLeft(0, isVisible('form-section'))}>
+              <div style={{ 
+                color: '#00a651', 
+                fontWeight: '700', 
+                marginBottom: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                fontSize: '13px',
+              }}>
+                Why Book With Us
+              </div>
+              <Title level={2} style={{ color: '#1e3a5f', marginBottom: '25px', fontSize: 'clamp(26px, 4vw, 36px)' }}>
+                Start Your Child's <span style={{ color: '#00aeef' }}>Journey</span> Today
+              </Title>
+              <Paragraph style={{ fontSize: '16px', lineHeight: '1.9', color: '#666', marginBottom: '35px' }}>
+                Our expert team is ready to provide personalized care and support for your child's 
+                developmental needs. Schedule a consultation to learn more.
+              </Paragraph>
 
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="parentName"
-                  label="Parent/Guardian Name"
-                  rules={[{ required: true, message: 'Please enter parent name' }]}
+              {/* Benefits */}
+              {[
+                { icon: <SafetyCertificateFilled />, title: 'Expert Therapists', desc: '50+ certified specialists', color: '#e31e24' },
+                { icon: <ClockCircleOutlined />, title: 'Flexible Scheduling', desc: 'Mon-Sat, 9AM - 6PM', color: '#f7941d' },
+                { icon: <HeartFilled />, title: 'Personalized Care', desc: 'Tailored to your child', color: '#00a651' },
+                { icon: <CheckCircleFilled />, title: 'Free Consultation', desc: 'First session free', color: '#00aeef' },
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '18px',
+                    marginBottom: '22px',
+                    padding: '18px 22px',
+                    background: '#f8fbff',
+                    borderRadius: '14px',
+                    border: `2px solid transparent`,
+                    transition: 'all 0.4s ease',
+                    ...getSlideFromLeft(0.1 + index * 0.1, isVisible('form-section')),
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateX(10px)'
+                    e.currentTarget.style.borderColor = item.color
+                    e.currentTarget.style.boxShadow = `0 10px 30px ${item.color}18`
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateX(0)'
+                    e.currentTarget.style.borderColor = 'transparent'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
                 >
-                  <Input 
-                    prefix={<UserOutlined style={{ color: '#00aeef' }} />} 
-                    placeholder="Enter parent name" 
-                    style={{ borderRadius: '10px' }}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="phone"
-                  label="Phone Number"
-                  rules={[
-                    { required: true, message: 'Please enter phone number' },
-                    { pattern: /^[0-9]{10}$/, message: 'Please enter valid 10-digit phone number' }
+                  <div style={{
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '50%',
+                    background: `${item.color}15`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '22px',
+                    color: item.color,
+                    transition: 'transform 0.3s ease',
+                  }}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: '700', color: '#1e3a5f', fontSize: '16px', marginBottom: '3px' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ color: '#888', fontSize: '14px' }}>{item.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Col>
+
+          {/* Right Side - Form */}
+          <Col xs={24} lg={14}>
+            <Card
+              style={{
+                border: 'none',
+                borderRadius: '24px',
+                boxShadow: '0 15px 50px rgba(0,0,0,0.1)',
+                overflow: 'hidden',
+                ...getSlideFromRight(0.15, isVisible('form-section')),
+              }}
+              bodyStyle={{ padding: '40px' }}
+            >
+              <div style={{ marginBottom: '30px' }}>
+                <Steps
+                  current={currentStep}
+                  size="small"
+                  items={[
+                    { title: 'Personal Info' },
+                    { title: 'Select Service' },
+                    { title: 'Schedule' },
                   ]}
-                >
-                  <Input 
-                    prefix={<PhoneOutlined style={{ color: '#00aeef' }} />} 
-                    placeholder="Enter phone number" 
-                    style={{ borderRadius: '10px' }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+                />
+              </div>
 
-            <Form.Item
-              name="email"
-              label="Email Address"
-              rules={[
-                { required: true, message: 'Please enter email' },
-                { type: 'email', message: 'Please enter valid email' }
-              ]}
-            >
-              <Input 
-                prefix={<MailOutlined style={{ color: '#00aeef' }} />} 
-                placeholder="Enter email address" 
-                style={{ borderRadius: '10px' }}
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="service"
-              label="Service Required"
-              rules={[{ required: true, message: 'Please select a service' }]}
-            >
-              <Select placeholder="Select a service" style={{ borderRadius: '10px' }}>
-                {services.map((service) => (
-                  <Option key={service} value={service}>
-                    {service}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="preferredDate"
-                  label="Preferred Date"
-                  rules={[{ required: true, message: 'Please select a date' }]}
-                >
-                  <DatePicker
-                    style={{ width: '100%', borderRadius: '10px' }}
-                    disabledDate={(current) => current && current < dayjs().startOf('day')}
-                    placeholder="Select date"
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  name="preferredTime"
-                  label="Preferred Time"
-                  rules={[{ required: true, message: 'Please select a time' }]}
-                >
-                  <TimePicker
-                    style={{ width: '100%', borderRadius: '10px' }}
-                    format="HH:mm"
-                    placeholder="Select time"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Form.Item
-              name="address"
-              label="Address"
-              rules={[{ required: true, message: 'Please enter address' }]}
-            >
-              <TextArea rows={3} placeholder="Enter your address" style={{ borderRadius: '10px' }} />
-            </Form.Item>
-
-            <Form.Item
-              name="message"
-              label="Additional Information (Optional)"
-            >
-              <TextArea 
-                rows={4} 
-                placeholder="Any additional information about your child's condition or requirements" 
-                style={{ borderRadius: '10px' }}
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={loading}
-                block
+              <Form
+                form={form}
+                layout="vertical"
+                onFinish={onFinish}
                 size="large"
-                icon={<CalendarOutlined />}
-                className="btn-animated"
+              >
+                {/* Step 1: Personal Info */}
+                <div style={{ display: currentStep === 0 ? 'block' : 'none' }}>
+                  <Row gutter={16}>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="parentName"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Parent/Guardian Name</span>}
+                        rules={[{ required: true, message: 'Please enter your name' }]}
+                      >
+                        <Input 
+                          prefix={<UserOutlined style={{ color: '#00aeef' }} />} 
+                          placeholder="Enter your name"
+                          style={{ 
+                            height: '52px', 
+                            borderRadius: '12px',
+                            border: '2px solid #e8e8e8',
+                            transition: 'all 0.3s ease',
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="childName"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Child's Name</span>}
+                        rules={[{ required: true, message: 'Please enter child name' }]}
+                      >
+                        <Input 
+                          prefix={<UserOutlined style={{ color: '#f7941d' }} />} 
+                          placeholder="Enter child's name"
+                          style={{ 
+                            height: '52px', 
+                            borderRadius: '12px',
+                            border: '2px solid #e8e8e8',
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={16}>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="phone"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Phone Number</span>}
+                        rules={[{ required: true, message: 'Please enter phone' }]}
+                      >
+                        <Input 
+                          prefix={<PhoneOutlined style={{ color: '#00a651' }} />} 
+                          placeholder="Enter phone number"
+                          style={{ 
+                            height: '52px', 
+                            borderRadius: '12px',
+                            border: '2px solid #e8e8e8',
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="email"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Email Address</span>}
+                      >
+                        <Input 
+                          prefix={<MailOutlined style={{ color: '#662d91' }} />} 
+                          placeholder="Enter email (optional)"
+                          style={{ 
+                            height: '52px', 
+                            borderRadius: '12px',
+                            border: '2px solid #e8e8e8',
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Button
+                    type="primary"
+                    block
+                    onClick={() => {
+                      form.validateFields(['parentName', 'childName', 'phone']).then(() => {
+                        setCurrentStep(1)
+                      })
+                    }}
+                    style={{
+                      height: '52px',
+                      borderRadius: '12px',
+                      background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+                      border: 'none',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      marginTop: '10px',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-3px)'
+                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,174,239,0.3)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = 'none'
+                    }}
+                  >
+                    Next Step →
+                  </Button>
+                </div>
+
+                {/* Step 2: Service Selection */}
+                <div style={{ display: currentStep === 1 ? 'block' : 'none' }}>
+                  <Form.Item
+                    name="service"
+                    label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Select Service</span>}
+                    rules={[{ required: true, message: 'Please select a service' }]}
+                  >
+                    <Select 
+                      placeholder="Choose therapy service"
+                      style={{ height: '52px' }}
+                      dropdownStyle={{ borderRadius: '12px' }}
+                    >
+                      {services.map((service, index) => (
+                        <Option key={index} value={service}>{service}</Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="childAge"
+                    label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Child's Age</span>}
+                    rules={[{ required: true, message: 'Please select age' }]}
+                  >
+                    <Select 
+                      placeholder="Select age group"
+                      style={{ height: '52px' }}
+                    >
+                      <Option value="0-2">0-2 years</Option>
+                      <Option value="2-4">2-4 years</Option>
+                      <Option value="4-6">4-6 years</Option>
+                      <Option value="6-10">6-10 years</Option>
+                      <Option value="10+">10+ years</Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="concerns"
+                    label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Describe Your Concerns</span>}
+                  >
+                    <TextArea 
+                      rows={4} 
+                      placeholder="Tell us about your child's needs..."
+                      style={{ 
+                        borderRadius: '12px',
+                        border: '2px solid #e8e8e8',
+                        padding: '15px',
+                      }}
+                    />
+                  </Form.Item>
+                  <Row gutter={16}>
+                    <Col span={12}>
+                      <Button
+                        block
+                        onClick={() => setCurrentStep(0)}
+                        style={{
+                          height: '52px',
+                          borderRadius: '12px',
+                          fontWeight: '600',
+                        }}
+                      >
+                        ← Back
+                      </Button>
+                    </Col>
+                    <Col span={12}>
+                      <Button
+                        type="primary"
+                        block
+                        onClick={() => {
+                          form.validateFields(['service', 'childAge']).then(() => {
+                            setCurrentStep(2)
+                          })
+                        }}
+                        style={{
+                          height: '52px',
+                          borderRadius: '12px',
+                          background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+                          border: 'none',
+                          fontWeight: '700',
+                        }}
+                      >
+                        Next Step →
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+
+                {/* Step 3: Schedule */}
+                <div style={{ display: currentStep === 2 ? 'block' : 'none' }}>
+                  <Row gutter={16}>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="date"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Preferred Date</span>}
+                        rules={[{ required: true, message: 'Please select date' }]}
+                      >
+                        <DatePicker 
+                          style={{ width: '100%', height: '52px', borderRadius: '12px' }}
+                          placeholder="Select date"
+                          disabledDate={(current) => current && current < dayjs().startOf('day')}
+                          suffixIcon={<CalendarOutlined style={{ color: '#00aeef' }} />}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="time"
+                        label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Preferred Time</span>}
+                        rules={[{ required: true, message: 'Please select time' }]}
+                      >
+                        <TimePicker 
+                          style={{ width: '100%', height: '52px', borderRadius: '12px' }}
+                          format="h:mm A"
+                          use12Hours
+                          placeholder="Select time"
+                          suffixIcon={<ClockCircleOutlined style={{ color: '#f7941d' }} />}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={16} style={{ marginTop: '20px' }}>
+                    <Col span={12}>
+                      <Button
+                        block
+                        onClick={() => setCurrentStep(1)}
+                        style={{
+                          height: '52px',
+                          borderRadius: '12px',
+                          fontWeight: '600',
+                        }}
+                      >
+                        ← Back
+                      </Button>
+                    </Col>
+                    <Col span={12}>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={loading}
+                        block
+                        style={{
+                          height: '52px',
+                          borderRadius: '12px',
+                          background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
+                          border: 'none',
+                          fontWeight: '700',
+                          fontSize: '16px',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-3px)'
+                          e.currentTarget.style.boxShadow = '0 10px 30px rgba(227,30,36,0.3)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0)'
+                          e.currentTarget.style.boxShadow = 'none'
+                        }}
+                      >
+                        Book Appointment ✓
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+
+      {/* Contact Info */}
+      <div 
+        data-animate-id="contact-info"
+        style={{ 
+          padding: '70px 30px', 
+          background: 'linear-gradient(135deg, #1e3a5f 0%, #00aeef 100%)',
+          textAlign: 'center',
+        }}
+      >
+        <Title level={3} style={{ 
+          color: '#fff', 
+          marginBottom: '30px', 
+          fontSize: 'clamp(22px, 3vw, 30px)',
+          ...getSlideFromBottom(0, isVisible('contact-info')),
+        }}>
+          Need Immediate Assistance?
+        </Title>
+        <Row gutter={[30, 30]} justify="center">
+          {[
+            { icon: <PhoneOutlined />, label: 'Call Us', value: '+91 7032 157 157', color: '#e31e24' },
+            { icon: <MailOutlined />, label: 'Email Us', value: 'info@livewellnetwork.com', color: '#f7941d' },
+            { icon: <ClockCircleOutlined />, label: 'Working Hours', value: 'Mon-Sat: 9AM - 6PM', color: '#00a651' },
+          ].map((item, index) => (
+            <Col xs={24} sm={8} md={6} key={index}>
+              <div
                 style={{
-                  background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
-                  border: 'none',
-                  borderRadius: '25px',
-                  height: '55px',
-                  fontWeight: '700',
-                  fontSize: '18px',
+                  padding: '25px 20px',
+                  background: 'rgba(255,255,255,0.1)',
+                  borderRadius: '16px',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.4s ease',
+                  ...getScaleIn(0.1 + index * 0.1, isVisible('contact-info')),
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.03)'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.18)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
                 }}
               >
-                Submit Appointment Request
-              </Button>
-            </Form.Item>
-          </Form>
-        </Card>
-
-        {/* What to Expect */}
-        <Card
-          className="card-animated"
-          style={{
-            marginTop: '30px',
-            background: 'linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%)',
-            border: '2px solid #00aeef',
-          }}
-        >
-          <Title level={4} style={{ marginBottom: '20px', color: '#1e3a5f' }}>
-            What to Expect:
-          </Title>
-          <Row gutter={[16, 16]}>
-            {[
-              'Initial consultation with our expert therapists',
-              'Comprehensive assessment of your child\'s needs',
-              'Personalized treatment plan development',
-              'Option to watch your child\'s training sessions live',
-              'Regular progress updates and parent training',
-            ].map((item, index) => (
-              <Col xs={24} sm={12} key={index}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <CheckCircleOutlined style={{ color: '#00a651', fontSize: '18px' }} />
-                  <span style={{ color: '#555' }}>{item}</span>
+                <div style={{ 
+                  fontSize: '32px', 
+                  marginBottom: '12px', 
+                  color: item.color,
+                }}>
+                  {item.icon}
                 </div>
-              </Col>
-            ))}
-          </Row>
-        </Card>
+                <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', marginBottom: '5px' }}>
+                  {item.label}
+                </div>
+                <div style={{ color: '#fff', fontWeight: '700', fontSize: '15px' }}>
+                  {item.value}
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
       </div>
+
+      <style>{`
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .ant-select-selector {
+          height: 52px !important;
+          border-radius: 12px !important;
+          border: 2px solid #e8e8e8 !important;
+        }
+        .ant-select-selection-placeholder,
+        .ant-select-selection-item {
+          line-height: 48px !important;
+        }
+        .ant-picker {
+          border: 2px solid #e8e8e8 !important;
+        }
+        .ant-input:hover, .ant-input:focus,
+        .ant-select-selector:hover, .ant-picker:hover {
+          border-color: #00aeef !important;
+        }
+        .ant-input:focus, .ant-picker-focused {
+          box-shadow: 0 0 0 3px rgba(0,174,239,0.1) !important;
+        }
+      `}</style>
     </div>
   )
 }

@@ -18,12 +18,59 @@ import { Link } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
 
-const Services = () => {
-  const [isVisible, setIsVisible] = useState(false)
-
+// Custom hook for scroll animations
+const useScrollAnimation = () => {
+  const [visibleElements, setVisibleElements] = useState(new Set())
+  
   useEffect(() => {
-    setIsVisible(true)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleElements((prev) => new Set([...prev, entry.target.dataset.animateId]))
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const elements = document.querySelectorAll('[data-animate-id]')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
   }, [])
+
+  return visibleElements
+}
+
+const Services = () => {
+  const visibleElements = useScrollAnimation()
+  const isVisible = (id) => visibleElements.has(id)
+
+  // Animation styles
+  const getSlideFromLeft = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(-50px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromRight = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(50px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromBottom = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateY(0)' : 'translateY(40px)',
+    transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getScaleIn = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'scale(1)' : 'scale(0.85)',
+    transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
 
   const services = [
     {
@@ -136,9 +183,6 @@ const Services = () => {
           overflow: 'hidden',
         }}
       >
-        <div className="hero-shape hero-shape-1 animate-float" />
-        <div className="hero-shape hero-shape-2 animate-float" style={{ animationDelay: '2s' }} />
-        
         <div style={{ 
           color: 'rgba(255,255,255,0.9)', 
           fontWeight: '700', 
@@ -146,51 +190,59 @@ const Services = () => {
           textTransform: 'uppercase',
           letterSpacing: '3px',
           fontSize: '14px',
+          animation: 'slideDown 0.8s ease-out',
         }}>
           What We Offer
         </div>
         <Title 
           level={1} 
-          className="hero-title"
           style={{ 
             color: '#fff', 
             marginBottom: '20px',
             fontSize: 'clamp(32px, 5vw, 48px)',
+            animation: 'slideDown 0.8s ease-out 0.2s both',
           }}
         >
           Our Therapy Services
         </Title>
         <Paragraph 
-          className="hero-subtitle"
           style={{ 
             fontSize: '18px', 
             color: 'rgba(255,255,255,0.95)', 
             maxWidth: '800px', 
             margin: '0 auto',
+            animation: 'slideDown 0.8s ease-out 0.4s both',
           }}
         >
           Comprehensive therapeutic services designed to support children with autism, ADHD, and other 
-          neurological and sensorial disorders. Our integrated approach ensures maximum progress.
+          neurological and sensorial disorders.
         </Paragraph>
       </div>
 
       {/* Services Grid */}
-      <div style={{ padding: '100px 30px' }}>
+      <div 
+        data-animate-id="services-grid"
+        style={{ padding: '90px 30px' }}
+      >
         <Row gutter={[24, 24]}>
           {services.map((service, index) => (
             <Col xs={24} sm={12} md={8} lg={6} key={service.id}>
               <Card
                 hoverable
-                className={`card-animated hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{
                   height: '100%',
                   border: `2px solid ${service.color}`,
+                  borderRadius: '16px',
                   overflow: 'hidden',
-                  animationDelay: `${index * 0.1}s`,
+                  transition: 'all 0.4s ease',
+                  ...(index % 2 === 0 
+                    ? getSlideFromLeft(0.05 + index * 0.05, isVisible('services-grid'))
+                    : getSlideFromRight(0.05 + index * 0.05, isVisible('services-grid'))
+                  ),
                 }}
-                bodyStyle={{ padding: '20px' }}
+                bodyStyle={{ padding: '18px' }}
                 cover={
-                  <div className="image-zoom" style={{ height: '160px', overflow: 'hidden', position: 'relative' }}>
+                  <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
                     <img 
                       src={service.image} 
                       alt={service.title}
@@ -198,46 +250,64 @@ const Services = () => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
+                        transition: 'transform 0.5s ease',
                       }}
                     />
                     <div style={{
                       position: 'absolute',
-                      top: '10px',
-                      right: '10px',
+                      top: '12px',
+                      right: '12px',
                       background: service.color,
                       color: '#fff',
-                      width: '45px',
-                      height: '45px',
+                      width: '42px',
+                      height: '42px',
                       borderRadius: '50%',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '20px',
+                      fontSize: '18px',
                       boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                      transition: 'transform 0.3s ease',
                     }}>
                       {service.icon}
                     </div>
                   </div>
                 }
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)'
+                  e.currentTarget.style.boxShadow = `0 20px 40px ${service.color}30`
+                  const img = e.currentTarget.querySelector('img')
+                  if (img) img.style.transform = 'scale(1.1)'
+                  const icon = e.currentTarget.querySelector('[style*="border-radius: 50%"]')
+                  if (icon) icon.style.transform = 'rotate(360deg) scale(1.1)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                  const img = e.currentTarget.querySelector('img')
+                  if (img) img.style.transform = 'scale(1)'
+                  const icon = e.currentTarget.querySelector('[style*="border-radius: 50%"]')
+                  if (icon) icon.style.transform = 'rotate(0) scale(1)'
+                }}
               >
-                <Title level={4} style={{ marginBottom: '10px', color: '#1e3a5f', fontSize: '18px' }}>
+                <Title level={4} style={{ marginBottom: '10px', color: '#1e3a5f', fontSize: '16px' }}>
                   {service.title}
                 </Title>
-                <Paragraph style={{ color: '#666', fontSize: '14px', minHeight: '70px', marginBottom: '15px' }}>
+                <Paragraph style={{ color: '#666', fontSize: '13px', minHeight: '60px', marginBottom: '12px' }}>
                   {service.description}
                 </Paragraph>
                 {service.successRate && (
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '12px', color: '#888' }}>Success Rate</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '11px', color: '#888' }}>Success Rate</span>
                       <span style={{ fontWeight: '700', color: service.color }}>{service.successRate}%</span>
                     </div>
                     <Progress 
-                      percent={service.successRate} 
+                      percent={isVisible('services-grid') ? service.successRate : 0} 
                       strokeColor={service.color}
                       showInfo={false}
                       size="small"
-                      strokeWidth={8}
+                      strokeWidth={6}
                     />
                   </div>
                 )}
@@ -249,8 +319,9 @@ const Services = () => {
 
       {/* Statistics Section */}
       <div
+        data-animate-id="stats"
         style={{
-          padding: '100px 30px',
+          padding: '90px 30px',
           backgroundImage: 'linear-gradient(135deg, rgba(30,58,95,0.95) 0%, rgba(0,174,239,0.95) 100%), url(https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -265,13 +336,19 @@ const Services = () => {
           textTransform: 'uppercase',
           letterSpacing: '3px',
           fontSize: '14px',
+          ...getSlideFromBottom(0, isVisible('stats')),
         }}>
           Our Achievements
         </div>
-        <Title level={2} style={{ color: '#fff', marginBottom: '60px', fontSize: 'clamp(28px, 4vw, 42px)' }}>
+        <Title level={2} style={{ 
+          color: '#fff', 
+          marginBottom: '50px', 
+          fontSize: 'clamp(28px, 4vw, 42px)',
+          ...getSlideFromBottom(0.1, isVisible('stats')),
+        }}>
           Proven Success Rates
         </Title>
-        <Row gutter={[32, 32]} justify="center">
+        <Row gutter={[28, 28]} justify="center">
           {[
             { name: 'Autism Integrated Therapy', rate: 98, color: '#e31e24' },
             { name: 'Speech Therapy', rate: 98, color: '#f7941d' },
@@ -280,27 +357,37 @@ const Services = () => {
           ].map((stat, index) => (
             <Col xs={12} sm={8} md={6} key={index}>
               <div
-                className={`glass-effect ${isVisible ? 'animate-scale-in' : ''}`}
                 style={{
-                  padding: '35px 20px',
-                  borderRadius: '20px',
-                  animationDelay: `${index * 0.15}s`,
+                  padding: '30px 20px',
+                  background: 'rgba(255,255,255,0.1)',
+                  borderRadius: '16px',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.4s ease',
+                  ...getScaleIn(0.1 + index * 0.1, isVisible('stats')),
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px) scale(1.03)'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.18)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
                 }}
               >
                 <Progress
                   type="circle"
-                  percent={stat.rate}
+                  percent={isVisible('stats') ? stat.rate : 0}
                   strokeColor={stat.color}
                   trailColor="rgba(255,255,255,0.2)"
                   strokeWidth={10}
-                  size={130}
+                  size={120}
                   format={(percent) => (
-                    <span style={{ color: '#fff', fontSize: '32px', fontWeight: '800' }}>
+                    <span style={{ color: '#fff', fontSize: '28px', fontWeight: '800' }}>
                       {percent}%
                     </span>
                   )}
                 />
-                <div style={{ color: '#fff', marginTop: '20px', fontWeight: '600', fontSize: '16px' }}>
+                <div style={{ color: '#fff', marginTop: '18px', fontWeight: '600', fontSize: '15px' }}>
                   {stat.name}
                 </div>
               </div>
@@ -310,32 +397,64 @@ const Services = () => {
       </div>
 
       {/* CTA Section */}
-      <div style={{ padding: '100px 30px', textAlign: 'center', background: '#f8fbff' }}>
-        <Title level={2} style={{ marginBottom: '20px', color: '#1e3a5f', fontSize: 'clamp(28px, 4vw, 40px)' }}>
+      <div 
+        data-animate-id="cta"
+        style={{ padding: '90px 30px', textAlign: 'center', background: '#f8fbff' }}
+      >
+        <Title level={2} style={{ 
+          marginBottom: '20px', 
+          color: '#1e3a5f', 
+          fontSize: 'clamp(28px, 4vw, 40px)',
+          ...getSlideFromBottom(0, isVisible('cta')),
+        }}>
           Ready to Get Started?
         </Title>
-        <Paragraph style={{ fontSize: '18px', color: '#666', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px' }}>
+        <Paragraph style={{ 
+          fontSize: '18px', 
+          color: '#666', 
+          marginBottom: '35px', 
+          maxWidth: '600px', 
+          margin: '0 auto 35px',
+          ...getSlideFromBottom(0.1, isVisible('cta')),
+        }}>
           Book an appointment today and take the first step towards your child's development journey.
         </Paragraph>
-        <Link to="/appointment">
-          <Button
-            type="primary"
-            size="large"
-            className="btn-animated hover-glow"
-            style={{
-              background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
-              border: 'none',
-              borderRadius: '50px',
-              height: '60px',
-              padding: '0 60px',
-              fontWeight: '700',
-              fontSize: '18px',
-            }}
-          >
-            Book Appointment Now <ArrowRightOutlined />
-          </Button>
-        </Link>
+        <div style={getSlideFromBottom(0.2, isVisible('cta'))}>
+          <Link to="/appointment">
+            <Button
+              type="primary"
+              size="large"
+              style={{
+                background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
+                border: 'none',
+                borderRadius: '50px',
+                height: '55px',
+                padding: '0 50px',
+                fontWeight: '700',
+                fontSize: '17px',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)'
+                e.currentTarget.style.boxShadow = '0 15px 35px rgba(227,30,36,0.35)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
+              Book Appointment Now <ArrowRightOutlined />
+            </Button>
+          </Link>
+        </div>
       </div>
+
+      <style>{`
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   )
 }
