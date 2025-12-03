@@ -110,12 +110,12 @@ const Home = () => {
   ]
 
   const services = [
-    { name: 'Autism Therapy', icon: <HeartFilled />, color: '#e31e24', image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=300&h=200&fit=crop' },
-    { name: 'Speech Therapy', icon: <AudioOutlined />, color: '#f7941d', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=200&fit=crop' },
-    { name: 'Occupational Therapy', icon: <ToolOutlined />, color: '#00a651', image: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=300&h=200&fit=crop' },
-    { name: 'Behavior Therapy', icon: <BulbOutlined />, color: '#00aeef', image: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=300&h=200&fit=crop' },
-    { name: 'Special Education', icon: <ReadOutlined />, color: '#662d91', image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=300&h=200&fit=crop' },
-    { name: 'Play Therapy', icon: <PlayCircleOutlined />, color: '#92278f', image: 'https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=300&h=200&fit=crop' },
+    { name: 'Autism Therapy', icon: <HeartFilled />, color: '#e31e24', image: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=300&h=200&fit=crop' },
+    { name: 'Speech Therapy', icon: <AudioOutlined />, color: '#f7941d', image: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=300&h=200&fit=crop' },
+    { name: 'Occupational Therapy', icon: <ToolOutlined />, color: '#00a651', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=300&h=200&fit=crop' },
+    { name: 'Behavior Therapy', icon: <BulbOutlined />, color: '#00aeef', image: 'https://images.unsplash.com/photo-1602052577122-f73b9710adba?w=300&h=200&fit=crop' },
+    { name: 'Special Education', icon: <ReadOutlined />, color: '#662d91', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&h=200&fit=crop' },
+    { name: 'Play Therapy', icon: <PlayCircleOutlined />, color: '#92278f', image: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=300&h=200&fit=crop' },
   ]
 
   const stats = [
@@ -167,12 +167,12 @@ const Home = () => {
   ]
 
   const galleryImages = [
-    { src: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=300&fit=crop', title: 'Therapy Session' },
-    { src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=300&fit=crop', title: 'Learning Activities' },
-    { src: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&h=300&fit=crop', title: 'Child Development' },
-    { src: 'https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=400&h=300&fit=crop', title: 'Play Therapy' },
-    { src: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop', title: 'Medical Care' },
-    { src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=400&h=300&fit=crop', title: 'Special Education' },
+    { src: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop', title: 'Autism Therapy Session' },
+    { src: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=400&h=300&fit=crop', title: 'Speech & Language Therapy' },
+    { src: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=400&h=300&fit=crop', title: 'Play-Based Learning' },
+    { src: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop', title: 'Fine Motor Skills Training' },
+    { src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop', title: 'Special Education Class' },
+    { src: 'https://images.unsplash.com/photo-1602052577122-f73b9710adba?w=400&h=300&fit=crop', title: 'Behavioral Development' },
   ]
 
   return (
