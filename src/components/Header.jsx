@@ -42,6 +42,11 @@ const Header = () => {
       label: <Link to="/" onClick={() => setDrawerVisible(false)}>Home</Link>,
     },
     {
+      key: '/about',
+      icon: <TeamOutlined />,
+      label: <Link to="/about" onClick={() => setDrawerVisible(false)}>About Us</Link>,
+    },
+    {
       key: '/services',
       icon: <AppstoreOutlined />,
       label: <Link to="/services" onClick={() => setDrawerVisible(false)}>Our Services</Link>,
@@ -49,7 +54,7 @@ const Header = () => {
     {
       key: '/products',
       icon: <ShopOutlined />,
-      label: <Link to="/products" onClick={() => setDrawerVisible(false)}>Shop</Link>,
+      label: <Link to="/products" onClick={() => setDrawerVisible(false)}>Products</Link>,
     },
     {
       key: '/appointment',
@@ -66,11 +71,7 @@ const Header = () => {
       icon: <PictureOutlined />,
       label: <Link to="/gallery" onClick={() => setDrawerVisible(false)}>Gallery</Link>,
     },
-    {
-      key: '/about',
-      icon: <TeamOutlined />,
-      label: <Link to="/about" onClick={() => setDrawerVisible(false)}>About Us</Link>,
-    },
+
     {
       key: '/contact',
       icon: <ContactsOutlined />,
