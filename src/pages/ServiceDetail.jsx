@@ -215,10 +215,12 @@ const ServiceDetail = () => {
         </Title>
         <Paragraph
           style={{
-            fontSize: '20px',
+            fontSize: '18px',
             color: 'rgba(255,255,255,0.95)',
             maxWidth: '800px',
             margin: '0 auto 30px',
+            lineHeight: '1.7',
+            fontWeight: '400',
           }}
         >
           {service.description}
@@ -334,12 +336,13 @@ const ServiceDetail = () => {
             </Col>
             <Col xs={24} lg={12}>
               <Paragraph style={{ 
-                fontSize: '15px', 
+                fontSize: '16px', 
                 lineHeight: '1.8', 
                 color: '#444', 
                 whiteSpace: 'pre-line', 
                 margin: 0,
                 fontWeight: '400',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
               }}>
                 {service.overview}
               </Paragraph>
@@ -507,11 +510,12 @@ const ServiceDetail = () => {
               </div>
               <div style={{ padding: '25px' }}>
                 <Paragraph style={{ 
-                  fontSize: '15px', 
+                  fontSize: '16px', 
                   lineHeight: '1.8', 
                   color: '#444',
                   margin: 0,
                   fontWeight: '400',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                 }}>
                   {service.approach}
                 </Paragraph>
@@ -618,14 +622,15 @@ const ServiceDetail = () => {
                         fontWeight: '700', 
                         color: '#1e3a5f', 
                         marginBottom: '4px',
-                        fontSize: '14px',
+                        fontSize: '15px',
                       }}>
                         Duration
                       </div>
                       <div style={{ 
                         color: '#666',
-                        fontSize: '14px',
-                        fontWeight: '500',
+                        fontSize: '15px',
+                        fontWeight: '400',
+                        lineHeight: '1.6',
                       }}>
                         {service.duration}
                       </div>
@@ -667,14 +672,15 @@ const ServiceDetail = () => {
                         fontWeight: '700', 
                         color: '#1e3a5f', 
                         marginBottom: '4px',
-                        fontSize: '14px',
+                        fontSize: '15px',
                       }}>
                         Age Group
                       </div>
                       <div style={{ 
                         color: '#666',
-                        fontSize: '14px',
-                        fontWeight: '500',
+                        fontSize: '15px',
+                        fontWeight: '400',
+                        lineHeight: '1.6',
                       }}>
                         {service.ageGroup}
                       </div>
@@ -730,13 +736,14 @@ const ServiceDetail = () => {
               Ready to Get Started?
             </Title>
             <Paragraph style={{ 
-              fontSize: '19px', 
+              fontSize: '17px', 
               color: 'rgba(255,255,255,0.95)', 
               marginBottom: '40px', 
               maxWidth: '650px', 
               margin: '0 auto 40px',
               lineHeight: '1.8',
               fontWeight: '400',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
             }}>
               Book an appointment today and take the first step towards your child's development journey with our {service.name} program.
             </Paragraph>
@@ -753,8 +760,8 @@ const ServiceDetail = () => {
                     borderRadius: '50px',
                     height: '60px',
                     padding: '0 50px',
-                    fontWeight: '700',
-                    fontSize: '17px',
+                    fontWeight: '600',
+                    fontSize: '16px',
                     boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
                     transition: 'all 0.3s ease',
                   }}
@@ -781,8 +788,8 @@ const ServiceDetail = () => {
                     borderRadius: '50px',
                     height: '60px',
                     padding: '0 50px',
-                    fontWeight: '700',
-                    fontSize: '17px',
+                    fontWeight: '600',
+                    fontSize: '16px',
                     backdropFilter: 'blur(10px)',
                     transition: 'all 0.3s ease',
                   }}
@@ -814,7 +821,7 @@ const ServiceDetail = () => {
               padding: '12px 28px',
               borderRadius: '50px',
               fontSize: '13px',
-              fontWeight: '700',
+              fontWeight: '600',
               letterSpacing: '1px',
               textTransform: 'uppercase',
               marginBottom: '25px',
@@ -832,10 +839,12 @@ const ServiceDetail = () => {
               Explore Our Other Services
             </Title>
             <Paragraph style={{
-              fontSize: '18px',
+              fontSize: '16px',
               color: '#666',
               maxWidth: '600px',
               margin: '0 auto',
+              lineHeight: '1.7',
+              fontWeight: '400',
             }}>
               Discover more comprehensive therapy services we offer
             </Paragraph>
@@ -926,7 +935,7 @@ const ServiceDetail = () => {
                           <Title level={4} style={{ 
                             marginBottom: '12px', 
                             color: '#1e3a5f', 
-                            fontSize: '18px',
+                            fontSize: '17px',
                             fontWeight: '700',
                             lineHeight: '1.4',
                           }}>
@@ -934,10 +943,12 @@ const ServiceDetail = () => {
                           </Title>
                           <Paragraph style={{ 
                             color: '#666', 
-                            fontSize: '14px', 
+                            fontSize: '15px', 
                             marginBottom: 0,
-                            lineHeight: '1.6',
-                            minHeight: '42px',
+                            lineHeight: '1.7',
+                            minHeight: '45px',
+                            fontWeight: '400',
+                            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                           }}>
                             {otherService.description}
                           </Paragraph>
@@ -1071,8 +1082,8 @@ const ServiceDetail = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <ArrowLeftOutlined style={{ color: servicesData[prevServiceKey]?.color, fontSize: '20px' }} />
                     <div>
-                      <div style={{ fontSize: '12px', color: '#999', marginBottom: '5px' }}>Previous Service</div>
-                      <div style={{ fontSize: '18px', fontWeight: '700', color: '#333' }}>
+                      <div style={{ fontSize: '13px', color: '#999', marginBottom: '5px', fontWeight: '500' }}>Previous Service</div>
+                      <div style={{ fontSize: '17px', fontWeight: '700', color: '#333', lineHeight: '1.4' }}>
                         {servicesData[prevServiceKey]?.name}
                       </div>
                     </div>
@@ -1096,8 +1107,8 @@ const ServiceDetail = () => {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '15px' }}>
                     <div>
-                      <div style={{ fontSize: '12px', color: '#999', marginBottom: '5px' }}>Next Service</div>
-                      <div style={{ fontSize: '18px', fontWeight: '700', color: '#333' }}>
+                      <div style={{ fontSize: '13px', color: '#999', marginBottom: '5px', fontWeight: '500' }}>Next Service</div>
+                      <div style={{ fontSize: '17px', fontWeight: '700', color: '#333', lineHeight: '1.4' }}>
                         {servicesData[nextServiceKey]?.name}
                       </div>
                     </div>

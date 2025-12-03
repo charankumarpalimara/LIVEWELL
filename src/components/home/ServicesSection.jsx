@@ -22,7 +22,7 @@ const ServicesSection = ({ isVisible }) => {
 
   const services = [
     { name: 'Autism Therapy', icon: <HeartFilled />, color: '#e31e24', image: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=300&h=200&fit=crop' },
-    { name: 'Speech Therapy', icon: <AudioOutlined />, color: '#f7941d', image: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=300&h=200&fit=crop' },
+    { name: 'Speech Therapy', icon: <AudioOutlined />, color: '#f7941d', image: 'https://img.freepik.com/free-photo/woman-doing-speech-therapy-with-little-blonde-boy_23-2149110233.jpg?semt=ais_hybrid&w=740&q=80' },
     { name: 'Occupational Therapy', icon: <ToolOutlined />, color: '#00a651', image: 'https://media.istockphoto.com/id/1402700273/photo/schoolboy-playing-with-building-blocks-in-the-classroom.jpg?s=612x612&w=0&k=20&c=ytMz74BvWY31nu6FAsFChKN7vS7UygwUSj5MKyOY3Hg=' },
     { name: 'Behavior Therapy', icon: <BulbOutlined />, color: '#00aeef', image: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=300&h=200&fit=crop' },
     { name: 'Special Education', icon: <ReadOutlined />, color: '#662d91', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&h=200&fit=crop' },
