@@ -743,7 +743,7 @@ const ServiceDetail = () => {
             <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link to="/appointment">
                 <Button
-                  type="primary"
+                  className="service-detail-cta-button"
                   size="large"
                   icon={<CalendarOutlined />}
                   style={{
@@ -1109,6 +1109,19 @@ const ServiceDetail = () => {
           </div>
         )}
       </div>
+      <style>{`
+        .service-detail-cta-button {
+          background: #fff !important;
+          background-image: none !important;
+          border: none !important;
+        }
+        .service-detail-cta-button:hover,
+        .service-detail-cta-button:focus {
+          background: #fff !important;
+          background-image: none !important;
+          border: none !important;
+        }
+      `}</style>
     </div>
   )
 }

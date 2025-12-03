@@ -60,11 +60,11 @@ const Header = () => {
       icon: <ShopOutlined />,
       label: <Link to="/products" onClick={() => setDrawerVisible(false)}>Products</Link>,
     },
-    {
-      key: '/appointment',
-      icon: <UserOutlined />,
-      label: <Link to="/appointment" onClick={() => setDrawerVisible(false)}>Book Appointment</Link>,
-    },
+    // {
+    //   key: '/appointment',
+    //   icon: <UserOutlined />,
+    //   label: <Link to="/appointment" onClick={() => setDrawerVisible(false)}>Book Appointment</Link>,
+    // },
     {
       key: '/programs',
       icon: <BookOutlined />,
@@ -290,7 +290,7 @@ const Header = () => {
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
-              <span className="book-now-text">Book Now</span>
+              <span className="book-now-text"> Book Appointment</span>
             </Button>
           </Link>
           <Button
