@@ -85,7 +85,7 @@ const Header = () => {
       {/* Top Bar */}
       <div
         style={{
-          background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
+          background: 'linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
           padding: '10px 20px',
           display: 'flex',
           justifyContent: 'center',

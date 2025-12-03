@@ -293,9 +293,9 @@ const Footer = () => {
           <p style={{ margin: '0 0 10px' }}>
             © {new Date().getFullYear()} Live Well Rehabilitation Network. All Rights Reserved.
           </p>
-          <p style={{ margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+          {/* <p style={{ margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
             Made with <HeartFilled style={{ color: '#e31e24', animation: 'pulse 1.5s infinite' }} /> for Special Children
-          </p>
+          </p> */}
         </div>
       </div>
 
