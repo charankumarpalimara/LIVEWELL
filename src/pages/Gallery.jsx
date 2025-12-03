@@ -61,18 +61,18 @@ const Gallery = () => {
   })
 
   const galleryImages = [
-    { id: 1, title: 'Autism Therapy Session', category: 'Therapy', src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&h=400&fit=crop', color: '#e31e24' },
-    { id: 2, title: 'Speech Therapy', category: 'Therapy', src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop', color: '#f7941d' },
-    { id: 3, title: 'Play Therapy Activities', category: 'Activities', src: 'https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=600&h=400&fit=crop', color: '#00a651' },
-    { id: 4, title: 'Occupational Therapy', category: 'Therapy', src: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&h=400&fit=crop', color: '#00aeef' },
+    { id: 1, title: 'Autism Therapy Session', category: 'Therapy', src: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&h=400&fit=crop', color: '#e31e24' },
+    { id: 2, title: 'Speech Therapy', category: 'Therapy', src: 'https://img.freepik.com/free-photo/woman-doing-speech-therapy-with-little-blonde-boy_23-2149110233.jpg?semt=ais_hybrid&w=740&q=80', color: '#f7941d' },
+    { id: 3, title: 'Play Therapy Activities', category: 'Activities', src: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=600&h=400&fit=crop', color: '#00a651' },
+    { id: 4, title: 'Occupational Therapy', category: 'Therapy', src: 'https://media.istockphoto.com/id/1402700273/photo/schoolboy-playing-with-building-blocks-in-the-classroom.jpg?s=612x612&w=0&k=20&c=ytMz74BvWY31nu6FAsFChKN7vS7UygwUSj5MKyOY3Hg=', color: '#00aeef' },
     { id: 5, title: 'Music Therapy Session', category: 'Activities', src: 'https://images.unsplash.com/photo-1514119412350-e174d90d280e?w=600&h=400&fit=crop', color: '#662d91' },
-    { id: 6, title: 'Special Education Class', category: 'Education', src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop', color: '#92278f' },
+    { id: 6, title: 'Special Education Class', category: 'Education', src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop', color: '#92278f' },
     { id: 7, title: 'Child Development', category: 'Activities', src: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=600&h=400&fit=crop', color: '#ec008c' },
     { id: 8, title: 'Medical Assessment', category: 'Therapy', src: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop', color: '#e31e24' },
-    { id: 9, title: 'Learning Activities', category: 'Education', src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop', color: '#f7941d' },
-    { id: 10, title: 'Sensory Integration', category: 'Therapy', src: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&h=400&fit=crop', color: '#00a651' },
-    { id: 11, title: 'Physiotherapy Session', category: 'Therapy', src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop', color: '#00aeef' },
-    { id: 12, title: 'Creative Arts', category: 'Activities', src: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop', color: '#662d91' },
+    { id: 9, title: 'Learning Activities', category: 'Education', src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop', color: '#f7941d' },
+    { id: 10, title: 'Sensory Integration', category: 'Therapy', src: 'https://media.istockphoto.com/id/1402700273/photo/schoolboy-playing-with-building-blocks-in-the-classroom.jpg?s=612x612&w=0&k=20&c=ytMz74BvWY31nu6FAsFChKN7vS7UygwUSj5MKyOY3Hg=', color: '#00a651' },
+    { id: 11, title: 'Physiotherapy Session', category: 'Therapy', src: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=400&fit=crop', color: '#00aeef' },
+    { id: 12, title: 'Creative Arts', category: 'Activities', src: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=600&h=400&fit=crop', color: '#662d91' },
   ]
 
   const categories = ['All', 'Therapy', 'Activities', 'Education']

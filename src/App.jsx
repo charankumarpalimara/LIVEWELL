@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Layout } from 'antd'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import Products from './pages/Products'
@@ -17,6 +18,7 @@ import Contact from './pages/Contact'
 import Franchise from './pages/Franchise'
 import Branches from './pages/Branches'
 import Careers from './pages/Careers'
+import ServiceDetail from './pages/ServiceDetail'
 import { CartProvider } from './context/CartContext'
 
 const { Content } = Layout
@@ -24,6 +26,7 @@ const { Content } = Layout
 function App() {
   return (
     <CartProvider>
+      <ScrollToTop />
       <Layout style={{ minHeight: '100vh', background: '#fff' }}>
         <Header />
         <Content style={{ background: '#fff' }}>
@@ -42,6 +45,17 @@ function App() {
             <Route path="/franchise" element={<Franchise />} />
             <Route path="/branches" element={<Branches />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/autism-therapy" element={<ServiceDetail />} />
+            <Route path="/speech-therapy" element={<ServiceDetail />} />
+            <Route path="/occupational-therapy-for-kids" element={<ServiceDetail />} />
+            <Route path="/behavior-therapy-for-kids" element={<ServiceDetail />} />
+            <Route path="/special-education-for-kids" element={<ServiceDetail />} />
+            <Route path="/play-therapy" element={<ServiceDetail />} />
+            <Route path="/music-therapy" element={<ServiceDetail />} />
+            <Route path="/applied-behavior-analysis-aba" element={<ServiceDetail />} />
+            <Route path="/early-intervention" element={<ServiceDetail />} />
+            <Route path="/sensory-integration-therapy" element={<ServiceDetail />} />
+            <Route path="/physiotherapy" element={<ServiceDetail />} />
           </Routes>
         </Content>
         <Footer />

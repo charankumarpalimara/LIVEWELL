@@ -86,6 +86,19 @@ const Home = () => {
     transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
   })
 
+  // Service name to URL mapping
+  const getServiceUrl = (serviceName) => {
+    const urlMap = {
+      'Autism Therapy': '/autism-therapy',
+      'Speech Therapy': '/speech-therapy',
+      'Occupational Therapy': '/occupational-therapy-for-kids',
+      'Behavior Therapy': '/behavior-therapy-for-kids',
+      'Special Education': '/special-education-for-kids',
+      'Play Therapy': '/play-therapy',
+    }
+    return urlMap[serviceName] || '/services'
+  }
+
   const heroSlides = [
     {
       title: "LIVE WELL REHABILITATION NETWORK",
@@ -171,7 +184,7 @@ const Home = () => {
     { src: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop', title: 'Autism Therapy Session' },
     { src: 'https://img.freepik.com/free-photo/woman-doing-speech-therapy-with-little-blonde-boy_23-2149110233.jpg?semt=ais_hybrid&w=740&q=80', title: 'Speech & Language Therapy' },
     { src: 'https://images.unsplash.com/photo-1587616211892-f743fcca64f9?w=400&h=300&fit=crop', title: 'Play-Based Learning' },
-    { src: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop', title: 'Occupational Therapy' },
+    { src: 'https://media.istockphoto.com/id/1402700273/photo/schoolboy-playing-with-building-blocks-in-the-classroom.jpg?s=612x612&w=0&k=20&c=ytMz74BvWY31nu6FAsFChKN7vS7UygwUSj5MKyOY3Hg=', title: 'Occupational Therapy' },
     { src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop', title: 'Special Education Class' },
     { src: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&h=300&fit=crop', title: 'Child Development' },
   ]
@@ -228,9 +241,10 @@ const Home = () => {
       {/* Hero Carousel Section */}
       <Carousel
         autoplay
-        autoplaySpeed={3000}
+        autoplaySpeed={2000}
         effect="fade"
         dotPosition="bottom"
+        speed={250}
       >
         {heroSlides.map((slide, index) => (
           <div key={index}>
@@ -358,7 +372,7 @@ const Home = () => {
       <div
         style={{
           padding: '20px 0',
-          background: 'linear-gradient(135deg, #1e3a5f 0%, #00aeef 100%)',
+          background: 'linear-gradient(135deg, #1e3a5f 0%,rgb(73, 73, 73) 100%)',
           overflow: 'hidden',
           position: 'relative',
         }}
@@ -598,43 +612,45 @@ const Home = () => {
         <Row gutter={[20, 20]} justify="center">
           {services.map((service, index) => (
             <Col xs={12} sm={8} md={6} lg={4} key={index}>
-              <Card
-                hoverable
-                style={{
-                  border: `2px solid ${service.color}`,
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  transition: 'all 0.4s ease',
-                  ...getSlideFromLeft(0.1 + index * 0.08, isVisible('services')),
-                }}
-                bodyStyle={{ padding: '15px' }}
-                cover={
-                  <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      src={service.image}
-                      alt={service.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }}
-                    />
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: `linear-gradient(to bottom, transparent 30%, ${service.color}60 100%)`,
-                    }} />
-                  </div>
-                }
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)'
-                  e.currentTarget.style.boxShadow = `0 15px 35px ${service.color}30`
-                  const img = e.currentTarget.querySelector('img')
-                  if (img) img.style.transform = 'scale(1.1)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
-                  const img = e.currentTarget.querySelector('img')
-                  if (img) img.style.transform = 'scale(1)'
-                }}
-              >
+              <Link to={getServiceUrl(service.name)} style={{ textDecoration: 'none' }}>
+                <Card
+                  hoverable
+                  style={{
+                    border: `2px solid ${service.color}`,
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    transition: 'all 0.4s ease',
+                    cursor: 'pointer',
+                    ...getSlideFromLeft(0.1 + index * 0.08, isVisible('services')),
+                  }}
+                  bodyStyle={{ padding: '15px' }}
+                  cover={
+                    <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
+                      <img
+                        src={service.image}
+                        alt={service.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: `linear-gradient(to bottom, transparent 30%, ${service.color}60 100%)`,
+                      }} />
+                    </div>
+                  }
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-8px)'
+                    e.currentTarget.style.boxShadow = `0 15px 35px ${service.color}30`
+                    const img = e.currentTarget.querySelector('img')
+                    if (img) img.style.transform = 'scale(1.1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = 'none'
+                    const img = e.currentTarget.querySelector('img')
+                    if (img) img.style.transform = 'scale(1)'
+                  }}
+                >
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -659,6 +675,7 @@ const Home = () => {
                   </div>
                 </div>
               </Card>
+              </Link>
             </Col>
           ))}
         </Row>

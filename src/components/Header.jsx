@@ -446,61 +446,67 @@ const Header = () => {
         @media (max-width: 768px) {
           .main-header {
             padding: 0 10px !important;
-            height: 60px !important;
+            height: 75px !important;
           }
           .header-logo {
-            height: 40px !important;
-            max-width: 130px !important;
+            height: 45px !important;
+            max-width: 150px !important;
           }
           .cart-btn, .book-now-btn {
-            height: 35px !important;
-            padding: 0 12px !important;
+            height: 40px !important;
+            padding: 0 15px !important;
             font-size: 12px !important;
           }
           .cart-btn-text, .book-now-text {
             display: none;
           }
           .mobile-menu-btn {
-            height: 35px !important;
-            width: 35px !important;
+            height: 40px !important;
+            width: 40px !important;
           }
           .top-bar-hours-text {
-            display: none;
+            display: inline !important;
           }
           .top-bar-label {
-            display: none;
+            display: inline !important;
           }
         }
 
         @media (max-width: 576px) {
           .main-header {
             padding: 0 8px !important;
-            height: 55px !important;
+            height: 70px !important;
           }
           .header-logo {
-            height: 35px !important;
-            max-width: 110px !important;
+            height: 42px !important;
+            max-width: 140px !important;
           }
           .cart-btn, .book-now-btn {
-            height: 32px !important;
-            width: 32px !important;
+            height: 38px !important;
+            width: 38px !important;
             padding: 0 !important;
-            min-width: 32px !important;
+            min-width: 38px !important;
           }
           .mobile-menu-btn {
-            height: 32px !important;
-            width: 32px !important;
+            height: 38px !important;
+            width: 38px !important;
           }
           .header-actions {
-            gap: 6px !important;
+            gap: 8px !important;
           }
           .top-bar {
-            padding: 5px 8px !important;
-            font-size: 11px !important;
+            padding: 6px 8px !important;
+            font-size: 12px !important;
           }
           .top-bar-item {
-            padding: 3px 8px !important;
-            font-size: 11px !important;
+            padding: 4px 10px !important;
+            font-size: 12px !important;
+          }
+          .top-bar-hours-text {
+            display: inline !important;
+          }
+          .top-bar-label {
+            display: inline !important;
           }
         }
 

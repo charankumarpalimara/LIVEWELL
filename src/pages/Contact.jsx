@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Card, Typography, Form, Input, Button, message } from 'antd'
+import { Row, Col, Card, Typography, Form, Input, Button, message, Tag } from 'antd'
 import { 
   PhoneOutlined, 
   MailOutlined, 
@@ -78,30 +78,123 @@ const Contact = () => {
     }, 1500)
   }
 
+  const branches = [
+    {
+      id: 1,
+      name: 'Hyderabad - Banjara Hills (Headquarters)',
+      address: 'Plot No. 8-2-293/82/A/431, Road No. 22, Banjara Hills, Hyderabad - 500034',
+      phone: '+91 8977510100',
+      email: 'banjarahills@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Hyderabad',
+      state: 'Telangana',
+      isHeadquarters: true,
+      color: '#e31e24',
+    },
+    {
+      id: 2,
+      name: 'Hyderabad - Kukatpally',
+      address: 'H.No. 18-11-741/3, KPHB Colony, Kukatpally, Hyderabad - 500072',
+      phone: '+91 8977510101',
+      email: 'kukatpally@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Hyderabad',
+      state: 'Telangana',
+      isHeadquarters: false,
+      color: '#f7941d',
+    },
+    {
+      id: 3,
+      name: 'Hyderabad - Secunderabad',
+      address: '1st Floor, Plot No. 45, Marredpally West, Secunderabad - 500026',
+      phone: '+91 8977510102',
+      email: 'secunderabad@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Secunderabad',
+      state: 'Telangana',
+      isHeadquarters: false,
+      color: '#00a651',
+    },
+    {
+      id: 4,
+      name: 'Bangalore - Koramangala',
+      address: '4th Block, Koramangala, Bangalore - 560034',
+      phone: '+91 8977510103',
+      email: 'bangalore@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Bangalore',
+      state: 'Karnataka',
+      isHeadquarters: false,
+      color: '#00aeef',
+    },
+    {
+      id: 5,
+      name: 'Chennai - Anna Nagar',
+      address: 'Plot No. 2234, 2nd Avenue, Anna Nagar, Chennai - 600040',
+      phone: '+91 8977510104',
+      email: 'chennai@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Chennai',
+      state: 'Tamil Nadu',
+      isHeadquarters: false,
+      color: '#662d91',
+    },
+    {
+      id: 6,
+      name: 'Vijayawada',
+      address: 'Door No. 29-5-35, Prakasam Road, Governorpet, Vijayawada - 520002',
+      phone: '+91 8977510105',
+      email: 'vijayawada@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Vijayawada',
+      state: 'Andhra Pradesh',
+      isHeadquarters: false,
+      color: '#92278f',
+    },
+    {
+      id: 7,
+      name: 'Visakhapatnam',
+      address: 'Door No. 47-11-16, Dwaraka Nagar, Visakhapatnam - 530016',
+      phone: '+91 8977510106',
+      email: 'vizag@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Visakhapatnam',
+      state: 'Andhra Pradesh',
+      isHeadquarters: false,
+      color: '#ec008c',
+    },
+    {
+      id: 8,
+      name: 'Pune - Kothrud',
+      address: 'Office No. 12, 3rd Floor, Karve Road, Kothrud, Pune - 411038',
+      phone: '+91 8977510107',
+      email: 'pune@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      city: 'Pune',
+      state: 'Maharashtra',
+      isHeadquarters: false,
+      color: '#00aeef',
+    },
+  ]
+
   const contactInfo = [
     {
       icon: <PhoneOutlined />,
       title: 'Phone',
-      details: ['+91 7032 157 157', '+91 9876 543 210'],
+      details: ['+91 8977510100', 'Helpline: 24/7 Support'],
       color: '#e31e24',
     },
     {
       icon: <MailOutlined />,
       title: 'Email',
-      details: ['info@livewellnetwork.com', 'support@livewellnetwork.com'],
+      details: ['info@livewellrehabilitationnetwork.com', 'support@livewellrehab.com'],
       color: '#f7941d',
-    },
-    {
-      icon: <EnvironmentOutlined />,
-      title: 'Address',
-      details: ['Plot No. 123, Road No. 45', 'Jubilee Hills, Hyderabad - 500033'],
-      color: '#00a651',
     },
     {
       icon: <ClockCircleOutlined />,
       title: 'Working Hours',
-      details: ['Monday - Saturday', '9:00 AM - 6:00 PM'],
-      color: '#00aeef',
+      details: ['Monday - Saturday', '8:00 AM - 7:30 PM'],
+      color: '#00a651',
     },
   ]
 
@@ -164,9 +257,9 @@ const Contact = () => {
           zIndex: 10,
         }}
       >
-        <Row gutter={[20, 20]}>
+        <Row gutter={[20, 20]} justify="center">
           {contactInfo.map((info, index) => (
-            <Col xs={24} sm={12} md={6} key={index}>
+            <Col xs={24} sm={12} md={8} lg={7} xl={6} key={index}>
               <Card
                 style={{
                   textAlign: 'center',
@@ -222,6 +315,162 @@ const Contact = () => {
             </Col>
           ))}
         </Row>
+      </div>
+
+      {/* Branches Section */}
+      <div 
+        data-animate-id="branches"
+        style={{ padding: '80px 30px', background: '#f8fbff' }}
+      >
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <div style={{ 
+              color: '#00aeef', 
+              fontWeight: '700', 
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              fontSize: '13px',
+              ...getSlideFromBottom(0, isVisible('branches')),
+            }}>
+              <GlobalOutlined style={{ marginRight: '8px' }} />
+              Our Branches
+            </div>
+            <Title level={2} style={{ 
+              color: '#1e3a5f', 
+              marginBottom: '15px', 
+              fontSize: 'clamp(26px, 4vw, 38px)',
+              ...getSlideFromBottom(0.1, isVisible('branches')),
+            }}>
+              Find Us Near You
+            </Title>
+            <Paragraph style={{
+              color: '#666',
+              fontSize: '16px',
+              maxWidth: '700px',
+              margin: '0 auto',
+              ...getSlideFromBottom(0.2, isVisible('branches')),
+            }}>
+              Visit any of our branches across India for in-person consultations and therapy sessions
+            </Paragraph>
+          </div>
+          <Row gutter={[24, 24]}>
+            {branches.map((branch, index) => (
+              <Col xs={24} sm={12} lg={8} key={branch.id}>
+                <Card
+                  hoverable
+                  style={{
+                    borderRadius: '20px',
+                    border: branch.isHeadquarters ? `3px solid ${branch.color}` : '1px solid #e8e8e8',
+                    height: '100%',
+                    transition: 'all 0.4s ease',
+                    ...getScaleIn(0.05 * index, isVisible('branches')),
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-8px)'
+                    e.currentTarget.style.boxShadow = `0 20px 40px ${branch.color}25`
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
+                  bodyStyle={{ padding: '25px' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
+                    <div style={{ flex: 1 }}>
+                      <Title level={4} style={{ 
+                        color: '#1e3a5f', 
+                        marginBottom: '8px',
+                        fontSize: '18px',
+                        lineHeight: '1.3',
+                      }}>
+                        {branch.name}
+                      </Title>
+                      {branch.isHeadquarters && (
+                        <span style={{
+                          display: 'inline-block',
+                          background: branch.color,
+                          color: '#fff',
+                          padding: '3px 10px',
+                          borderRadius: '12px',
+                          fontSize: '11px',
+                          fontWeight: '600',
+                          marginBottom: '10px',
+                        }}>
+                          Headquarters
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '15px' }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      <EnvironmentOutlined style={{ color: branch.color, fontSize: '16px', marginTop: '3px', flexShrink: 0 }} />
+                      <span style={{ color: '#666', fontSize: '14px', lineHeight: '1.5' }}>{branch.address}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <PhoneOutlined style={{ color: branch.color, fontSize: '16px' }} />
+                      <a href={`tel:${branch.phone}`} style={{ color: '#1e3a5f', fontWeight: '600', fontSize: '14px' }}>
+                        {branch.phone}
+                      </a>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <MailOutlined style={{ color: branch.color, fontSize: '16px' }} />
+                      <a href={`mailto:${branch.email}`} style={{ color: '#666', fontSize: '13px' }}>
+                        {branch.email}
+                      </a>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <ClockCircleOutlined style={{ color: branch.color, fontSize: '16px' }} />
+                      <span style={{ color: '#666', fontSize: '13px' }}>{branch.timing}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '8px', 
+                    paddingTop: '15px', 
+                    borderTop: '1px solid #f0f0f0',
+                  }}>
+                    <a href={`tel:${branch.phone}`} style={{ flex: 1 }}>
+                      <Button
+                        type="primary"
+                        block
+                        style={{
+                          background: branch.color,
+                          border: 'none',
+                          borderRadius: '25px',
+                          height: '38px',
+                          fontWeight: '600',
+                          fontSize: '13px',
+                        }}
+                        icon={<PhoneOutlined />}
+                      >
+                        Call
+                      </Button>
+                    </a>
+                    <a href={`mailto:${branch.email}`} style={{ flex: 1 }}>
+                      <Button
+                        block
+                        style={{
+                          border: `2px solid ${branch.color}`,
+                          color: branch.color,
+                          borderRadius: '25px',
+                          height: '38px',
+                          fontWeight: '600',
+                          fontSize: '13px',
+                        }}
+                        icon={<MailOutlined />}
+                      >
+                        Email
+                      </Button>
+                    </a>
+                  </div>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
 
       {/* Contact Form & Map */}
@@ -406,7 +655,7 @@ const Contact = () => {
                   {[
                     { icon: <PhoneOutlined />, label: 'Call Now', value: '+91 7032 157 157', color: '#e31e24' },
                     { icon: <WhatsAppOutlined />, label: 'WhatsApp', value: '+91 7032 157 157', color: '#25d366' },
-                    { icon: <GlobalOutlined />, label: 'Website', value: 'www.livewellnetwork.com', color: '#f7941d' },
+                    { icon: <GlobalOutlined />, label: 'Website', value: 'https://livewellrehabilitationnetwork.com', color: '#f7941d' },
                   ].map((item, index) => (
                     <Col xs={24} key={index}>
                       <div

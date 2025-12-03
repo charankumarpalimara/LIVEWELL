@@ -8,7 +8,8 @@ import {
   CheckCircleFilled,
   ClockCircleOutlined,
   HeartFilled,
-  SafetyCertificateFilled
+  SafetyCertificateFilled,
+  EnvironmentOutlined
 } from '@ant-design/icons'
 import dayjs from 'dayjs'
 
@@ -85,6 +86,17 @@ const Appointment = () => {
     'Early Intervention',
     'Sensory Integration',
     'Pediatric Physiotherapy',
+  ]
+
+  const branches = [
+    'Hyderabad - Banjara Hills (Headquarters)',
+    'Hyderabad - Kukatpally',
+    'Hyderabad - Secunderabad',
+    'Bangalore - Koramangala',
+    'Chennai - Anna Nagar',
+    'Vijayawada',
+    'Visakhapatnam',
+    'Pune - Kothrud',
   ]
 
   const onFinish = (values) => {
@@ -448,6 +460,22 @@ const Appointment = () => {
 
                 {/* Step 3: Schedule */}
                 <div style={{ display: currentStep === 2 ? 'block' : 'none' }}>
+                  <Form.Item
+                    name="location"
+                    label={<span style={{ color: '#1e3a5f', fontWeight: '600' }}>Select Branch/Franchise</span>}
+                    rules={[{ required: true, message: 'Please select a branch location' }]}
+                  >
+                    <Select 
+                      placeholder="Choose branch location"
+                      style={{ height: '52px' }}
+                      dropdownStyle={{ borderRadius: '12px' }}
+                      suffixIcon={<EnvironmentOutlined style={{ color: '#00a651' }} />}
+                    >
+                      {branches.map((branch, index) => (
+                        <Option key={index} value={branch}>{branch}</Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
                   <Row gutter={16}>
                     <Col xs={24} sm={12}>
                       <Form.Item

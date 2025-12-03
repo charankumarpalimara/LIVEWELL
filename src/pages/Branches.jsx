@@ -10,6 +10,11 @@ import {
   ArrowRightOutlined
 } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import vizagImage from '../assets/vizag.jpg'
+import secunderabadImage from '../assets/secendrabad.jpg'
+import chennaiImage from '../assets/chennai.jpg'
+import bengaluruImage from '../assets/benguluru.jpg'
+import puneImage from '../assets/pune.jpg'
 
 const { Title, Paragraph } = Typography
 const { Search } = Input
@@ -70,39 +75,11 @@ const Branches = () => {
       city: 'Hyderabad',
       isHeadquarters: true,
       services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
-      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=250&fit=crop',
+      image: secunderabadImage,
       mapUrl: 'https://maps.google.com/?q=Banjara+Hills+Hyderabad',
     },
     {
       id: 2,
-      name: 'Live Well - Hyderabad (Kukatpally)',
-      address: 'H.No. 18-11-741/3, KPHB Colony, Kukatpally, Hyderabad - 500072',
-      phone: '+91 8977510101',
-      email: 'kukatpally@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Telangana',
-      city: 'Hyderabad',
-      isHeadquarters: false,
-      services: ['Autism Therapy', 'Speech Therapy', 'Behavior Therapy'],
-      image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=250&fit=crop',
-      mapUrl: 'https://maps.google.com/?q=Kukatpally+Hyderabad',
-    },
-    {
-      id: 3,
-      name: 'Live Well - Hyderabad (Secunderabad)',
-      address: '1st Floor, Plot No. 45, Marredpally West, Secunderabad - 500026',
-      phone: '+91 8977510102',
-      email: 'secunderabad@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Telangana',
-      city: 'Secunderabad',
-      isHeadquarters: false,
-      services: ['Speech Therapy', 'Occupational Therapy', 'Play Therapy'],
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=250&fit=crop',
-      mapUrl: 'https://maps.google.com/?q=Secunderabad',
-    },
-    {
-      id: 4,
       name: 'Live Well - Bangalore (Koramangala)',
       address: '4th Block, Koramangala, Bangalore - 560034',
       phone: '+91 8977510103',
@@ -112,11 +89,11 @@ const Branches = () => {
       city: 'Bangalore',
       isHeadquarters: false,
       services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Behavior Therapy'],
-      image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=400&h=250&fit=crop',
+      image: bengaluruImage,
       mapUrl: 'https://maps.google.com/?q=Koramangala+Bangalore',
     },
     {
-      id: 5,
+      id: 3,
       name: 'Live Well - Chennai (Anna Nagar)',
       address: 'Plot No. 2234, 2nd Avenue, Anna Nagar, Chennai - 600040',
       phone: '+91 8977510104',
@@ -126,11 +103,11 @@ const Branches = () => {
       city: 'Chennai',
       isHeadquarters: false,
       services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy'],
-      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+      image: chennaiImage,
       mapUrl: 'https://maps.google.com/?q=Anna+Nagar+Chennai',
     },
     {
-      id: 6,
+      id: 4,
       name: 'Live Well - Vijayawada',
       address: 'Door No. 29-5-35, Prakasam Road, Governorpet, Vijayawada - 520002',
       phone: '+91 8977510105',
@@ -140,11 +117,11 @@ const Branches = () => {
       city: 'Vijayawada',
       isHeadquarters: false,
       services: ['Autism Therapy', 'Speech Therapy', 'Special Education'],
-      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
       mapUrl: 'https://maps.google.com/?q=Vijayawada',
     },
     {
-      id: 7,
+      id: 5,
       name: 'Live Well - Visakhapatnam',
       address: 'Door No. 47-11-16, Dwaraka Nagar, Visakhapatnam - 530016',
       phone: '+91 8977510106',
@@ -154,11 +131,11 @@ const Branches = () => {
       city: 'Visakhapatnam',
       isHeadquarters: false,
       services: ['Speech Therapy', 'Occupational Therapy', 'Behavior Therapy'],
-      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop',
+      image: vizagImage,
       mapUrl: 'https://maps.google.com/?q=Visakhapatnam',
     },
     {
-      id: 8,
+      id: 6,
       name: 'Live Well - Pune (Kothrud)',
       address: 'Office No. 12, 3rd Floor, Karve Road, Kothrud, Pune - 411038',
       phone: '+91 8977510107',
@@ -168,7 +145,7 @@ const Branches = () => {
       city: 'Pune',
       isHeadquarters: false,
       services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Play Therapy'],
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=250&fit=crop',
+      image: puneImage,
       mapUrl: 'https://maps.google.com/?q=Kothrud+Pune',
     },
   ]
