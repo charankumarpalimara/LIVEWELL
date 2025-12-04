@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { Row, Col, Card, Button, InputNumber, Typography, Tag, Divider, Rate, message } from 'antd'
+import { Row, Col, Card, Button, InputNumber, Typography, Tag, Divider, Rate, message, Tabs, List, Badge } from 'antd'
 import { 
   ShoppingCartOutlined, 
   ArrowLeftOutlined, 
@@ -9,12 +9,16 @@ import {
   CheckCircleOutlined,
   TruckOutlined,
   SafetyCertificateOutlined,
-  ShareAltOutlined
+  ShareAltOutlined,
+  StarFilled,
+  InfoCircleOutlined,
+  GiftOutlined,
+  ThunderboltOutlined
 } from '@ant-design/icons'
 import { products } from '../data/products'
 import { useCart } from '../context/CartContext'
 
-const { Title, Paragraph } = Typography
+const { Title, Paragraph, Text } = Typography
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -34,7 +38,7 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div style={{ 
-        padding: '100px 30px', 
+        padding: '60px 30px', 
         textAlign: 'center',
         background: 'linear-gradient(135deg, #f8fbff 0%, #fff 100%)',
         minHeight: '60vh',
@@ -242,10 +246,11 @@ const ProductDetail = () => {
 
               {/* Description */}
               <Paragraph style={{ 
-                fontSize: '16px', 
+                fontSize: '17px', 
                 lineHeight: '1.9', 
-                color: '#555', 
-                marginBottom: '30px' 
+                color: '#4a5568', 
+                marginBottom: '30px',
+                fontWeight: '400',
               }}>
                 {product.description}
               </Paragraph>
@@ -367,40 +372,317 @@ const ProductDetail = () => {
           </Col>
         </Row>
 
+        {/* Detailed Information Tabs */}
+        <div style={{ marginTop: '80px' }}>
+          <Tabs
+            defaultActiveKey="1"
+            style={{
+              background: '#fff',
+              borderRadius: '20px',
+              padding: '30px',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            }}
+            items={[
+              {
+                key: '1',
+                label: (
+                  <span style={{ fontSize: '15px', fontWeight: '600' }}>
+                    <InfoCircleOutlined style={{ marginRight: '8px' }} />
+                    Product Details
+                  </span>
+                ),
+                children: (
+                  <div>
+                    <Title level={4} style={{ color: '#1e3a5f', marginBottom: '20px' }}>
+                      About This Product
+                    </Title>
+                    <Paragraph style={{ fontSize: '16px', lineHeight: '1.9', color: '#4a5568', marginBottom: '25px' }}>
+                      {product.description}
+                    </Paragraph>
+                    
+                    <Title level={4} style={{ color: '#1e3a5f', marginBottom: '20px', marginTop: '30px' }}>
+                      Key Features
+                    </Title>
+                    <List
+                      dataSource={[
+                        'Safe and non-toxic materials certified for children',
+                        'Designed by child development experts',
+                        'Promotes cognitive and motor skill development',
+                        'Durable construction for long-lasting use',
+                        'Easy to clean and maintain',
+                        'Suitable for home and therapy center use',
+                      ]}
+                      renderItem={(item) => (
+                        <List.Item style={{ border: 'none', padding: '10px 0' }}>
+                          <CheckCircleOutlined style={{ color: '#00a651', marginRight: '12px', fontSize: '18px' }} />
+                          <span style={{ fontSize: '15px', color: '#4a5568' }}>{item}</span>
+                        </List.Item>
+                      )}
+                    />
+                  </div>
+                ),
+              },
+              {
+                key: '2',
+                label: (
+                  <span style={{ fontSize: '15px', fontWeight: '600' }}>
+                    <GiftOutlined style={{ marginRight: '8px' }} />
+                    Benefits
+                  </span>
+                ),
+                children: (
+                  <div>
+                    <Title level={4} style={{ color: '#1e3a5f', marginBottom: '20px' }}>
+                      How This Product Helps
+                    </Title>
+                    <Row gutter={[20, 20]}>
+                      {[
+                        { 
+                          title: 'Cognitive Development', 
+                          desc: 'Enhances problem-solving skills and logical thinking',
+                          color: '#00aeef',
+                          icon: <ThunderboltOutlined />
+                        },
+                        { 
+                          title: 'Motor Skills', 
+                          desc: 'Improves fine and gross motor coordination',
+                          color: '#00a651',
+                          icon: <CheckCircleOutlined />
+                        },
+                        { 
+                          title: 'Sensory Integration', 
+                          desc: 'Stimulates multiple senses for better learning',
+                          color: '#f7941d',
+                          icon: <StarFilled />
+                        },
+                        { 
+                          title: 'Social Skills', 
+                          desc: 'Encourages interaction and communication',
+                          color: '#662d91',
+                          icon: <GiftOutlined />
+                        },
+                      ].map((benefit, index) => (
+                        <Col xs={24} sm={12} key={index}>
+                          <Card
+                            style={{
+                              border: `2px solid ${benefit.color}20`,
+                              borderRadius: '16px',
+                              background: `${benefit.color}08`,
+                              transition: 'all 0.3s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = 'translateY(-5px)'
+                              e.currentTarget.style.boxShadow = `0 10px 30px ${benefit.color}20`
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)'
+                              e.currentTarget.style.boxShadow = 'none'
+                            }}
+                          >
+                            <div style={{ 
+                              color: benefit.color, 
+                              fontSize: '32px', 
+                              marginBottom: '12px' 
+                            }}>
+                              {benefit.icon}
+                            </div>
+                            <Title level={5} style={{ color: '#1e3a5f', marginBottom: '8px' }}>
+                              {benefit.title}
+                            </Title>
+                            <Paragraph style={{ color: '#666', fontSize: '14px', margin: 0 }}>
+                              {benefit.desc}
+                            </Paragraph>
+                          </Card>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                ),
+              },
+              {
+                key: '3',
+                label: (
+                  <span style={{ fontSize: '15px', fontWeight: '600' }}>
+                    <TruckOutlined style={{ marginRight: '8px' }} />
+                    Specifications
+                  </span>
+                ),
+                children: (
+                  <div>
+                    <Title level={4} style={{ color: '#1e3a5f', marginBottom: '20px' }}>
+                      Product Specifications
+                    </Title>
+                    <Row gutter={[0, 15]}>
+                      {[
+                        { label: 'Category', value: product.category },
+                        { label: 'Age Range', value: '2-12 years' },
+                        { label: 'Material', value: 'Non-toxic, BPA-free materials' },
+                        { label: 'Dimensions', value: 'Varies by product' },
+                        { label: 'Weight', value: 'Lightweight and portable' },
+                        { label: 'Warranty', value: '1 year manufacturer warranty' },
+                        { label: 'Certification', value: 'CE Certified, ASTM Compliant' },
+                        { label: 'Country of Origin', value: 'India' },
+                      ].map((spec, index) => (
+                        <Col span={24} key={index}>
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            padding: '15px 20px',
+                            background: index % 2 === 0 ? '#f8fbff' : '#fff',
+                            borderRadius: '10px',
+                            border: '1px solid #f0f0f0',
+                          }}>
+                            <Text strong style={{ color: '#1e3a5f', fontSize: '15px' }}>
+                              {spec.label}:
+                            </Text>
+                            <Text style={{ color: '#666', fontSize: '15px' }}>
+                              {spec.value}
+                            </Text>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                ),
+              },
+              {
+                key: '4',
+                label: (
+                  <span style={{ fontSize: '15px', fontWeight: '600' }}>
+                    <StarFilled style={{ marginRight: '8px' }} />
+                    Reviews ({Math.floor(Math.random() * 50) + 10})
+                  </span>
+                ),
+                children: (
+                  <div>
+                    <div style={{ marginBottom: '30px', textAlign: 'center', padding: '30px', background: '#f8fbff', borderRadius: '16px' }}>
+                      <div style={{ fontSize: '48px', fontWeight: '800', color: '#1e3a5f', marginBottom: '10px' }}>
+                        {product.rating}
+                      </div>
+                      <Rate disabled defaultValue={product.rating} allowHalf style={{ fontSize: '24px', marginBottom: '10px' }} />
+                      <Paragraph style={{ color: '#666', margin: 0 }}>
+                        Based on {Math.floor(Math.random() * 50) + 10} customer reviews
+                      </Paragraph>
+                    </div>
+                    <List
+                      dataSource={[
+                        { 
+                          name: 'Priya Sharma', 
+                          rating: 5, 
+                          comment: 'Excellent product! My child loves it and it has really helped with their development.',
+                          date: '2 days ago'
+                        },
+                        { 
+                          name: 'Rajesh Kumar', 
+                          rating: 5, 
+                          comment: 'Great quality and very durable. Highly recommend for therapy sessions.',
+                          date: '1 week ago'
+                        },
+                        { 
+                          name: 'Sunita Patel', 
+                          rating: 4, 
+                          comment: 'Good product, my child enjoys using it. Could be improved with more features.',
+                          date: '2 weeks ago'
+                        },
+                      ]}
+                      renderItem={(item) => (
+                        <List.Item style={{ border: 'none', padding: '20px 0', borderBottom: '1px solid #f0f0f0' }}>
+                          <div style={{ width: '100%' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                              <div>
+                                <Text strong style={{ fontSize: '16px', color: '#1e3a5f' }}>
+                                  {item.name}
+                                </Text>
+                                <Rate disabled defaultValue={item.rating} allowHalf style={{ fontSize: '14px', marginLeft: '10px' }} />
+                              </div>
+                              <Text style={{ color: '#999', fontSize: '13px' }}>{item.date}</Text>
+                            </div>
+                            <Paragraph style={{ color: '#666', fontSize: '15px', margin: 0 }}>
+                              {item.comment}
+                            </Paragraph>
+                          </div>
+                        </List.Item>
+                      )}
+                    />
+                  </div>
+                ),
+              },
+            ]}
+          />
+        </div>
+
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div style={{ marginTop: '80px' }}>
-            <Title level={2} style={{ 
-              color: '#1e3a5f', 
-              marginBottom: '35px',
-              textAlign: 'center',
-            }}>
-              Related Products
-            </Title>
-            <Row gutter={[24, 24]}>
+            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+              <div style={{
+                color: '#00aeef',
+                fontWeight: '700',
+                marginBottom: '15px',
+                textTransform: 'uppercase',
+                letterSpacing: '3px',
+                fontSize: '14px',
+              }}>
+                More Products
+              </div>
+              <Title level={2} style={{ 
+                color: '#1e3a5f', 
+                marginBottom: '20px',
+                fontSize: 'clamp(32px, 5vw, 48px)',
+                fontWeight: '800',
+                lineHeight: '1.2',
+              }}>
+                Related Products
+              </Title>
+              <div style={{
+                width: '100px',
+                height: '4px',
+                background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
+                margin: '0 auto',
+                borderRadius: '2px',
+              }} />
+            </div>
+            <Row gutter={[32, 32]}>
               {relatedProducts.map((item, index) => (
                 <Col xs={24} sm={12} md={6} key={item.id}>
                   <Card
                     hoverable
-                    onClick={() => navigate(`/products/${item.id}`)}
+                    onClick={() => navigate(`/product/${item.id}`, { replace: true })}
                     style={{
-                      borderRadius: '16px',
-                      overflow: 'hidden',
+                      borderRadius: '24px',
+                      overflow: 'visible',
                       border: 'none',
-                      boxShadow: '0 5px 20px rgba(0,0,0,0.06)',
-                      transition: 'all 0.4s ease',
+                      background: '#ffffff',
+                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      padding: '0',
                       animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                     }}
+                    bodyStyle={{ padding: '24px 20px' }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-10px)'
-                      e.currentTarget.style.boxShadow = '0 20px 45px rgba(0,174,239,0.15)'
+                      e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)'
+                      e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,174,239,0.25)'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = '0 5px 20px rgba(0,0,0,0.06)'
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
                     }}
                     cover={
-                      <div style={{ height: '180px', overflow: 'hidden' }}>
+                      <div style={{ 
+                        height: '200px', 
+                        overflow: 'hidden',
+                        position: 'relative',
+                        background: `linear-gradient(135deg, ${categoryColors[item.category] || '#00aeef'}15 0%, ${categoryColors[item.category] || '#00aeef'}05 100%)`,
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: '4px',
+                          background: `linear-gradient(90deg, ${categoryColors[item.category] || '#00aeef'} 0%, ${categoryColors[item.category] || '#00aeef'}cc 100%)`,
+                          zIndex: 1,
+                        }} />
                         <img
                           src={item.image}
                           alt={item.name}
@@ -411,23 +693,45 @@ const ProductDetail = () => {
                             transition: 'transform 0.5s ease',
                           }}
                         />
+                        <Tag
+                          style={{
+                            position: 'absolute',
+                            top: '12px',
+                            left: '12px',
+                            background: `linear-gradient(135deg, ${categoryColors[item.category] || '#00aeef'} 0%, ${categoryColors[item.category] || '#00aeef'}dd 100%)`,
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '20px',
+                            fontWeight: '700',
+                            fontSize: '11px',
+                            padding: '4px 12px',
+                            zIndex: 2,
+                          }}
+                        >
+                          {item.category}
+                        </Tag>
                       </div>
                     }
-                    bodyStyle={{ padding: '18px' }}
                   >
                     <Title level={5} style={{ 
                       color: '#1e3a5f', 
-                      marginBottom: '8px',
-                      whiteSpace: 'nowrap',
+                      marginBottom: '10px',
+                      fontSize: '16px',
+                      fontWeight: '800',
+                      lineHeight: '1.4',
+                      minHeight: '44px',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
                       overflow: 'hidden',
-                      textOverflow: 'ellipsis',
                     }}>
                       {item.name}
                     </Title>
                     <div style={{ 
-                      fontSize: '18px', 
-                      fontWeight: '700', 
-                      color: '#e31e24' 
+                      fontSize: '22px', 
+                      fontWeight: '900', 
+                      color: '#e31e24',
+                      letterSpacing: '0.3px',
                     }}>
                       ₹{item.price}
                     </div>

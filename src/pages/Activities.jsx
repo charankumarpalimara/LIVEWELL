@@ -144,7 +144,7 @@ const Activities = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(0,166,81,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -186,7 +186,7 @@ const Activities = () => {
       {/* Activities Grid */}
       <div 
         data-animate-id="activities"
-        style={{ padding: '80px 30px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '50px 30px', maxWidth: '1200px', margin: '0 auto' }}
       >
         <Row gutter={[30, 30]}>
           {activities.map((activity, index) => (
@@ -331,7 +331,7 @@ const Activities = () => {
       <div 
         data-animate-id="schedule"
         style={{ 
-          padding: '80px 30px', 
+          padding: '50px 30px', 
           background: 'linear-gradient(135deg, #f8fbff 0%, #fff 100%)',
         }}
       >

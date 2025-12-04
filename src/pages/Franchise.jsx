@@ -94,7 +94,7 @@ const Franchise = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(0,174,239,0.9) 0%, rgba(0,166,81,0.9) 100%), url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >

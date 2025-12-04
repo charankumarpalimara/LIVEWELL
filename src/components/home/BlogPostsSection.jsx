@@ -56,7 +56,11 @@ const BlogPostsSection = ({ isVisible }) => {
   return (
     <div
       data-animate-id="blog"
-      style={{ padding: '90px 30px', background: '#fff' }}
+      style={{ 
+        padding: '60px 30px',
+        background: '#f8fbff',
+        position: 'relative',
+      }}
     >
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <div style={{
@@ -73,18 +77,28 @@ const BlogPostsSection = ({ isVisible }) => {
         </div>
         <Title level={2} style={{
           color: '#1e3a5f',
-          marginBottom: '15px',
-          fontSize: 'clamp(26px, 4vw, 40px)',
+          marginBottom: '20px',
+          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontWeight: '800',
+          lineHeight: '1.2',
           ...getSlideFromBottom(0.1, isVisible('blog')),
         }}>
           Insights & <span style={{ color: '#00aeef' }}>Resources</span>
         </Title>
+        <div style={{
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, #00aeef 0%, #662d91 100%)',
+          margin: '0 auto 20px',
+          borderRadius: '2px',
+          ...getSlideFromBottom(0.2, isVisible('blog')),
+        }} />
         <Paragraph style={{
           color: '#666',
           fontSize: '16px',
           maxWidth: '700px',
           margin: '0 auto',
-          ...getSlideFromBottom(0.2, isVisible('blog')),
+          ...getSlideFromBottom(0.3, isVisible('blog')),
         }}>
           Stay informed with expert articles, tips, and insights on autism, therapy, and child development
         </Paragraph>

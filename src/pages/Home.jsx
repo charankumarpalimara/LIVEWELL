@@ -18,36 +18,74 @@ const Home = () => {
   const isVisible = (id) => visibleElements.has(id)
 
   return (
-    <div style={{ background: '#fff', overflow: 'hidden' }}>
+    <div style={{ 
+      background: '#fff', 
+      overflow: 'hidden',
+      position: 'relative',
+    }}>
       {/* Hero Carousel Section */}
       <HeroCarousel />
 
       {/* Scrolling Tags Section */}
       <ScrollingTags />
 
-      {/* About Section */}
-      <AboutSection isVisible={isVisible} />
+      {/* Main Content Container with smooth transitions */}
+      <div style={{
+        position: 'relative',
+        background: '#fff',
+      }}>
+        {/* About Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <AboutSection isVisible={isVisible} />
+          {/* Section Divider */}
+          <div style={{
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(0, 174, 239, 0.2) 50%, transparent 100%)',
+            margin: '0 30px',
+          }} />
+        </section>
 
-      {/* Services Section */}
-      <ServicesSection isVisible={isVisible} />
+        {/* Services Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <ServicesSection isVisible={isVisible} />
+          {/* Section Divider */}
+          <div style={{
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(0, 166, 81, 0.2) 50%, transparent 100%)',
+            margin: '0 30px',
+          }} />
+        </section>
 
-      {/* Why Choose Us Section */}
-      <WhyChooseUsSection isVisible={isVisible} />
+        {/* Why Choose Us Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <WhyChooseUsSection isVisible={isVisible} />
+        </section>
 
-      {/* Success Rates Section */}
-      <SuccessRatesSection isVisible={isVisible} />
+        {/* Success Rates Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <SuccessRatesSection isVisible={isVisible} />
+        </section>
 
-      {/* Gallery Section */}
-      <GallerySection isVisible={isVisible} />
+        {/* Gallery Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <GallerySection isVisible={isVisible} />
+        </section>
 
-      {/* Featured Products Section */}
-      <FeaturedProductsSection isVisible={isVisible} />
+        {/* Featured Products Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <FeaturedProductsSection isVisible={isVisible} />
+        </section>
 
-      {/* Testimonials Section */}
-      <TestimonialsSection isVisible={isVisible} />
+        {/* Testimonials Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <TestimonialsSection isVisible={isVisible} />
+        </section>
 
-      {/* Blog Posts Section */}
-      <BlogPostsSection isVisible={isVisible} />
+        {/* Blog Posts Section */}
+        <section style={{ position: 'relative', zIndex: 1 }}>
+          <BlogPostsSection isVisible={isVisible} />
+        </section>
+      </div>
 
       {/* CTA Section */}
       <CTASection />
@@ -74,6 +112,33 @@ const Home = () => {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+
+        /* Smooth section transitions */
+        section {
+          scroll-margin-top: 80px;
+        }
+
+        /* Improved scroll behavior */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Enhanced visual effects */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Better card hover effects */
+        .ant-card {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
       `}</style>
     </div>

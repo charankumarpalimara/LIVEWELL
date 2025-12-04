@@ -137,7 +137,7 @@ const Programs = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(102,45,145,0.9) 0%, rgba(146,39,143,0.9) 100%), url(https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -180,7 +180,7 @@ const Programs = () => {
       {/* Programs Grid */}
       <div 
         data-animate-id="programs"
-        style={{ padding: '80px 30px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '50px 30px', maxWidth: '1200px', margin: '0 auto' }}
       >
         <Row gutter={[30, 30]}>
           {programs.map((program, index) => (
@@ -329,7 +329,7 @@ const Programs = () => {
       <div 
         data-animate-id="cta"
         style={{
-          padding: '80px 30px',
+          padding: '50px 30px',
           background: 'linear-gradient(135deg, #1e3a5f 0%, #00aeef 100%)',
           textAlign: 'center',
         }}

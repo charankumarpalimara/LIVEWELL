@@ -102,7 +102,7 @@ const About = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(102,45,145,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -151,8 +151,8 @@ const About = () => {
           <Col xs={24} md={12}>
             <div style={{ position: 'relative', ...getSlideFromLeft(0, isVisible('about-content')) }}>
               <img 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=450&fit=crop"
-                alt="About Live Well"
+                src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&h=450&fit=crop"
+                alt="Child Development and Therapy"
                 style={{
                   width: '100%',
                   borderRadius: '20px',
@@ -212,28 +212,128 @@ const About = () => {
       {/* Mission & Vision */}
       <div 
         data-animate-id="mission"
-        style={{ padding: '90px 30px', background: '#f8fbff' }}
+        style={{ 
+          padding: '70px 30px', 
+          background: 'linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #ffffff 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <Row gutter={[40, 40]}>
+        {/* Decorative background elements */}
+        <div style={{
+          position: 'absolute',
+          top: '-100px',
+          right: '-100px',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(0, 174, 239, 0.06) 0%, rgba(0, 166, 81, 0.06) 100%)',
+          filter: 'blur(80px)',
+          zIndex: 0,
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-100px',
+          left: '-100px',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(227, 30, 36, 0.06) 0%, rgba(247, 148, 29, 0.06) 100%)',
+          filter: 'blur(80px)',
+          zIndex: 0,
+        }} />
+
+        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '70px' }}>
+            <div style={{ 
+              color: '#00aeef', 
+              fontWeight: '700', 
+              marginBottom: '15px',
+              textTransform: 'uppercase',
+              letterSpacing: '3px',
+              fontSize: '14px',
+              position: 'relative',
+              display: 'inline-block',
+              padding: '0 20px',
+              ...getSlideFromBottom(0, isVisible('mission')),
+            }}>
+              <div style={{
+                position: 'absolute',
+                left: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '3px',
+                background: 'linear-gradient(90deg, transparent 0%, #00aeef 100%)',
+                borderRadius: '2px',
+              }} />
+              Our Foundation
+              <div style={{
+                position: 'absolute',
+                right: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '3px',
+                background: 'linear-gradient(90deg, #00aeef 0%, transparent 100%)',
+                borderRadius: '2px',
+              }} />
+            </div>
+            <Title level={2} style={{ 
+              color: '#1e3a5f', 
+              marginBottom: '20px', 
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              fontWeight: '800',
+              lineHeight: '1.2',
+              ...getSlideFromBottom(0.1, isVisible('mission')),
+            }}>
+              Mission & Vision
+            </Title>
+            <div style={{
+              width: '100px',
+              height: '4px',
+              background: 'linear-gradient(90deg, #00aeef 0%, #e31e24 100%)',
+              margin: '0 auto',
+              borderRadius: '2px',
+              ...getSlideFromBottom(0.2, isVisible('mission')),
+            }} />
+          </div>
+
+          <Row gutter={[32, 32]}>
             <Col xs={24} md={12}>
               <Card
+                className="mission-card"
                 style={{
                   height: '100%',
-                  border: '2px solid #00aeef',
                   borderRadius: '20px',
+                  border: 'none',
                   textAlign: 'center',
-                  overflow: 'hidden',
-                  transition: 'all 0.4s ease',
+                  overflow: 'visible',
+                  background: '#ffffff',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
                   ...getSlideFromLeft(0, isVisible('mission')),
                 }}
+                bodyStyle={{ padding: '28px 24px' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)'
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,174,239,0.2)'
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)'
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0, 174, 239, 0.25)'
+                  const icon = e.currentTarget.querySelector('.mission-icon')
+                  if (icon) {
+                    icon.style.transform = 'scale(1.12) rotate(5deg)'
+                    icon.style.boxShadow = '0 12px 30px rgba(0, 174, 239, 0.4)'
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                  const icon = e.currentTarget.querySelector('.mission-icon')
+                  if (icon) {
+                    icon.style.transform = 'scale(1) rotate(0)'
+                    icon.style.boxShadow = '0 6px 20px rgba(0, 174, 239, 0.3)'
+                  }
                 }}
                 cover={
                   <div style={{ 
@@ -242,36 +342,111 @@ const About = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
                   }}>
-                    <AimOutlined style={{ fontSize: '55px', color: '#fff' }} />
+                    {/* Decorative circles */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '-40px',
+                      right: '-40px',
+                      width: '160px',
+                      height: '160px',
+                      borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                    }} />
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-25px',
+                      left: '-25px',
+                      width: '120px',
+                      height: '120px',
+                      borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                    }} />
+                    <div 
+                      className="mission-icon"
+                      style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '3px solid rgba(255, 255, 255, 0.3)',
+                        boxShadow: '0 6px 20px rgba(0, 174, 239, 0.3)',
+                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <AimOutlined style={{ fontSize: '40px', color: '#fff' }} />
+                    </div>
                   </div>
                 }
               >
-                <Title level={3} style={{ color: '#1e3a5f' }}>Our Mission</Title>
-                <Paragraph style={{ fontSize: '15px', lineHeight: '1.8', color: '#555' }}>
+                <Title level={3} style={{ 
+                  color: '#1e3a5f',
+                  marginBottom: '16px',
+                  fontSize: '24px',
+                  fontWeight: '800',
+                  letterSpacing: '0.3px',
+                }}>
+                  Our Mission
+                </Title>
+                <Paragraph style={{ 
+                  fontSize: '15px', 
+                  lineHeight: '1.8', 
+                  color: '#555',
+                  marginBottom: 0,
+                }}>
                   To provide world-class rehabilitation services that empower children with autism, ADHD, 
                   and other neurological disorders to achieve their maximum potential and lead fulfilling lives.
                 </Paragraph>
+                {/* Accent line */}
+                <div style={{
+                  width: '50px',
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
+                  margin: '20px auto 0',
+                  borderRadius: '2px',
+                }} />
               </Card>
             </Col>
             <Col xs={24} md={12}>
               <Card
+                className="vision-card"
                 style={{
                   height: '100%',
-                  border: '2px solid #e31e24',
                   borderRadius: '20px',
+                  border: 'none',
                   textAlign: 'center',
-                  overflow: 'hidden',
-                  transition: 'all 0.4s ease',
+                  overflow: 'visible',
+                  background: '#ffffff',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
                   ...getSlideFromRight(0.1, isVisible('mission')),
                 }}
+                bodyStyle={{ padding: '28px 24px' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)'
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(227,30,36,0.2)'
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)'
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(227, 30, 36, 0.25)'
+                  const icon = e.currentTarget.querySelector('.vision-icon')
+                  if (icon) {
+                    icon.style.transform = 'scale(1.12) rotate(-5deg)'
+                    icon.style.boxShadow = '0 12px 30px rgba(227, 30, 36, 0.4)'
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                  const icon = e.currentTarget.querySelector('.vision-icon')
+                  if (icon) {
+                    icon.style.transform = 'scale(1) rotate(0)'
+                    icon.style.boxShadow = '0 6px 20px rgba(227, 30, 36, 0.3)'
+                  }
                 }}
                 cover={
                   <div style={{ 
@@ -280,16 +455,76 @@ const About = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
                   }}>
-                    <HeartFilled style={{ fontSize: '55px', color: '#fff' }} />
+                    {/* Decorative circles */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '-40px',
+                      left: '-40px',
+                      width: '160px',
+                      height: '160px',
+                      borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                    }} />
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-25px',
+                      right: '-25px',
+                      width: '120px',
+                      height: '120px',
+                      borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                    }} />
+                    <div 
+                      className="vision-icon"
+                      style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '3px solid rgba(255, 255, 255, 0.3)',
+                        boxShadow: '0 6px 20px rgba(227, 30, 36, 0.3)',
+                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <HeartFilled style={{ fontSize: '40px', color: '#fff' }} />
+                    </div>
                   </div>
                 }
               >
-                <Title level={3} style={{ color: '#1e3a5f' }}>Our Vision</Title>
-                <Paragraph style={{ fontSize: '15px', lineHeight: '1.8', color: '#555' }}>
+                <Title level={3} style={{ 
+                  color: '#1e3a5f',
+                  marginBottom: '16px',
+                  fontSize: '24px',
+                  fontWeight: '800',
+                  letterSpacing: '0.3px',
+                }}>
+                  Our Vision
+                </Title>
+                <Paragraph style={{ 
+                  fontSize: '15px', 
+                  lineHeight: '1.8', 
+                  color: '#555',
+                  marginBottom: 0,
+                }}>
                   To be India's leading integrated autism network that transforms lives through innovative 
                   therapies, evidence-based practices, and commitment to inclusion and equity.
                 </Paragraph>
+                {/* Accent line */}
+                <div style={{
+                  width: '50px',
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #e31e24 0%, #f7941d 100%)',
+                  margin: '20px auto 0',
+                  borderRadius: '2px',
+                }} />
               </Card>
             </Col>
           </Row>
@@ -299,72 +534,226 @@ const About = () => {
       {/* Our Team */}
       <div 
         data-animate-id="team"
-        style={{ padding: '90px 30px' }}
+        style={{ 
+          padding: '70px 30px',
+          background: 'linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #ffffff 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+        {/* Decorative background elements */}
+        <div style={{
+          position: 'absolute',
+          top: '-100px',
+          right: '-100px',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(247, 148, 29, 0.08) 0%, rgba(0, 174, 239, 0.08) 100%)',
+          filter: 'blur(80px)',
+          zIndex: 0,
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-150px',
+          left: '-150px',
+          width: '500px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(0, 166, 81, 0.06) 0%, rgba(102, 45, 145, 0.06) 100%)',
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }} />
+
+        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', marginBottom: '70px' }}>
             <div style={{ 
               color: '#f7941d', 
               fontWeight: '700', 
-              marginBottom: '10px',
+              marginBottom: '15px',
               textTransform: 'uppercase',
-              letterSpacing: '2px',
-              fontSize: '13px',
+              letterSpacing: '3px',
+              fontSize: '14px',
+              position: 'relative',
+              display: 'inline-block',
+              padding: '0 20px',
               ...getSlideFromBottom(0, isVisible('team')),
             }}>
+              <div style={{
+                position: 'absolute',
+                left: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '3px',
+                background: 'linear-gradient(90deg, transparent 0%, #f7941d 100%)',
+                borderRadius: '2px',
+              }} />
               Our Team
+              <div style={{
+                position: 'absolute',
+                right: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '3px',
+                background: 'linear-gradient(90deg, #f7941d 0%, transparent 100%)',
+                borderRadius: '2px',
+              }} />
             </div>
             <Title level={2} style={{ 
               color: '#1e3a5f', 
-              marginBottom: '15px', 
-              fontSize: 'clamp(26px, 4vw, 38px)',
+              marginBottom: '20px', 
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              fontWeight: '800',
+              lineHeight: '1.2',
               ...getSlideFromBottom(0.1, isVisible('team')),
             }}>
               Meet Our Expert Therapists
             </Title>
+            <div style={{
+              width: '100px',
+              height: '4px',
+              background: 'linear-gradient(90deg, #f7941d 0%, #00aeef 100%)',
+              margin: '0 auto',
+              borderRadius: '2px',
+              ...getSlideFromBottom(0.2, isVisible('team')),
+            }} />
           </div>
-          <Row gutter={[24, 24]}>
+          <Row gutter={[32, 40]}>
             {teamMembers.map((member, index) => (
               <Col xs={24} sm={12} md={6} key={index}>
                 <Card
                   hoverable
                   style={{ 
                     textAlign: 'center', 
-                    borderRadius: '16px',
-                    overflow: 'hidden',
-                    transition: 'all 0.4s ease',
-                    ...getSlideFromBottom(0.1 + index * 0.1, isVisible('team')),
+                    borderRadius: '24px',
+                    overflow: 'visible',
+                    border: 'none',
+                    background: '#ffffff',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                    padding: '0',
+                    ...getSlideFromBottom(0.1 + index * 0.12, isVisible('team')),
                   }}
+                  bodyStyle={{ padding: '30px 24px' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-12px)'
-                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)'
+                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)'
+                    e.currentTarget.style.boxShadow = '0 25px 60px rgba(247, 148, 29, 0.25)'
                     const img = e.currentTarget.querySelector('img')
-                    if (img) img.style.transform = 'scale(1.08)'
+                    if (img) img.style.transform = 'scale(1.1)'
+                    const profileImg = e.currentTarget.querySelector('.profile-image-container')
+                    if (profileImg) {
+                      profileImg.style.transform = 'scale(1.05)'
+                      profileImg.style.boxShadow = '0 15px 40px rgba(247, 148, 29, 0.35)'
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'none'
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
                     const img = e.currentTarget.querySelector('img')
                     if (img) img.style.transform = 'scale(1)'
+                    const profileImg = e.currentTarget.querySelector('.profile-image-container')
+                    if (profileImg) {
+                      profileImg.style.transform = 'scale(1)'
+                      profileImg.style.boxShadow = '0 8px 24px rgba(247, 148, 29, 0.25)'
+                    }
                   }}
                   cover={
-                    <div style={{ overflow: 'hidden' }}>
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
+                    <div style={{ 
+                      position: 'relative',
+                      padding: '40px 40px 60px',
+                      background: 'linear-gradient(135deg, #f8fbff 0%, #ffffff 100%)',
+                    }}>
+                      {/* Profile Image Container */}
+                      <div 
+                        className="profile-image-container"
                         style={{
-                          width: '100%',
-                          height: '220px',
-                          objectFit: 'cover',
-                          transition: 'transform 0.5s ease',
+                          position: 'relative',
+                          width: '160px',
+                          height: '160px',
+                          margin: '0 auto',
+                          borderRadius: '50%',
+                          overflow: 'hidden',
+                          border: '5px solid #ffffff',
+                          boxShadow: '0 8px 24px rgba(247, 148, 29, 0.25)',
+                          background: 'linear-gradient(135deg, #f7941d20 0%, #00aeef20 100%)',
+                          transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                         }}
-                      />
+                      >
+                        <img 
+                          src={member.image} 
+                          alt={member.name}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            transition: 'transform 0.5s ease',
+                          }}
+                        />
+                        {/* Decorative ring */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '-8px',
+                          left: '-8px',
+                          right: '-8px',
+                          bottom: '-8px',
+                          borderRadius: '50%',
+                          border: '2px solid rgba(247, 148, 29, 0.2)',
+                          pointerEvents: 'none',
+                        }} />
+                      </div>
+                      {/* Decorative badge */}
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '20px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: 'linear-gradient(135deg, #f7941d 0%, #00aeef 100%)',
+                        color: '#ffffff',
+                        padding: '6px 16px',
+                        borderRadius: '20px',
+                        fontSize: '11px',
+                        fontWeight: '700',
+                        letterSpacing: '0.5px',
+                        boxShadow: '0 4px 12px rgba(247, 148, 29, 0.3)',
+                        textTransform: 'uppercase',
+                      }}>
+                        Expert
+                      </div>
                     </div>
                   }
                 >
-                  <Title level={4} style={{ color: '#1e3a5f', marginBottom: '5px' }}>{member.name}</Title>
-                  <div style={{ color: '#00aeef', fontWeight: '600', marginBottom: '5px' }}>{member.role}</div>
-                  <div style={{ color: '#888', fontSize: '13px' }}>{member.specialty}</div>
+                  <Title level={4} style={{ 
+                    color: '#1e3a5f', 
+                    marginBottom: '8px',
+                    fontSize: '20px',
+                    fontWeight: '800',
+                    letterSpacing: '0.3px',
+                  }}>
+                    {member.name}
+                  </Title>
+                  <div style={{ 
+                    color: '#00aeef', 
+                    fontWeight: '700', 
+                    marginBottom: '8px',
+                    fontSize: '15px',
+                    letterSpacing: '0.3px',
+                  }}>
+                    {member.role}
+                  </div>
+                  <div style={{ 
+                    color: '#718096', 
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    padding: '8px 16px',
+                    background: 'linear-gradient(135deg, #f8fbff 0%, #ffffff 100%)',
+                    borderRadius: '12px',
+                    display: 'inline-block',
+                    border: '1px solid rgba(0, 174, 239, 0.1)',
+                  }}>
+                    {member.specialty}
+                  </div>
                 </Card>
               </Col>
             ))}
@@ -398,12 +787,22 @@ const About = () => {
             </div>
             <Title level={2} style={{ 
               color: '#fff', 
-              marginBottom: '15px', 
-              fontSize: 'clamp(26px, 4vw, 38px)',
+              marginBottom: '20px', 
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              fontWeight: '800',
+              lineHeight: '1.2',
               ...getSlideFromBottom(0.1, isVisible('why-us')),
             }}>
               What Makes Us Different
             </Title>
+            <div style={{
+              width: '100px',
+              height: '4px',
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+              margin: '0 auto',
+              borderRadius: '2px',
+              ...getSlideFromBottom(0.2, isVisible('why-us')),
+            }} />
           </div>
           <Row gutter={[24, 24]}>
             {[
@@ -466,14 +865,26 @@ const About = () => {
             </div>
             <Title level={2} style={{ 
               color: '#1e3a5f', 
-              marginBottom: '15px', 
-              fontSize: 'clamp(26px, 4vw, 38px)',
+              marginBottom: '20px', 
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              fontWeight: '800',
+              lineHeight: '1.2',
               opacity: isVisible('approach') ? 1 : 0,
               transform: isVisible('approach') ? 'translateY(0)' : 'translateY(20px)',
               transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s',
             }}>
               Our Integrated Approach
             </Title>
+            <div style={{
+              width: '100px',
+              height: '4px',
+              background: 'linear-gradient(90deg, #00a651 0%, #00aeef 100%)',
+              margin: '0 auto',
+              borderRadius: '2px',
+              opacity: isVisible('approach') ? 1 : 0,
+              transform: isVisible('approach') ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+            }} />
           </div>
           
           {/* Custom Timeline with Smooth Animations */}

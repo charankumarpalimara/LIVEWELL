@@ -149,7 +149,7 @@ const Header = () => {
             href="tel:+918977510100" 
             style={{ color: '#fff', fontWeight: 'bold', textDecoration: 'none', fontSize: '13px' }}
           >
-            +91 8977510100
+            +91 89775 10100
           </a>
         </div>
         <div 

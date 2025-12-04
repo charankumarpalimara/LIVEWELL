@@ -32,32 +32,95 @@ const ServicesSection = ({ isVisible }) => {
   return (
     <div
       data-animate-id="services"
-      style={{ padding: '90px 30px', background: '#f8fbff' }}
+      style={{ 
+        padding: '70px 30px',
+        background: 'linear-gradient(180deg, #f8fbff 0%, #ffffff 50%, #f8fbff 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
     >
-      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <div style={{
-          color: '#00aeef',
-          fontWeight: '700',
-          marginBottom: '10px',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          fontSize: '13px',
-          ...getSlideFromBottom(0, isVisible('services')),
-        }}>
-          Our Services
-        </div>
-        <Title
-          level={2}
-          style={{
-            color: '#1e3a5f',
+      {/* Decorative elements */}
+      <div style={{
+        position: 'absolute',
+        top: '50px',
+        left: '-200px',
+        width: '600px',
+        height: '600px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0, 174, 239, 0.06) 0%, transparent 70%)',
+        filter: 'blur(60px)',
+        zIndex: 0,
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '50px',
+        right: '-200px',
+        width: '600px',
+        height: '600px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0, 166, 81, 0.06) 0%, transparent 70%)',
+        filter: 'blur(60px)',
+        zIndex: 0,
+      }} />
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div style={{ textAlign: 'center', marginBottom: '70px' }}>
+          <div style={{
+            color: '#00aeef',
+            fontWeight: '700',
             marginBottom: '15px',
-            fontSize: 'clamp(26px, 4vw, 40px)',
-            ...getSlideFromBottom(0.1, isVisible('services')),
-          }}
-        >
-          Comprehensive Therapy Services
-        </Title>
-      </div>
+            textTransform: 'uppercase',
+            letterSpacing: '3px',
+            fontSize: '14px',
+            position: 'relative',
+            display: 'inline-block',
+            padding: '0 20px',
+            ...getSlideFromBottom(0, isVisible('services')),
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent 0%, #00aeef 100%)',
+              borderRadius: '2px',
+            }} />
+            Our Services
+            <div style={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '3px',
+              background: 'linear-gradient(90deg, #00aeef 0%, transparent 100%)',
+              borderRadius: '2px',
+            }} />
+          </div>
+          <Title
+            level={2}
+            style={{
+              color: '#1e3a5f',
+              marginBottom: '20px',
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              fontWeight: '800',
+              lineHeight: '1.2',
+              ...getSlideFromBottom(0.1, isVisible('services')),
+            }}
+          >
+            Comprehensive Therapy Services
+          </Title>
+          <div style={{
+            width: '100px',
+            height: '4px',
+            background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
+            margin: '0 auto',
+            borderRadius: '2px',
+            ...getSlideFromBottom(0.2, isVisible('services')),
+          }} />
+        </div>
       <Row gutter={[20, 20]} justify="center">
         {services.map((service, index) => (
           <Col xs={12} sm={8} md={6} lg={4} key={index}>
@@ -65,37 +128,58 @@ const ServicesSection = ({ isVisible }) => {
               <Card
                 hoverable
                 style={{
-                  border: `2px solid ${service.color}`,
-                  borderRadius: '16px',
+                  border: 'none',
+                  // borderRadius: '12px',
                   overflow: 'hidden',
-                  transition: 'all 0.4s ease',
+                  background: '#ffffff',  
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
+                  position: 'relative',
                   ...getSlideFromLeft(0.1 + index * 0.08, isVisible('services')),
                 }}
-                bodyStyle={{ padding: '15px' }}
+                bodyStyle={{ padding: '20px' }}
                 cover={
-                  <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
+                  <div style={{ 
+                    height: '160px', 
+                    overflow: 'hidden', 
+                    position: 'relative',
+                    background: `linear-gradient(135deg, ${service.color}15 0%, ${service.color}05 100%)`,
+                  }}>
                     <img
                       src={service.image}
                       alt={service.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }}
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover', 
+                        transition: 'transform 0.5s ease',
+                      }}
                     />
                     <div style={{
                       position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '4px',
+                      background: `linear-gradient(90deg, ${service.color} 0%, ${service.color}cc 100%)`,
+                    }} />
+                    <div style={{
+                      position: 'absolute',
                       inset: 0,
-                      background: `linear-gradient(to bottom, transparent 30%, ${service.color}60 100%)`,
+                      background: `linear-gradient(to bottom, transparent 40%, ${service.color}40 100%)`,
                     }} />
                   </div>
                 }
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)'
-                  e.currentTarget.style.boxShadow = `0 15px 35px ${service.color}30`
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)'
+                  e.currentTarget.style.boxShadow = `0 20px 50px ${service.color}35`
                   const img = e.currentTarget.querySelector('img')
-                  if (img) img.style.transform = 'scale(1.1)'
+                  if (img) img.style.transform = 'scale(1.15)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
                   const img = e.currentTarget.querySelector('img')
                   if (img) img.style.transform = 'scale(1)'
                 }}
@@ -106,20 +190,28 @@ const ServicesSection = ({ isVisible }) => {
                   gap: '10px',
                 }}>
                   <div style={{
-                    fontSize: '24px',
+                    fontSize: '28px',
                     color: service.color,
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '10px',
-                    background: `${service.color}15`,
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '5px',
+                    background: `linear-gradient(135deg, ${service.color}20 0%, ${service.color}10 100%)`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
+                    boxShadow: `0 4px 12px ${service.color}20`,
+                    border: `2px solid ${service.color}15`,
                   }}>
                     {service.icon}
                   </div>
-                  <div style={{ fontWeight: '700', color: '#1e3a5f', fontSize: '13px', lineHeight: '1.3' }}>
+                  <div style={{ 
+                    fontWeight: '800', 
+                    color: '#1e3a5f', 
+                    fontSize: '15px', 
+                    lineHeight: '1.4',
+                    letterSpacing: '0.3px',
+                  }}>
                     {service.name}
                   </div>
                 </div>
@@ -128,7 +220,8 @@ const ServicesSection = ({ isVisible }) => {
           </Col>
         ))}
       </Row>
-      <div style={{ textAlign: 'center', marginTop: '40px', ...getSlideFromBottom(0.5, isVisible('services')) }}>
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '60px', position: 'relative', zIndex: 1, ...getSlideFromBottom(0.5, isVisible('services')) }}>
         <Link to="/services">
           <Button
             type="primary"

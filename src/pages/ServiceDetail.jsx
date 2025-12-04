@@ -162,7 +162,7 @@ const ServiceDetail = () => {
           backgroundImage: `linear-gradient(135deg, ${service.color}dd 0%, ${service.color}aa 100%), url(${service.image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '120px 30px 80px',
+          padding: '70px 30px 50px',
           textAlign: 'center',
           position: 'relative',
         }}
@@ -254,7 +254,7 @@ const ServiceDetail = () => {
       </div>
 
       {/* Content Section */}
-      <div style={{ padding: '100px 30px', maxWidth: '1200px', margin: '0 auto', background: '#fafbfc' }}>
+      <div style={{ padding: '60px 30px', maxWidth: '1200px', margin: '0 auto', background: '#fafbfc' }}>
         {/* Overview */}
         <Card
           style={{

@@ -206,7 +206,7 @@ const Contact = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(227,30,36,0.9) 0%, rgba(247,148,29,0.9) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -306,7 +306,14 @@ const Contact = () => {
                 {info.details.map((detail, idx) => (
                   <Paragraph 
                     key={idx} 
-                    style={{ color: '#666', margin: 0, fontSize: '14px', lineHeight: '1.7' }}
+                    style={{ 
+                      color: '#666', 
+                      margin: 0, 
+                      fontSize: info.title === 'Email' ? '12px' : '14px', 
+                      lineHeight: '1.7',
+                      wordBreak: 'break-all',
+                      overflowWrap: 'anywhere',
+                    }}
                   >
                     {detail}
                   </Paragraph>
@@ -320,7 +327,7 @@ const Contact = () => {
       {/* Branches Section */}
       <div 
         data-animate-id="branches"
-        style={{ padding: '80px 30px', background: '#f8fbff' }}
+        style={{ padding: '50px 30px', background: '#f8fbff' }}
       >
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -476,7 +483,7 @@ const Contact = () => {
       {/* Contact Form & Map */}
       <div 
         data-animate-id="form-map"
-        style={{ padding: '80px 30px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '50px 30px', maxWidth: '1200px', margin: '0 auto' }}
       >
         <Row gutter={[50, 50]}>
           {/* Contact Form */}
@@ -653,8 +660,8 @@ const Contact = () => {
                 </Title>
                 <Row gutter={[16, 16]}>
                   {[
-                    { icon: <PhoneOutlined />, label: 'Call Now', value: '+91 7032 157 157', color: '#e31e24' },
-                    { icon: <WhatsAppOutlined />, label: 'WhatsApp', value: '+91 7032 157 157', color: '#25d366' },
+                    { icon: <PhoneOutlined />, label: 'Call Now', value: '+91 89775 10100', color: '#e31e24' },
+                    { icon: <WhatsAppOutlined />, label: 'WhatsApp', value: '+91 89775 10100', color: '#25d366' },
                     { icon: <GlobalOutlined />, label: 'Website', value: 'https://livewellrehabilitationnetwork.com', color: '#f7941d' },
                   ].map((item, index) => (
                     <Col xs={24} key={index}>
@@ -709,7 +716,7 @@ const Contact = () => {
       <div 
         data-animate-id="faq"
         style={{ 
-          padding: '80px 30px', 
+          padding: '50px 30px', 
           background: '#f8fbff',
         }}
       >

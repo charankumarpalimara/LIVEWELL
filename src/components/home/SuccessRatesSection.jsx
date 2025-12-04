@@ -18,8 +18,9 @@ const SuccessRatesSection = ({ isVisible }) => {
     <div
       data-animate-id="stats"
       style={{
-        padding: '90px 30px',
+        padding: '60px 30px',
         background: 'linear-gradient(135deg, #1e3a5f 0%, #00aeef 100%)',
+        position: 'relative',
       }}
     >
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -36,12 +37,22 @@ const SuccessRatesSection = ({ isVisible }) => {
         </div>
         <Title level={2} style={{
           color: '#fff',
-          marginBottom: '15px',
-          fontSize: 'clamp(26px, 4vw, 40px)',
+          marginBottom: '20px',
+          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontWeight: '800',
+          lineHeight: '1.2',
           ...getSlideFromBottom(0.1, isVisible('stats')),
         }}>
           Proven Success Rates
         </Title>
+        <div style={{
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+          margin: '0 auto',
+          borderRadius: '2px',
+          ...getSlideFromBottom(0.2, isVisible('stats')),
+        }} />
       </div>
       <Row gutter={[20, 20]} justify="center">
         {stats.map((stat, index) => (

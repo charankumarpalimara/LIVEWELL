@@ -12,7 +12,7 @@ const PatronHealthCare = () => {
       <div
         style={{
           background: 'linear-gradient(135deg, #662d91 0%, #92278f 100%)',
-          padding: '100px 30px 80px',
+          padding: '60px 30px 50px',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
@@ -65,7 +65,7 @@ const PatronHealthCare = () => {
       </div>
 
       {/* Content Section */}
-      <div style={{ padding: '100px 30px', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ padding: '60px 30px', maxWidth: '1200px', margin: '0 auto' }}>
         <Row gutter={[50, 50]} align="middle">
           <Col xs={24} md={12}>
             <div style={{

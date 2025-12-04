@@ -195,7 +195,7 @@ const Services = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(0,174,239,0.9) 0%, rgba(0,166,81,0.9) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
@@ -218,11 +218,20 @@ const Services = () => {
             color: '#fff', 
             marginBottom: '20px',
             fontSize: 'clamp(32px, 5vw, 48px)',
+            fontWeight: '800',
             animation: 'slideDown 0.8s ease-out 0.2s both',
           }}
         >
           Our Therapy Services
         </Title>
+        <div style={{
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+          margin: '0 auto 25px',
+          borderRadius: '2px',
+          animation: 'slideDown 0.8s ease-out 0.3s both',
+        }} />
         <Paragraph 
           style={{ 
             fontSize: '18px', 
@@ -240,20 +249,54 @@ const Services = () => {
       {/* Services Grid */}
       <div 
         data-animate-id="services-grid"
-        style={{ padding: '90px 30px' }}
+        style={{ 
+          padding: '70px 30px',
+          background: 'linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #ffffff 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        <Row gutter={[24, 24]}>
-          {services.map((service, index) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={service.id}>
+        {/* Decorative background elements */}
+        <div style={{
+          position: 'absolute',
+          top: '-150px',
+          right: '-150px',
+          width: '500px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(0, 174, 239, 0.06) 0%, rgba(0, 166, 81, 0.06) 100%)',
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-150px',
+          left: '-150px',
+          width: '500px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, rgba(247, 148, 29, 0.06) 0%, rgba(227, 30, 36, 0.06) 100%)',
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }} />
+
+        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <Row gutter={[32, 40]}>
+            {services.map((service, index) => (
+              <Col xs={24} sm={12} md={8} lg={6} key={service.id} style={{ display: 'flex' }}>
                 <Card
                   hoverable
                   style={{
+                    width: '100%',
                     height: '100%',
-                    border: `2px solid ${service.color}`,
-                    borderRadius: '16px',
-                    overflow: 'hidden',
-                    transition: 'all 0.4s ease',
+                    borderRadius: '24px',
+                    overflow: 'visible',
+                    border: 'none',
+                    background: '#ffffff',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                     cursor: 'pointer',
+                    padding: '0',
                     display: 'flex',
                     flexDirection: 'column',
                     ...(index % 2 === 0 
@@ -262,107 +305,149 @@ const Services = () => {
                     ),
                   }}
                   bodyStyle={{ 
-                    padding: '18px',
+                    padding: '24px 20px',
                     display: 'flex',
                     flexDirection: 'column',
                     flex: 1,
+                    height: '100%',
                   }}
                   cover={
-                    <div style={{ height: '140px', overflow: 'hidden', position: 'relative' }}>
+                    <div style={{ 
+                      height: '180px', 
+                      overflow: 'hidden', 
+                      position: 'relative',
+                      background: `linear-gradient(135deg, ${service.color}15 0%, ${service.color}05 100%)`,
+                    }}>
+                      {/* Top accent border */}
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '4px',
+                        background: `linear-gradient(90deg, ${service.color} 0%, ${service.color}cc 50%, ${service.color} 100%)`,
+                        zIndex: 1,
+                      }} />
                       <img 
                         src={service.image} 
                         alt={service.title}
+                        className="service-img"
                         style={{
                           width: '100%',
                           height: '100%',
                           objectFit: 'cover',
-                          transition: 'transform 0.5s ease',
+                          transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                         }}
                       />
+                      {/* Gradient overlay */}
                       <div style={{
                         position: 'absolute',
-                        top: '12px',
-                        right: '12px',
-                        background: service.color,
-                        color: '#fff',
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '18px',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-                        transition: 'transform 0.3s ease',
-                      }}>
+                        inset: 0,
+                        background: `linear-gradient(to bottom, transparent 40%, ${service.color}40 100%)`,
+                        pointerEvents: 'none',
+                      }} />
+                      {/* Icon Badge */}
+                      <div 
+                        className="service-icon-badge"
+                        style={{
+                          position: 'absolute',
+                          top: '15px',
+                          right: '15px',
+                          background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}dd 100%)`,
+                          color: '#fff',
+                          width: '56px',
+                          height: '56px',
+                          borderRadius: '16px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '24px',
+                          boxShadow: `0 8px 24px ${service.color}40`,
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          zIndex: 2,
+                          border: '3px solid #ffffff',
+                        }}
+                      >
                         {service.icon}
                       </div>
                     </div>
                   }
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-10px)'
-                    e.currentTarget.style.boxShadow = `0 20px 40px ${service.color}30`
-                    const img = e.currentTarget.querySelector('img')
-                    if (img) img.style.transform = 'scale(1.1)'
-                    const icon = e.currentTarget.querySelector('[style*="border-radius: 50%"]')
-                    if (icon) icon.style.transform = 'rotate(360deg) scale(1.1)'
+                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)'
+                    e.currentTarget.style.boxShadow = `0 25px 60px ${service.color}30`
+                    const img = e.currentTarget.querySelector('.service-img')
+                    if (img) img.style.transform = 'scale(1.15)'
+                    const icon = e.currentTarget.querySelector('.service-icon-badge')
+                    if (icon) {
+                      icon.style.transform = 'rotate(5deg) scale(1.1)'
+                      icon.style.boxShadow = `0 12px 30px ${service.color}50`
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'none'
-                    const img = e.currentTarget.querySelector('img')
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                    const img = e.currentTarget.querySelector('.service-img')
                     if (img) img.style.transform = 'scale(1)'
-                    const icon = e.currentTarget.querySelector('[style*="border-radius: 50%"]')
-                    if (icon) icon.style.transform = 'rotate(0) scale(1)'
+                    const icon = e.currentTarget.querySelector('.service-icon-badge')
+                    if (icon) {
+                      icon.style.transform = 'rotate(0) scale(1)'
+                      icon.style.boxShadow = `0 8px 24px ${service.color}40`
+                    }
                   }}
                 >
-                  <Title level={4} style={{ marginBottom: '10px', color: '#1e3a5f', fontSize: '16px' }}>
-                    {service.title}
-                  </Title>
-                  <Paragraph style={{ color: '#666', fontSize: '13px', minHeight: '60px', marginBottom: '12px', flex: 1 }}>
-                    {service.description}
-                  </Paragraph>
-                  {service.successRate && (
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                        <span style={{ fontSize: '11px', color: '#888' }}>Success Rate</span>
-                        <span style={{ fontWeight: '700', color: service.color }}>{service.successRate}%</span>
-                      </div>
-                      <Progress 
-                        percent={isVisible('services-grid') ? service.successRate : 0} 
-                        strokeColor={service.color}
-                        showInfo={false}
-                        size="small"
-                        strokeWidth={6}
-                      />
-                    </div>
-                  )}
-                  <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '15px' }}>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Title level={4} style={{ 
+                      marginBottom: '12px', 
+                      color: '#1e3a5f', 
+                      fontSize: '18px',
+                      fontWeight: '800',
+                      letterSpacing: '0.3px',
+                      lineHeight: '1.3',
+                    }}>
+                      {service.title}
+                    </Title>
+                    <Paragraph style={{ 
+                      color: '#4a5568', 
+                      fontSize: '14px', 
+                      minHeight: '70px', 
+                      marginBottom: '16px', 
+                      flex: 1,
+                      lineHeight: '1.6',
+                    }}>
+                      {service.description}
+                    </Paragraph>
+                  </div>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '10px', 
+                    marginTop: 'auto',
+                    paddingTop: '16px',
+                    borderTop: '1px solid #f0f0f0',
+                  }}>
                     <Link to="/appointment" style={{ flex: 1, textDecoration: 'none' }} onClick={(e) => e.stopPropagation()}>
                       <Button
                         type="primary"
                         block
                         style={{
-                          background: service.color,
+                          background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}dd 100%)`,
                           border: 'none',
-                          borderRadius: '8px',
-                          height: '38px',
-                          fontWeight: '600',
-                          fontSize: '13px',
+                          borderRadius: '12px',
+                          height: '42px',
+                          fontWeight: '700',
+                          fontSize: '14px',
+                          boxShadow: `0 4px 12px ${service.color}30`,
                           transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = service.color
-                          e.currentTarget.style.opacity = '0.9'
                           e.currentTarget.style.transform = 'translateY(-2px)'
+                          e.currentTarget.style.boxShadow = `0 6px 20px ${service.color}40`
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = service.color
-                          e.currentTarget.style.opacity = '1'
                           e.currentTarget.style.transform = 'translateY(0)'
+                          e.currentTarget.style.boxShadow = `0 4px 12px ${service.color}30`
                         }}
                       >
-                        Book
+                        Book Now
                       </Button>
                     </Link>
                     <Link to={getServiceUrl(service.title)} style={{ flex: 1, textDecoration: 'none' }}>
@@ -372,31 +457,34 @@ const Services = () => {
                           background: 'transparent',
                           border: `2px solid ${service.color}`,
                           color: service.color,
-                          borderRadius: '8px',
-                          height: '38px',
-                          fontWeight: '600',
-                          fontSize: '13px',
+                          borderRadius: '12px',
+                          height: '42px',
+                          fontWeight: '700',
+                          fontSize: '14px',
                           transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.background = service.color
                           e.currentTarget.style.color = '#fff'
                           e.currentTarget.style.transform = 'translateY(-2px)'
+                          e.currentTarget.style.boxShadow = `0 6px 20px ${service.color}30`
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.background = 'transparent'
                           e.currentTarget.style.color = service.color
                           e.currentTarget.style.transform = 'translateY(0)'
+                          e.currentTarget.style.boxShadow = 'none'
                         }}
                       >
-                        More
+                        Details
                       </Button>
                     </Link>
                   </div>
                 </Card>
-            </Col>
-          ))}
-        </Row>
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
 
       {/* Statistics Section */}
@@ -424,12 +512,22 @@ const Services = () => {
         </div>
         <Title level={2} style={{ 
           color: '#fff', 
-          marginBottom: '50px', 
-          fontSize: 'clamp(28px, 4vw, 42px)',
+          marginBottom: '20px', 
+          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontWeight: '800',
+          lineHeight: '1.2',
           ...getSlideFromBottom(0.1, isVisible('stats')),
         }}>
           Proven Success Rates
         </Title>
+        <div style={{
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+          margin: '0 auto 50px',
+          borderRadius: '2px',
+          ...getSlideFromBottom(0.2, isVisible('stats')),
+        }} />
         <Row gutter={[28, 28]} justify="center">
           {[
             { name: 'Autism Integrated Therapy', rate: 98, color: '#e31e24' },
@@ -483,24 +581,70 @@ const Services = () => {
         data-animate-id="cta"
         style={{ padding: '90px 30px', textAlign: 'center', background: '#f8fbff' }}
       >
-        <Title level={2} style={{ 
-          marginBottom: '20px', 
-          color: '#1e3a5f', 
-          fontSize: 'clamp(28px, 4vw, 40px)',
-          ...getSlideFromBottom(0, isVisible('cta')),
-        }}>
-          Ready to Get Started?
-        </Title>
-        <Paragraph style={{ 
-          fontSize: '18px', 
-          color: '#666', 
-          marginBottom: '35px', 
-          maxWidth: '600px', 
-          margin: '0 auto 35px',
-          ...getSlideFromBottom(0.1, isVisible('cta')),
-        }}>
-          Book an appointment today and take the first step towards your child's development journey.
-        </Paragraph>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <div style={{
+            color: '#00aeef',
+            fontWeight: '700',
+            marginBottom: '15px',
+            textTransform: 'uppercase',
+            letterSpacing: '3px',
+            fontSize: '14px',
+            position: 'relative',
+            display: 'inline-block',
+            padding: '0 20px',
+            ...getSlideFromBottom(0, isVisible('cta')),
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent 0%, #00aeef 100%)',
+              borderRadius: '2px',
+            }} />
+            Get Started
+            <div style={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '3px',
+              background: 'linear-gradient(90deg, #00aeef 0%, transparent 100%)',
+              borderRadius: '2px',
+            }} />
+          </div>
+          <Title level={2} style={{ 
+            marginBottom: '20px', 
+            color: '#1e3a5f', 
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            fontWeight: '800',
+            lineHeight: '1.2',
+            ...getSlideFromBottom(0.1, isVisible('cta')),
+          }}>
+            Ready to Get Started?
+          </Title>
+          <div style={{
+            width: '100px',
+            height: '4px',
+            background: 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)',
+            margin: '0 auto 30px',
+            borderRadius: '2px',
+            ...getSlideFromBottom(0.2, isVisible('cta')),
+          }} />
+          <Paragraph style={{ 
+            fontSize: '18px', 
+            color: '#666', 
+            marginBottom: '35px', 
+            maxWidth: '600px', 
+            margin: '0 auto 35px',
+            ...getSlideFromBottom(0.3, isVisible('cta')),
+          }}>
+            Book an appointment today and take the first step towards your child's development journey.
+          </Paragraph>
+        </div>
         <div style={getSlideFromBottom(0.2, isVisible('cta'))}>
           <Link to="/appointment">
             <Button

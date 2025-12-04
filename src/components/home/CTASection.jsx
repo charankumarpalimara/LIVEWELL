@@ -12,8 +12,9 @@ const CTASection = () => {
         backgroundImage: 'linear-gradient(135deg, rgba(227,30,36,0.92) 0%, rgba(247,148,29,0.92) 50%, rgba(255,242,0,0.92) 100%), url(https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&h=600&fit=crop)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '90px 30px',
+        padding: '60px 30px',
         textAlign: 'center',
+        position: 'relative',
       }}
     >
       <Title level={2} style={{ color: '#fff', marginBottom: '18px', textShadow: '2px 4px 8px rgba(0,0,0,0.2)', fontSize: 'clamp(26px, 4vw, 40px)' }}>

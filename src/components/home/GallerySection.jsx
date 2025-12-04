@@ -19,7 +19,11 @@ const GallerySection = ({ isVisible }) => {
   return (
     <div
       data-animate-id="gallery"
-      style={{ padding: '90px 30px', background: '#fff' }}
+      style={{ 
+        padding: '60px 30px',
+        background: '#f8fbff',
+        position: 'relative',
+      }}
     >
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <div style={{
@@ -35,12 +39,22 @@ const GallerySection = ({ isVisible }) => {
         </div>
         <Title level={2} style={{
           color: '#1e3a5f',
-          marginBottom: '15px',
-          fontSize: 'clamp(26px, 4vw, 40px)',
+          marginBottom: '20px',
+          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontWeight: '800',
+          lineHeight: '1.2',
           ...getSlideFromBottom(0.1, isVisible('gallery')),
         }}>
           See Our Therapy Sessions
         </Title>
+        <div style={{
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, #662d91 0%, #00aeef 100%)',
+          margin: '0 auto',
+          borderRadius: '2px',
+          ...getSlideFromBottom(0.2, isVisible('gallery')),
+        }} />
       </div>
       <Row gutter={[20, 20]}>
         {galleryImages.map((img, index) => (

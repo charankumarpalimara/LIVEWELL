@@ -168,7 +168,7 @@ const Branches = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(102,45,145,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -440,7 +440,7 @@ const Branches = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(227,30,36,0.92) 0%, rgba(247,148,29,0.92) 100%), url(https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&h=400&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '70px 30px',
+          padding: '50px 30px',
           textAlign: 'center',
         }}
       >

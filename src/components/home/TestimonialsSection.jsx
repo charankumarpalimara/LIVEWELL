@@ -48,99 +48,260 @@ const TestimonialsSection = ({ isVisible }) => {
   return (
     <div
       data-animate-id="testimonials"
-      style={{ padding: '90px 30px', background: '#f8fbff' }}
+      style={{
+        padding: '60px 30px',
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #ffffff 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
     >
-      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <div style={{
-          color: '#ec008c',
-          fontWeight: '700',
-          marginBottom: '10px',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          fontSize: '13px',
-          ...getSlideFromLeft(0, isVisible('testimonials')),
-        }}>
-          Testimonials
-        </div>
-        <Title level={2} style={{
-          color: '#1e3a5f',
-          marginBottom: '15px',
-          fontSize: 'clamp(26px, 4vw, 40px)',
-          ...getSlideFromLeft(0.1, isVisible('testimonials')),
-        }}>
-          What Parents Say
-        </Title>
-      </div>
-      <Row gutter={[24, 40]} justify="center">
-        {testimonials.map((testimonial, index) => (
-          <Col xs={24} sm={12} md={6} key={index}>
-            <Card
-              style={{
-                height: '100%',
-                border: `2px solid ${testimonial.color}`,
-                borderRadius: '16px',
-                position: 'relative',
-                overflow: 'visible',
-                marginTop: '30px',
-                transition: 'all 0.4s ease',
-                ...getSlideFromLeft(0.1 + index * 0.12, isVisible('testimonials')),
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-8px)'
-                e.currentTarget.style.boxShadow = `0 15px 35px ${testimonial.color}25`
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                top: '-28px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '58px',
-                height: '58px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: `3px solid ${testimonial.color}`,
-                boxShadow: '0 5px 15px rgba(0,0,0,0.12)',
-              }}>
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              </div>
+      {/* Decorative background elements */}
+      <div style={{
+        position: 'absolute',
+        top: '-100px',
+        right: '-100px',
+        width: '400px',
+        height: '400px',
+        borderRadius: '50%',
+        background: 'linear-gradient(135deg, rgba(236, 0, 140, 0.05) 0%, rgba(0, 174, 239, 0.05) 100%)',
+        filter: 'blur(80px)',
+        zIndex: 0,
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '-150px',
+        left: '-150px',
+        width: '500px',
+        height: '500px',
+        borderRadius: '50%',
+        background: 'linear-gradient(135deg, rgba(247, 148, 29, 0.05) 0%, rgba(102, 45, 145, 0.05) 100%)',
+        filter: 'blur(100px)',
+        zIndex: 0,
+      }} />
 
-              <div style={{ marginTop: '30px', marginBottom: '12px', textAlign: 'center' }}>
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <StarFilled key={i} style={{ color: '#f7941d', marginRight: '2px', fontSize: '16px' }} />
-                ))}
-              </div>
-              <Paragraph style={{ fontStyle: 'italic', color: '#555', marginBottom: '18px', minHeight: '65px', textAlign: 'center', fontSize: '14px' }}>
-                "{testimonial.testimonial}"
-              </Paragraph>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontWeight: '700', color: '#1e3a5f', fontSize: '15px' }}>{testimonial.name}</div>
-                <div style={{ color: '#888', fontSize: '12px' }}>Parent of {testimonial.child}</div>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        position: 'relative',
+        zIndex: 1,
+      }}>
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '70px',
+        }}>
+          <div style={{
+            color: '#ec008c',
+            fontWeight: '700',
+            marginBottom: '12px',
+            textTransform: 'uppercase',
+            letterSpacing: '3px',
+            fontSize: '14px',
+            ...getSlideFromLeft(0, isVisible('testimonials')),
+          }}>
+            Testimonials
+          </div>
+          <Title level={2} style={{
+            color: '#1e3a5f',
+            marginBottom: '20px',
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            fontWeight: '700',
+            lineHeight: '1.2',
+            ...getSlideFromLeft(0.1, isVisible('testimonials')),
+          }}>
+            What Parents Say
+          </Title>
+          <div style={{
+            width: '100px',
+            height: '4px',
+            background: 'linear-gradient(90deg, #ec008c 0%, #00aeef 100%)',
+            margin: '0 auto',
+            borderRadius: '2px',
+            ...getSlideFromLeft(0.2, isVisible('testimonials')),
+          }} />
+        </div>
+
+        <Row gutter={[32, 40]} justify="center">
+          {testimonials.map((testimonial, index) => (
+            <Col xs={24} sm={12} lg={6} key={index}>
+              <Card
+                style={{
+                  height: '100%',
+                  border: 'none',
+                  borderRadius: '24px',
+                  position: 'relative',
+                  overflow: 'visible',
+                  background: '#ffffff',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  padding: '0',
+                  ...getSlideFromLeft(0.1 + index * 0.12, isVisible('testimonials')),
+                }}
+                bodyStyle={{
+                  padding: '32px 24px 24px',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)'
+                  e.currentTarget.style.boxShadow = `0 20px 50px ${testimonial.color}30`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                }}
+              >
+                {/* Quote icon */}
                 <div style={{
-                  color: testimonial.color,
-                  fontSize: '11px',
-                  marginTop: '8px',
-                  fontWeight: '600',
-                  background: `${testimonial.color}12`,
-                  padding: '5px 14px',
-                  borderRadius: '20px',
-                  display: 'inline-block',
+                  position: 'absolute',
+                  top: '20px',
+                  right: '24px',
+                  fontSize: '64px',
+                  color: `${testimonial.color}15`,
+                  lineHeight: 1,
+                  fontFamily: 'Georgia, serif',
+                  fontWeight: 'bold',
+                  transform: 'rotate(180deg)',
                 }}>
-                  {testimonial.service}
+                  "
                 </div>
-              </div>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+
+                {/* Profile image with modern design */}
+                <div style={{
+                  position: 'relative',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: '18px',
+                }}>
+                  <div style={{
+                    position: 'relative',
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    border: `4px solid ${testimonial.color}`,
+                    boxShadow: `0 8px 24px ${testimonial.color}30`,
+                    background: '#ffffff',
+                    padding: '3px',
+                  }}>
+                    <div style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      background: `linear-gradient(135deg, ${testimonial.color}20 0%, ${testimonial.color}05 100%)`,
+                    }}>
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {/* Decorative ring */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '92px',
+                    height: '92px',
+                    borderRadius: '50%',
+                    border: `2px solid ${testimonial.color}20`,
+                    pointerEvents: 'none',
+                  }} />
+                </div>
+
+                {/* Rating stars */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '4px',
+                  marginBottom: '16px',
+                }}>
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <StarFilled
+                      key={i}
+                      style={{
+                        color: '#f7941d',
+                        fontSize: '18px',
+                        filter: 'drop-shadow(0 2px 4px rgba(247, 148, 29, 0.3))',
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Testimonial text */}
+                <Paragraph style={{
+                  fontStyle: 'italic',
+                  color: '#4a5568',
+                  marginBottom: '18px',
+                  minHeight: '70px',
+                  textAlign: 'center',
+                  fontSize: '15px',
+                  lineHeight: '1.6',
+                  fontWeight: '400',
+                  position: 'relative',
+                  zIndex: 1,
+                }}>
+                  "{testimonial.testimonial}"
+                </Paragraph>
+
+                {/* Author info */}
+                <div style={{
+                  textAlign: 'center',
+                  paddingTop: '16px',
+                  borderTop: `1px solid ${testimonial.color}15`,
+                }}>
+                  <div style={{
+                    fontWeight: '700',
+                    color: '#1e3a5f',
+                    fontSize: '16px',
+                    marginBottom: '6px',
+                    letterSpacing: '0.3px',
+                  }}>
+                    {testimonial.name}
+                  </div>
+                  <div style={{
+                    color: '#718096',
+                    fontSize: '13px',
+                    marginBottom: '10px',
+                    fontWeight: '500',
+                  }}>
+                    Parent of {testimonial.child}
+                  </div>
+                  <div style={{
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    background: `linear-gradient(135deg, ${testimonial.color} 0%, ${testimonial.color}dd 100%)`,
+                    padding: '8px 20px',
+                    borderRadius: '25px',
+                    display: 'inline-block',
+                    boxShadow: `0 4px 12px ${testimonial.color}40`,
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                  }}>
+                    {testimonial.service}
+                  </div>
+                </div>
+
+                {/* Accent border */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '4px',
+                  background: `linear-gradient(90deg, ${testimonial.color} 0%, ${testimonial.color}cc 50%, ${testimonial.color} 100%)`,
+                  borderRadius: '24px 24px 0 0',
+                }} />
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   )
 }

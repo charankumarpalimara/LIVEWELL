@@ -116,7 +116,7 @@ const Footer = () => {
 
       <div 
         data-animate-id="footer"
-        style={{ padding: '100px 30px 40px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '100px 30px 15px', maxWidth: '1200px', margin: '0 auto' }}
       >
         <Row gutter={[40, 40]}>
           {/* Company Info */}
@@ -241,10 +241,10 @@ const Footer = () => {
                 Contact Us
               </Title>
               {[
-                { icon: <PhoneOutlined />, text: '+91 7032 157 157', color: '#e31e24' },
+                { icon: <PhoneOutlined />, text: '+91 89775 10100', color: '#e31e24' },
                 { icon: <MailOutlined />, text: 'info@livewellnetwork.com', color: '#f7941d' },
-                { icon: <EnvironmentOutlined />, text: 'Jubilee Hills, Hyderabad', color: '#00a651' },
-                { icon: <ClockCircleOutlined />, text: 'Mon-Sat: 9AM - 6PM', color: '#00aeef' },
+                { icon: <EnvironmentOutlined />, text: 'KPHB Colony Hyderabad', color: '#00a651' },
+                { icon: <ClockCircleOutlined />, text: 'Mon-Sat: 8:00 AM - 7:30 PM', color: '#00aeef' },
               ].map((item, index) => (
                 <div 
                   key={index}

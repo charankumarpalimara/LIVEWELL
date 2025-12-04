@@ -9,7 +9,11 @@ const WhyChooseUsSection = ({ isVisible }) => {
   return (
     <div
       data-animate-id="why"
-      style={{ padding: '90px 30px', background: '#fff' }}
+      style={{ 
+        padding: '60px 30px',
+        background: '#fff',
+        position: 'relative',
+      }}
     >
       <Row gutter={[50, 50]} align="middle" justify="center">
         <Col xs={24} md={12} style={{ order: window.innerWidth < 768 ? 2 : 1 }}>

@@ -36,6 +36,15 @@ const Cart = () => {
   const visibleElements = useScrollAnimation()
   const isVisible = (id) => visibleElements.has(id)
 
+  // Category color mapping
+  const categoryColors = {
+    'Educational': '#00aeef',
+    'Sensory': '#00a651',
+    'Therapy': '#e31e24',
+    'Toys': '#f7941d',
+    'Books': '#662d91',
+  }
+
   // Animation styles
   const getSlideFromLeft = (delay = 0, isActive = false) => ({
     opacity: isActive ? 1 : 0,
@@ -55,9 +64,9 @@ const Cart = () => {
     transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
   })
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const subtotal = Math.floor(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0))
   const shipping = subtotal > 500 ? 0 : 50
-  const total = subtotal + shipping
+  const total = Math.floor(subtotal + shipping)
 
   if (cartItems.length === 0) {
     return (
@@ -165,96 +174,197 @@ const Cart = () => {
           {/* Cart Items */}
           <Col xs={24} lg={16}>
             <div style={getSlideFromLeft(0, isVisible('cart-content'))}>
-              {cartItems.map((item, index) => (
-                <Card
-                  key={item.id}
-                  style={{
-                    marginBottom: '20px',
-                    borderRadius: '16px',
-                    border: 'none',
-                    boxShadow: '0 5px 20px rgba(0,0,0,0.05)',
-                    overflow: 'hidden',
-                    transition: 'all 0.4s ease',
-                    ...getSlideFromLeft(0.05 + index * 0.1, isVisible('cart-content')),
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateX(8px)'
-                    e.currentTarget.style.boxShadow = '0 10px 35px rgba(0,174,239,0.12)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateX(0)'
-                    e.currentTarget.style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)'
-                  }}
-                  bodyStyle={{ padding: '20px' }}
-                >
-                  <Row gutter={20} align="middle">
-                    <Col xs={8} sm={6} md={4}>
-                      <div style={{ 
-                        borderRadius: '12px', 
-                        overflow: 'hidden',
-                        boxShadow: '0 3px 10px rgba(0,0,0,0.1)',
-                      }}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          style={{ width: '100%', height: '80px', objectFit: 'cover' }}
-                        />
-                      </div>
-                    </Col>
-                    <Col xs={16} sm={18} md={20}>
-                      <Row align="middle" justify="space-between">
-                        <Col xs={24} md={10}>
-                          <Link to={`/products/${item.id}`} style={{ textDecoration: 'none' }}>
-                            <Title level={5} style={{ color: '#1e3a5f', marginBottom: '5px' }}>
-                              {item.name}
-                            </Title>
-                          </Link>
-                          <Tag color="#00aeef" style={{ borderRadius: '50px', fontSize: '11px' }}>
-                            {item.category}
-                          </Tag>
-                        </Col>
-                        <Col xs={12} md={6} style={{ marginTop: '10px' }}>
-                          <InputNumber
-                            min={1}
-                            max={10}
-                            value={item.quantity}
-                            onChange={(value) => updateQuantity(item.id, value)}
+              {cartItems.map((item, index) => {
+                const itemColor = categoryColors[item.category] || '#00aeef'
+                return (
+                  <Card
+                    key={item.id}
+                    className="cart-item-card"
+                    style={{
+                      marginBottom: '24px',
+                      borderRadius: '20px',
+                      border: 'none',
+                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                      overflow: 'hidden',
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      background: '#ffffff',
+                      position: 'relative',
+                      ...getSlideFromLeft(0.05 + index * 0.1, isVisible('cart-content')),
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-8px)'
+                      e.currentTarget.style.boxShadow = `0 12px 40px ${itemColor}25`
+                      const img = e.currentTarget.querySelector('.cart-item-img')
+                      if (img) img.style.transform = 'scale(1.1)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                      const img = e.currentTarget.querySelector('.cart-item-img')
+                      if (img) img.style.transform = 'scale(1)'
+                    }}
+                    bodyStyle={{ padding: '24px' }}
+                  >
+                    {/* Top accent border */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '4px',
+                      background: `linear-gradient(90deg, ${itemColor} 0%, ${itemColor}cc 50%, ${itemColor} 100%)`,
+                      zIndex: 1,
+                    }} />
+                    
+                    <Row gutter={24} align="middle">
+                      <Col xs={8} sm={6} md={5}>
+                        <div style={{ 
+                          borderRadius: '16px', 
+                          overflow: 'hidden',
+                          boxShadow: `0 6px 20px ${itemColor}20`,
+                          position: 'relative',
+                          background: `linear-gradient(135deg, ${itemColor}15 0%, ${itemColor}05 100%)`,
+                        }}>
+                          <img
+                            className="cart-item-img"
+                            src={item.image}
+                            alt={item.name}
                             style={{ 
-                              width: '100px',
-                              borderRadius: '8px',
+                              width: '100%', 
+                              height: '120px', 
+                              objectFit: 'cover',
+                              transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                             }}
                           />
-                        </Col>
-                        <Col xs={8} md={4} style={{ textAlign: 'right', marginTop: '10px' }}>
-                          <div style={{ fontSize: '18px', fontWeight: '800', color: '#e31e24' }}>
-                            ₹{item.price * item.quantity}
-                          </div>
-                        </Col>
-                        <Col xs={4} md={4} style={{ textAlign: 'right', marginTop: '10px' }}>
-                          <Button
-                            type="text"
-                            danger
-                            icon={<DeleteOutlined />}
-                            onClick={() => removeFromCart(item.id)}
-                            style={{
-                              borderRadius: '8px',
-                              transition: 'all 0.3s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = '#fff1f0'
-                              e.currentTarget.style.transform = 'scale(1.1)'
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = 'transparent'
-                              e.currentTarget.style.transform = 'scale(1)'
-                            }}
-                          />
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </Card>
-              ))}
+                          {/* Gradient overlay */}
+                          <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: `linear-gradient(to bottom, transparent 60%, ${itemColor}30 100%)`,
+                            pointerEvents: 'none',
+                          }} />
+                        </div>
+                      </Col>
+                      <Col xs={16} sm={18} md={19}>
+                        <Row align="middle" justify="space-between" gutter={[16, 16]}>
+                          <Col xs={24} md={12}>
+                            <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
+                              <Title 
+                                level={5} 
+                                style={{ 
+                                  color: '#1e3a5f', 
+                                  marginBottom: '8px',
+                                  fontSize: '16px',
+                                  fontWeight: '800',
+                                  lineHeight: '1.4',
+                                  transition: 'color 0.3s ease',
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.color = itemColor
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.color = '#1e3a5f'
+                                }}
+                              >
+                                {item.name}
+                              </Title>
+                            </Link>
+                            <Tag 
+                              style={{ 
+                                borderRadius: '20px', 
+                                fontSize: '11px',
+                                fontWeight: '700',
+                                padding: '4px 14px',
+                                border: 'none',
+                                background: `linear-gradient(135deg, ${itemColor} 0%, ${itemColor}dd 100%)`,
+                                color: '#fff',
+                                boxShadow: `0 3px 10px ${itemColor}30`,
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.5px',
+                              }}
+                            >
+                              {item.category}
+                            </Tag>
+                            <div style={{ 
+                              marginTop: '12px',
+                              fontSize: '14px',
+                              color: '#666',
+                              fontWeight: '600',
+                            }}>
+                              ₹{Math.floor(item.price)} <span style={{ color: '#999', fontSize: '12px' }}>each</span>
+                            </div>
+                          </Col>
+                          <Col xs={12} md={5} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span style={{ 
+                              fontSize: '13px', 
+                              color: '#666', 
+                              fontWeight: '600',
+                              whiteSpace: 'nowrap',
+                            }}>
+                              Quantity:
+                            </span>
+                            <InputNumber
+                              min={1}
+                              max={10}
+                              value={item.quantity}
+                              onChange={(value) => updateQuantity(item.id, value)}
+                              style={{ 
+                                width: '90px',
+                              }}
+                            />
+                          </Col>
+                          <Col xs={12} md={4} style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <div style={{ 
+                              fontSize: '12px', 
+                              color: '#999',
+                              marginBottom: '4px',
+                            }}>
+                              Total
+                            </div>
+                            <div style={{ 
+                              fontSize: '22px', 
+                              fontWeight: '900', 
+                              color: itemColor,
+                            }}>
+                              ₹{Math.floor(item.price * item.quantity)}
+                            </div>
+                          </Col>
+                          <Col xs={24} md={3} style={{ textAlign: 'right' }}>
+                            <Button
+                              type="text"
+                              danger
+                              icon={<DeleteOutlined />}
+                              onClick={() => removeFromCart(item.id)}
+                              style={{
+                                borderRadius: '12px',
+                                transition: 'all 0.3s ease',
+                                width: '44px',
+                                height: '44px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '2px solid #ff4d4f30',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = '#fff1f0'
+                                e.currentTarget.style.transform = 'scale(1.15) rotate(5deg)'
+                                e.currentTarget.style.borderColor = '#ff4d4f'
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 77, 79, 0.3)'
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = 'transparent'
+                                e.currentTarget.style.transform = 'scale(1) rotate(0)'
+                                e.currentTarget.style.borderColor = '#ff4d4f30'
+                                e.currentTarget.style.boxShadow = 'none'
+                              }}
+                            />
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Card>
+                )
+              })}
             </div>
           </Col>
 

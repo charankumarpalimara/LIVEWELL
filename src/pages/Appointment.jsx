@@ -117,7 +117,7 @@ const Appointment = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(0,166,81,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -158,7 +158,7 @@ const Appointment = () => {
 
       <div 
         data-animate-id="form-section"
-        style={{ padding: '80px 30px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '50px 30px', maxWidth: '1200px', margin: '0 auto' }}
       >
         <Row gutter={[50, 50]} align="top">
           {/* Left Side - Info */}
@@ -185,7 +185,7 @@ const Appointment = () => {
               {/* Benefits */}
               {[
                 { icon: <SafetyCertificateFilled />, title: 'Expert Therapists', desc: '50+ certified specialists', color: '#e31e24' },
-                { icon: <ClockCircleOutlined />, title: 'Flexible Scheduling', desc: 'Mon-Sat, 9AM - 6PM', color: '#f7941d' },
+                { icon: <ClockCircleOutlined />, title: 'Flexible Scheduling', desc: 'Mon-Sat: 8:00 AM - 7:30 PM', color: '#f7941d' },
                 { icon: <HeartFilled />, title: 'Personalized Care', desc: 'Tailored to your child', color: '#00a651' },
                 { icon: <CheckCircleFilled />, title: 'Free Consultation', desc: 'First session free', color: '#00aeef' },
               ].map((item, index) => (
@@ -559,7 +559,7 @@ const Appointment = () => {
       <div 
         data-animate-id="contact-info"
         style={{ 
-          padding: '70px 30px', 
+          padding: '50px 30px', 
           background: 'linear-gradient(135deg, #1e3a5f 0%, #00aeef 100%)',
           textAlign: 'center',
         }}
@@ -574,9 +574,9 @@ const Appointment = () => {
         </Title>
         <Row gutter={[30, 30]} justify="center">
           {[
-            { icon: <PhoneOutlined />, label: 'Call Us', value: '+91 7032 157 157', color: '#e31e24' },
+            { icon: <PhoneOutlined />, label: 'Call Us', value: '+91 89775 10100', color: '#e31e24' },
             { icon: <MailOutlined />, label: 'Email Us', value: 'info@livewellnetwork.com', color: '#f7941d' },
-            { icon: <ClockCircleOutlined />, label: 'Working Hours', value: 'Mon-Sat: 9AM - 6PM', color: '#00a651' },
+            { icon: <ClockCircleOutlined />, label: 'Working Hours', value: 'Mon-Sat: 8:00 AM - 7:30 PM', color: '#00a651' },
           ].map((item, index) => (
             <Col xs={24} sm={8} md={6} key={index}>
               <div

@@ -18,7 +18,7 @@ const useScrollAnimation = () => {
         })
       },
       { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-    )
+    ) 
 
     const elements = document.querySelectorAll('[data-animate-id]')
     elements.forEach((el) => observer.observe(el))
@@ -89,7 +89,7 @@ const Gallery = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(247,148,29,0.9) 0%, rgba(227,30,36,0.9) 100%), url(https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -128,7 +128,7 @@ const Gallery = () => {
 
       <div 
         data-animate-id="gallery"
-        style={{ padding: '70px 30px', maxWidth: '1400px', margin: '0 auto' }}
+        style={{ padding: '50px 30px', maxWidth: '1400px', margin: '0 auto' }}
       >
         {/* Category Filter */}
         <div style={{ marginBottom: '45px', textAlign: 'center', ...getSlideFromBottom(0, isVisible('gallery')) }}>
@@ -359,9 +359,49 @@ const Gallery = () => {
         width={850}
         centered
         bodyStyle={{ padding: 0 }}
+        closeIcon={null}
+        styles={{
+          content: {
+            position: 'relative',
+          }
+        }}
       >
         {selectedImage && (
-          <div>
+          <div style={{ position: 'relative' }}>
+            <div 
+              onClick={() => setSelectedImage(null)}
+              style={{
+                position: 'absolute',
+                top: '-20px',
+                right: '-20px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                cursor: 'pointer',
+                zIndex: 1001,
+                transition: 'all 0.3s ease',
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#1e3a5f',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.1)'
+                e.currentTarget.style.background = '#e31e24'
+                e.currentTarget.style.color = '#fff'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.background = '#fff'
+                e.currentTarget.style.color = '#1e3a5f'
+              }}
+            >
+              ✕
+            </div>
             <img 
               src={selectedImage.src} 
               alt={selectedImage.title}

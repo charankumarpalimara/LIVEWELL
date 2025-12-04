@@ -35,7 +35,7 @@ const useScrollAnimation = () => {
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
     )
 
     const elements = document.querySelectorAll('[data-animate-id]')
@@ -63,6 +63,18 @@ const Careers = () => {
     opacity: isActive ? 1 : 0,
     transform: isActive ? 'translateY(0)' : 'translateY(40px)',
     transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromLeft = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(-40px)',
+    transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
+  })
+
+  const getSlideFromRight = (delay = 0, isActive = false) => ({
+    opacity: isActive ? 1 : 0,
+    transform: isActive ? 'translateX(0)' : 'translateX(40px)',
+    transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
   })
 
   const getScaleIn = (delay = 0, isActive = false) => ({
@@ -340,7 +352,7 @@ const Careers = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(0,166,81,0.9) 0%, rgba(0,174,239,0.9) 100%), url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&h=600&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '100px 30px',
+          padding: '60px 30px',
           textAlign: 'center',
         }}
       >
@@ -398,7 +410,7 @@ const Careers = () => {
       {/* Why Join Us Section */}
       <div 
         data-animate-id="benefits"
-        style={{ padding: '70px 30px', background: '#f8fbff' }}
+        style={{ padding: '50px 30px', background: '#f8fbff' }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -419,17 +431,20 @@ const Careers = () => {
                     padding: '25px 15px',
                     background: '#fff',
                     borderRadius: '16px',
-                    boxShadow: '0 5px 20px rgba(0,0,0,0.06)',
-                    transition: 'all 0.3s ease',
-                    ...getScaleIn(0.05 * index, isVisible('benefits')),
+                    boxShadow: 'none',
+                    transition: 'all 0.4s ease',
+                    ...(index % 2 === 0 
+                      ? getSlideFromLeft(0.02 + index * 0.05, isVisible('benefits'))
+                      : getSlideFromRight(0.02 + index * 0.05, isVisible('benefits'))
+                    ),
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-8px)'
-                    e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)'
+                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = '0 5px 20px rgba(0,0,0,0.06)'
+                    e.currentTarget.style.boxShadow = 'none'
                   }}
                 >
                   <div style={{ fontSize: '32px', marginBottom: '10px', color: benefit.color }}>
@@ -721,7 +736,7 @@ const Careers = () => {
           backgroundImage: 'linear-gradient(135deg, rgba(30,58,95,0.95) 0%, rgba(102,45,145,0.95) 100%), url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=400&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          padding: '70px 30px',
+          padding: '50px 30px',
           textAlign: 'center',
         }}
       >
