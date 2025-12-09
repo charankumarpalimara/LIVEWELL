@@ -11,7 +11,7 @@ const { Option } = Select
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
   const [visibleElements, setVisibleElements] = useState(new Set())
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -61,7 +61,7 @@ const Products = () => {
   })
 
   const categories = ['All', ...new Set(products.map(p => p.category))]
-  
+
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory
@@ -69,8 +69,8 @@ const Products = () => {
   })
 
   const toggleWishlist = (productId) => {
-    setWishlist(prev => 
-      prev.includes(productId) 
+    setWishlist(prev =>
+      prev.includes(productId)
         ? prev.filter(id => id !== productId)
         : [...prev, productId]
     )
@@ -85,49 +85,50 @@ const Products = () => {
   }
 
   return (
-    <div style={{ background: '#fff', minHeight: '80vh' }}>
+    <div style={{ background: '#f8fafc', minHeight: '80vh', fontFamily: "'Inter', 'Poppins', sans-serif" }}>
       {/* Hero Section */}
       <div
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0,174,239,0.9) 0%, rgba(102,45,145,0.9) 100%), url(https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=1920&h=500&fit=crop)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          padding: '90px 30px',
+          background: 'radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.12), transparent 30%), radial-gradient(circle at 80% 0%, rgba(34,197,94,0.15), transparent 28%), linear-gradient(135deg, #0b1224 0%, #0f172a 55%, #111827 100%)',
+          padding: '72px 20px',
           textAlign: 'center',
+          color: '#e2e8f0',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div style={{ 
-          color: 'rgba(255,255,255,0.9)', 
-          fontWeight: '700', 
-          marginBottom: '12px',
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 45%)' }} />
+        <div style={{
+          fontWeight: 800,
+          letterSpacing: '1.8px',
           textTransform: 'uppercase',
-          letterSpacing: '3px',
-          fontSize: '13px',
-          animation: 'slideDown 0.8s ease-out',
+          fontSize: '12px',
+          opacity: 0.85,
         }}>
-          Our Products
+          Curated for child development
         </div>
-        <Title 
-          level={1} 
-          style={{ 
-            color: '#fff', 
-            marginBottom: '18px',
-            fontSize: 'clamp(30px, 5vw, 46px)',
-            animation: 'slideDown 0.8s ease-out 0.2s both',
+        <Title
+          level={1}
+          style={{
+            color: '#f8fafc',
+            marginBottom: '14px',
+            fontSize: 'clamp(30px, 4vw, 46px)',
+            fontWeight: 800,
+            letterSpacing: '-0.02em',
           }}
         >
-          Shop Child Development Products
+          Modern tools to help kids thrive
         </Title>
-        <Paragraph 
-          style={{ 
-            fontSize: '17px', 
-            color: 'rgba(255,255,255,0.95)', 
-            maxWidth: '700px', 
+        <Paragraph
+          style={{
+            fontSize: '16px',
+            color: 'rgba(226,232,240,0.85)',
+            maxWidth: '720px',
             margin: '0 auto',
-            animation: 'slideDown 0.8s ease-out 0.4s both',
+            lineHeight: 1.7,
           }}
         >
-          Discover our curated collection of educational toys, therapy tools, and sensory products
+          Shop a finely tuned catalog of sensory, educational, and therapy products—picked for real-world impact.
         </Paragraph>
       </div>
 
@@ -135,52 +136,57 @@ const Products = () => {
       <div 
         data-animate-id="filters"
         style={{ 
-          padding: '40px 30px 30px', 
-          background: '#f8fbff',
-          borderBottom: '1px solid #eee',
+          padding: '28px 20px', 
+          background: '#f8fafc',
+          borderBottom: '1px solid #e5e7eb',
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <Row gutter={[20, 20]} align="middle">
             <Col xs={24} md={12}>
               <div style={getSlideFromLeft(0, isVisible('filters'))}>
                 <Input
                   placeholder="Search products..."
-                  prefix={<SearchOutlined style={{ color: '#00aeef' }} />}
+                  prefix={<SearchOutlined style={{ color: '#2563eb' }} />}
                   size="large"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ 
-                    borderRadius: '12px',
-                    border: '2px solid #e8e8e8',
-                    height: '50px',
+                  style={{
+                    borderRadius: '14px',
+                    border: '1px solid #e2e8f0',
+                    height: '52px',
+                    background: '#ffffff',
+                    boxShadow: '0 8px 26px rgba(15, 23, 42, 0.06)',
+                    fontWeight: 600,
+                    letterSpacing: '0.2px',
                   }}
                 />
               </div>
             </Col>
             <Col xs={24} md={12}>
-              <div style={{ 
-                display: 'flex', 
-                gap: '10px', 
+              <div style={{
+                display: 'flex',
+                gap: '10px',
                 flexWrap: 'wrap',
                 ...getSlideFromRight(0.1, isVisible('filters')),
               }}>
-                <FilterOutlined style={{ color: '#1e3a5f', fontSize: '18px', marginTop: '10px' }} />
+                <FilterOutlined style={{ color: '#0b1224', fontSize: '18px', marginTop: '10px' }} />
                 {categories.map((category, index) => (
                   <Button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
                     style={{
                       borderRadius: '50px',
-                      border: selectedCategory === category ? 'none' : '2px solid #00aeef',
-                      background: selectedCategory === category 
-                        ? 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)' 
+                      border: selectedCategory === category ? 'none' : '1px solid #2563eb',
+                      background: selectedCategory === category
+                        ? 'linear-gradient(135deg, #2563eb 0%, #22c55e 100%)' 
                         : '#fff',
-                      color: selectedCategory === category ? '#fff' : '#00aeef',
-                      fontWeight: '600',
+                      color: selectedCategory === category ? '#fff' : '#2563eb',
+                      fontWeight: 700,
                       height: '40px',
-                      padding: '0 22px',
+                      padding: '0 20px',
                       transition: 'all 0.3s ease',
+                      boxShadow: selectedCategory === category ? '0 10px 25px rgba(37,99,235,0.25)' : '0 6px 18px rgba(15,23,42,0.06)',
                     }}
                     onMouseEnter={(e) => {
                       if (selectedCategory !== category) {
@@ -203,52 +209,56 @@ const Products = () => {
       {/* Products Grid */}
       <div 
         data-animate-id="products"
-        style={{ padding: '60px 30px', maxWidth: '1200px', margin: '0 auto' }}
+        style={{ padding: '50px 20px 70px', maxWidth: '1180px', margin: '0 auto' }}
       >
         <div style={{ 
-          marginBottom: '30px', 
+          marginBottom: '28px', 
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center',
           ...getSlideFromBottom(0, isVisible('products')),
         }}>
-          <Title level={4} style={{ color: '#1e3a5f', margin: 0 }}>
-            Showing {filteredProducts.length} Products
-          </Title>
+          <div>
+            <Title level={4} style={{ color: '#0b1224', margin: 0, fontWeight: 800, letterSpacing: '-0.01em' }}>
+              Showing {filteredProducts.length} Products
+            </Title>
+            <Paragraph style={{ color: '#475569', margin: 0, marginTop: '4px', fontWeight: 500 }}>
+              Browse curated items by category or search keyword.
+            </Paragraph>
+          </div>
         </div>
 
         <Row gutter={[32, 32]}>
           {filteredProducts.map((product, index) => (
             <Col xs={24} sm={12} md={8} lg={6} key={product.id}>
               <Card
-                hoverable
                 style={{
-                  borderRadius: '24px',
-                  overflow: 'visible',
-                  border: 'none',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid #e2e8f0',
                   background: '#ffffff',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                  padding: '0',
-                  ...(index % 2 === 0 
+                  boxShadow: '0 18px 40px rgba(15,23,42,0.08)',
+                  transition: 'transform 0.28s ease, box-shadow 0.28s ease',
+                  padding: 0,
+                  ...(index % 2 === 0
                     ? getSlideFromLeft(0.05 + (index * 0.03), isVisible('products'))
                     : getSlideFromRight(0.05 + (index * 0.03), isVisible('products'))
                   ),
                 }}
-                bodyStyle={{ padding: '24px 20px' }}
+                bodyStyle={{ padding: '18px 18px 20px' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)'
-                  e.currentTarget.style.boxShadow = `0 25px 60px ${categoryColors[product.category] || '#00aeef'}25`
+                  e.currentTarget.style.transform = 'translateY(-8px)'
+                  e.currentTarget.style.boxShadow = `0 18px 40px ${categoryColors[product.category] || '#2563eb'}22`
                   const img = e.currentTarget.querySelector('.product-img')
-                  if (img) img.style.transform = 'scale(1.12)'
+                  if (img) img.style.transform = 'scale(1.08)'
                   const actions = e.currentTarget.querySelector('.product-actions')
                   if (actions) actions.style.opacity = '1'
                   const wishlistBtn = e.currentTarget.querySelector('.wishlist-btn')
-                  if (wishlistBtn) wishlistBtn.style.transform = 'scale(1.1)'
+                  if (wishlistBtn) wishlistBtn.style.transform = 'scale(1.05)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 18px 40px rgba(15,23,42,0.08)'
                   const img = e.currentTarget.querySelector('.product-img')
                   if (img) img.style.transform = 'scale(1)'
                   const actions = e.currentTarget.querySelector('.product-actions')
@@ -257,11 +267,11 @@ const Products = () => {
                   if (wishlistBtn) wishlistBtn.style.transform = 'scale(1)'
                 }}
                 cover={
-                  <div style={{ 
-                    position: 'relative', 
-                    height: '220px', 
+                  <div style={{
+                    position: 'relative',
+                    height: '220px',
                     overflow: 'hidden',
-                    background: `linear-gradient(135deg, ${categoryColors[product.category] || '#00aeef'}15 0%, ${categoryColors[product.category] || '#00aeef'}05 100%)`,
+                    background: '#f8fafc',
                   }}>
                     {/* Top accent border */}
                     <div style={{
@@ -269,8 +279,8 @@ const Products = () => {
                       top: 0,
                       left: 0,
                       right: 0,
-                      height: '4px',
-                      background: `linear-gradient(90deg, ${categoryColors[product.category] || '#00aeef'} 0%, ${categoryColors[product.category] || '#00aeef'}cc 50%, ${categoryColors[product.category] || '#00aeef'} 100%)`,
+                      height: '3px',
+                      background: `linear-gradient(90deg, ${categoryColors[product.category] || '#2563eb'} 0%, ${categoryColors[product.category] || '#22c55e'} 100%)`,
                       zIndex: 1,
                     }} />
                     <img
@@ -295,17 +305,16 @@ const Products = () => {
                     <Tag
                       style={{
                         position: 'absolute',
-                        top: '15px',
-                        left: '15px',
-                        background: `linear-gradient(135deg, ${categoryColors[product.category] || '#00aeef'} 0%, ${categoryColors[product.category] || '#00aeef'}dd 100%)`,
-                        color: '#fff',
+                        top: '14px',
+                        left: '14px',
+                        background: '#0f172a',
+                        color: '#e2e8f0',
                         border: 'none',
-                        borderRadius: '20px',
-                        fontWeight: '700',
+                        borderRadius: '16px',
+                        fontWeight: 700,
                         fontSize: '11px',
-                        padding: '6px 16px',
-                        boxShadow: `0 4px 12px ${categoryColors[product.category] || '#00aeef'}40`,
-                        letterSpacing: '0.5px',
+                        padding: '6px 12px',
+                        letterSpacing: '0.4px',
                         textTransform: 'uppercase',
                         zIndex: 2,
                       }}
@@ -323,19 +332,17 @@ const Products = () => {
                         position: 'absolute',
                         top: '15px',
                         right: '15px',
-                        width: '42px',
-                        height: '42px',
-                        background: 'rgba(255, 255, 255, 0.95)',
-                        backdropFilter: 'blur(10px)',
+                        width: '40px',
+                        height: '40px',
+                        background: 'rgba(255, 255, 255, 0.9)',
                         borderRadius: '50%',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        boxShadow: '0 8px 20px rgba(15,23,42,0.12)',
+                        transition: 'all 0.25s ease',
                         zIndex: 2,
-                        border: '2px solid rgba(255,255,255,0.8)',
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.background = '#fff'
@@ -347,13 +354,13 @@ const Products = () => {
                       }}
                     >
                       {wishlist.includes(product.id) ? (
-                        <HeartFilled style={{ 
-                          color: '#e31e24', 
-                          fontSize: '20px',
+                        <HeartFilled style={{
+                          color: '#e31e24',
+                          fontSize: '18px',
                           filter: 'drop-shadow(0 2px 4px rgba(227, 30, 36, 0.3))',
                         }} />
                       ) : (
-                        <HeartOutlined style={{ color: '#718096', fontSize: '20px' }} />
+                        <HeartOutlined style={{ color: '#475569', fontSize: '18px' }} />
                       )}
                     </div>
                     {/* Quick Actions */}
@@ -375,12 +382,12 @@ const Products = () => {
                         <Button
                           icon={<EyeOutlined />}
                           style={{
-                            background: '#ffffff',
+                          background: '#ffffff',
                             border: 'none',
-                            borderRadius: '50%',
-                            width: '48px',
-                            height: '48px',
-                            boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
+                          borderRadius: '50%',
+                          width: '46px',
+                          height: '46px',
+                          boxShadow: '0 8px 24px rgba(15,23,42,0.15)',
                             transition: 'all 0.3s ease',
                           }}
                           onMouseEnter={(e) => {
@@ -400,13 +407,13 @@ const Products = () => {
                           addToCart(product)
                         }}
                         style={{
-                          background: `linear-gradient(135deg, ${categoryColors[product.category] || '#00aeef'} 0%, ${categoryColors[product.category] || '#00a651'} 100%)`,
+                          background: '#0f172a',
                           border: 'none',
                           borderRadius: '50%',
-                          width: '48px',
-                          height: '48px',
+                          width: '46px',
+                          height: '46px',
                           color: '#fff',
-                          boxShadow: `0 6px 20px ${categoryColors[product.category] || '#00aeef'}40`,
+                          boxShadow: '0 8px 24px rgba(15,23,42,0.2)',
                           transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
@@ -426,11 +433,11 @@ const Products = () => {
                   <Title 
                     level={5} 
                     style={{ 
-                      color: '#1e3a5f', 
+                      color: '#0f172a', 
                       marginBottom: '10px', 
                       fontSize: '16px',
-                      fontWeight: '800',
-                      lineHeight: '1.4',
+                      fontWeight: 800,
+                      lineHeight: '1.5',
                       minHeight: '44px',
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
@@ -442,49 +449,49 @@ const Products = () => {
                     {product.name}
                   </Title>
                 </Link>
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '8px', 
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
                   marginBottom: '14px',
                 }}>
-                  <Rate 
-                    disabled 
-                    defaultValue={product.rating} 
-                    allowHalf 
+                  <Rate
+                    disabled
+                    defaultValue={product.rating}
+                    allowHalf
                     style={{ fontSize: '15px' }}
                   />
-                  <span style={{ 
-                    color: '#718096', 
+                  <span style={{
+                    color: '#718096',
                     fontSize: '13px',
                     fontWeight: '600',
                   }}>
                     ({product.rating})
                   </span>
                 </div>
-                <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
                   alignItems: 'center',
                   paddingTop: '12px',
-                  borderTop: '1px solid #f0f0f0',
+                  borderTop: '1px solid #f1f5f9',
                 }}>
                   <div>
-                    <span style={{ 
-                      fontSize: '24px', 
-                      fontWeight: '900', 
-                      color: '#e31e24',
-                      letterSpacing: '0.3px',
+                    <span style={{
+                      fontSize: '22px',
+                      fontWeight: 800,
+                      color: '#0f172a',
+                      letterSpacing: '0.2px',
                     }}>
                       ₹{product.price}
                     </span>
                     {product.originalPrice && (
-                      <span style={{ 
-                        fontSize: '15px', 
-                        color: '#a0aec0', 
+                      <span style={{
+                        fontSize: '14px',
+                        color: '#94a3b8',
                         textDecoration: 'line-through',
                         marginLeft: '10px',
-                        fontWeight: '500',
+                        fontWeight: 500,
                       }}>
                         ₹{product.originalPrice}
                       </span>
@@ -496,22 +503,22 @@ const Products = () => {
                     type="primary"
                     block
                     style={{
-                      background: `linear-gradient(135deg, ${categoryColors[product.category] || '#00aeef'} 0%, ${categoryColors[product.category] || '#00a651'} 100%)`,
+                      background: '#0f172a',
                       border: 'none',
                       borderRadius: '12px',
-                      height: '42px',
-                      fontWeight: '700',
+                      height: '44px',
+                      fontWeight: 700,
                       fontSize: '14px',
-                      boxShadow: `0 4px 15px ${categoryColors[product.category] || '#00aeef'}30`,
-                      transition: 'all 0.3s ease',
+                      boxShadow: '0 10px 30px rgba(15,23,42,0.18)',
+                      transition: 'all 0.25s ease',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateY(-2px)'
-                      e.currentTarget.style.boxShadow = `0 6px 20px ${categoryColors[product.category] || '#00aeef'}40`
+                      e.currentTarget.style.boxShadow = '0 14px 34px rgba(15,23,42,0.22)'
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${categoryColors[product.category] || '#00aeef'}30`
+                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(15,23,42,0.18)'
                     }}
                   >
                     View Details

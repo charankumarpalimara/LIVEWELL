@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Layout, Menu, Badge, Button, Drawer } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
-import { 
-  ShoppingCartOutlined, 
-  HomeOutlined, 
-  ShopOutlined, 
-  BookOutlined, 
+import {
+  ShoppingCartOutlined,
+  HomeOutlined,
+  ShopOutlined,
+  BookOutlined,
   PlayCircleOutlined,
   MenuOutlined,
   PhoneOutlined,
@@ -18,7 +18,9 @@ import {
   GlobalOutlined,
   BranchesOutlined,
   SolutionOutlined,
-  BankOutlined
+  BankOutlined,
+  FileTextOutlined,
+  CalendarOutlined
 } from '@ant-design/icons'
 import { useCart } from '../context/CartContext'
 import logo from '../live-well-rehabilitation-network-logo.png'
@@ -61,6 +63,11 @@ const Header = () => {
       icon: <ShopOutlined />,
       label: <Link to="/products" onClick={() => setDrawerVisible(false)}>Products</Link>,
     },
+    // {
+    //   key: '/quiz',
+    //   icon: <FileTextOutlined />,
+    //   label: <Link to="/quiz" onClick={() => setDrawerVisible(false)}>Screening Quiz</Link>,
+    // },
     {
       key: '/patron-health-care',
       icon: <BankOutlined />,
@@ -122,11 +129,11 @@ const Header = () => {
           animation: 'slideDown 0.5s ease-out',
         }}
       >
-        <div 
+        <div
           className="top-bar-item"
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
+          style={{
+            display: 'flex',
+            alignItems: 'center',
             gap: '8px',
             padding: '5px 12px',
             background: 'rgba(255,255,255,0.15)',
@@ -145,18 +152,18 @@ const Header = () => {
         >
           <PhoneOutlined style={{ animation: 'pulse 2s infinite', fontSize: '14px' }} />
           <span className="top-bar-label">Helpline:</span>
-          <a 
-            href="tel:+918977510100" 
+          <a
+            href="tel:+918977510100"
             style={{ color: '#fff', fontWeight: 'bold', textDecoration: 'none', fontSize: '13px' }}
           >
             +91 89775 10100
           </a>
         </div>
-        <div 
+        <div
           className="top-bar-item top-bar-hours"
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
+          style={{
+            display: 'flex',
+            alignItems: 'center',
             gap: '6px',
             padding: '5px 12px',
             background: 'rgba(255,255,255,0.15)',
@@ -189,21 +196,21 @@ const Header = () => {
           overflow: 'hidden',
         }}
       >
-        <Link 
-          to="/" 
-          style={{ textDecoration: 'none', flexShrink: 0 }} 
+        <Link
+          to="/"
+          style={{ textDecoration: 'none', flexShrink: 0 }}
           className="logo-container"
         >
-          <img 
-            src={logo} 
-            alt="Live Well Rehabilitation Network" 
+          <img
+            src={logo}
+            alt="Live Well Rehabilitation Network"
             className="header-logo"
-            style={{ 
+            style={{
               height: scrolled ? '40px' : '50px',
               maxWidth: '180px',
               width: 'auto',
               transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            }} 
+            }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'scale(1.05)'
             }}
@@ -212,11 +219,11 @@ const Header = () => {
             }}
           />
         </Link>
-        
+
         {/* Desktop Menu */}
-        <div className="desktop-menu" style={{ 
-          flex: 1, 
-          display: 'flex', 
+        <div className="desktop-menu" style={{
+          flex: 1,
+          display: 'flex',
           justifyContent: 'center',
           minWidth: 0,
           overflow: 'hidden',
@@ -237,13 +244,44 @@ const Header = () => {
             overflowedIndicator={<MenuOutlined />}
           />
         </div>
-        
-        <div className="header-actions" style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+
+        <div className="header-actions" style={{
+          display: 'flex',
+          alignItems: 'center',
           gap: '10px',
           flexShrink: 0,
         }}>
+
+
+          <Link to="/quiz" className="cart-link">
+            <Badge showZero={false}>
+              <Button
+                type="primary"
+                icon={<FileTextOutlined />}
+                className="btn-animated cart-btn"
+                style={{
+                  background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+                  border: 'none',
+                  borderRadius: '25px',
+                  height: '38px',
+                  padding: '0 15px',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                  fontSize: '13px',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,174,239,0.35)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                <span className="cart-btn-text">Quiz</span>
+              </Button>
+            </Badge>
+          </Link>
           <Link to="/cart" className="cart-link">
             <Badge count={cartCount} showZero={false}>
               <Button
@@ -282,7 +320,7 @@ const Header = () => {
                 border: 'none',
                 borderRadius: '25px',
                 height: '38px',
-                padding: '0 15px',
+                padding: '0 16px',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
                 fontSize: '13px',
@@ -296,7 +334,8 @@ const Header = () => {
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
-              <span className="book-now-text"> Book Appointment</span>
+              <CalendarOutlined style={{ marginRight: '8px' }} />
+              <span className="book-now-text">Book Appointment</span>
             </Button>
           </Link>
           <Button
@@ -336,7 +375,7 @@ const Header = () => {
         closeIcon={<CloseOutlined style={{ fontSize: '18px', color: '#1e3a5f' }} />}
         styles={{
           body: { padding: 0 },
-          header: { 
+          header: {
             borderBottom: '1px solid #f0f0f0',
             padding: '16px 20px',
           },
@@ -346,14 +385,14 @@ const Header = () => {
           mode="vertical"
           selectedKeys={[location.pathname]}
           items={menuItems}
-          style={{ 
+          style={{
             border: 'none',
             fontSize: '15px',
           }}
         />
-        <div style={{ 
-          padding: '25px', 
-          borderTop: '1px solid #f0f0f0', 
+        <div style={{
+          padding: '25px',
+          borderTop: '1px solid #f0f0f0',
           marginTop: '10px',
           background: '#f8fbff',
         }}>
@@ -374,8 +413,8 @@ const Header = () => {
               Book Appointment
             </Button>
           </Link>
-          <div style={{ 
-            marginTop: '20px', 
+          <div style={{
+            marginTop: '20px',
             textAlign: 'center',
             padding: '15px',
             background: '#fff',
@@ -384,8 +423,8 @@ const Header = () => {
           }}>
             <PhoneOutlined style={{ color: '#00aeef', fontSize: '20px' }} />
             <div style={{ marginTop: '8px' }}>
-              <a 
-                href="tel:+918977510100" 
+              <a
+                href="tel:+918977510100"
                 style={{ color: '#1e3a5f', fontWeight: 'bold', fontSize: '18px' }}
               >
                 +91 8977510100

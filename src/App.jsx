@@ -20,6 +20,7 @@ import Branches from './pages/Branches'
 import Careers from './pages/Careers'
 import PatronHealthCare from './pages/PatronHealthCare'
 import ServiceDetail from './pages/ServiceDetail'
+import Quiz from './pages/Quiz'
 import { CartProvider } from './context/CartContext'
 
 const { Content } = Layout
@@ -47,6 +48,7 @@ function App() {
             <Route path="/branches" element={<Branches />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/patron-health-care" element={<PatronHealthCare />} />
+            <Route path="/quiz" element={<Quiz />} />
             <Route path="/autism-therapy" element={<ServiceDetail />} />
             <Route path="/speech-therapy" element={<ServiceDetail />} />
             <Route path="/occupational-therapy-for-kids" element={<ServiceDetail />} />

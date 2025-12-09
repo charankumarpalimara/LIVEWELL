@@ -294,7 +294,18 @@ const Cart = () => {
                               ₹{Math.floor(item.price)} <span style={{ color: '#999', fontSize: '12px' }}>each</span>
                             </div>
                           </Col>
-                          <Col xs={12} md={5} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <Col 
+                            xs={12} 
+                            md={5} 
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '12px',
+                              flexWrap: 'nowrap',
+                              minWidth: '170px',
+                              justifyContent: 'flex-start',
+                            }}
+                          >
                             <span style={{ 
                               fontSize: '13px', 
                               color: '#666', 
@@ -303,30 +314,61 @@ const Cart = () => {
                             }}>
                               Quantity:
                             </span>
-                            <InputNumber
-                              min={1}
-                              max={10}
-                              value={item.quantity}
-                              onChange={(value) => updateQuantity(item.id, value)}
-                              style={{ 
-                                width: '90px',
-                              }}
-                            />
-                          </Col>
-                          <Col xs={12} md={4} style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <div style={{ 
-                              fontSize: '12px', 
-                              color: '#999',
-                              marginBottom: '4px',
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '6px',
+                              background: '#f8fbff',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '12px',
+                              padding: '6px 10px',
+                              boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
                             }}>
-                              Total
-                            </div>
-                            <div style={{ 
-                              fontSize: '22px', 
-                              fontWeight: '900', 
-                              color: itemColor,
-                            }}>
-                              ₹{Math.floor(item.price * item.quantity)}
+                              <Button 
+                                shape="circle" 
+                                size="small" 
+                                onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                                disabled={item.quantity <= 1}
+                                style={{
+                                  border: '1px solid #e2e8f0',
+                                  width: 28,
+                                  height: 28,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  padding: 0,
+                                  fontWeight: 700,
+                                }}
+                              >
+                                -
+                              </Button>
+                              <div style={{ 
+                                minWidth: '32px', 
+                                textAlign: 'center', 
+                                fontWeight: 700, 
+                                color: '#1e293b',
+                                fontSize: '14px',
+                              }}>
+                                {item.quantity}
+                              </div>
+                              <Button 
+                                shape="circle" 
+                                size="small" 
+                                onClick={() => updateQuantity(item.id, Math.min(10, item.quantity + 1))}
+                                disabled={item.quantity >= 10}
+                                style={{
+                                  border: '1px solid #e2e8f0',
+                                  width: 28,
+                                  height: 28,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  padding: 0,
+                                  fontWeight: 700,
+                                }}
+                              >
+                                +
+                              </Button>
                             </div>
                           </Col>
                           <Col xs={24} md={3} style={{ textAlign: 'right' }}>
@@ -358,6 +400,22 @@ const Cart = () => {
                                 e.currentTarget.style.boxShadow = 'none'
                               }}
                             />
+                          </Col>
+                          <Col xs={12} md={4} style={{ textAlign: 'left', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
+                            <div style={{ 
+                              fontSize: '12px', 
+                              color: '#999',
+                              marginBottom: '4px',
+                            }}>
+                              Total
+                            </div>
+                            <div style={{ 
+                              fontSize: '22px', 
+                              fontWeight: '900', 
+                              color: itemColor,
+                            }}>
+                              ₹{Math.floor(item.price * item.quantity)}
+                            </div>
                           </Col>
                         </Row>
                       </Col>
