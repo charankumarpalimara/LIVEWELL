@@ -608,100 +608,204 @@ const About = () => {
               ...getSlideFromBottom(0.2, isVisible('team')),
             }} />
           </div>
-          <Row gutter={[32, 32]} justify="center" align="top">
+          <Row gutter={[24, 24]} justify="center">
             {teamMembers.map((member, index) => (
-              <Col xs={24} sm={12} md={12} lg={10} key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+              <Col xs={24} sm={24} md={22} lg={20} key={index}>
                 <Card
                   hoverable
                   style={{ 
-                    textAlign: 'left', 
-                    borderRadius: '20px',
+                    borderRadius: '24px',
                     overflow: 'hidden',
-                    border: '1px solid #e2e8f0',
+                    border: 'none',
                     background: '#ffffff',
-                    boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
-                    transition: 'all 0.35s ease',
-                    maxWidth: '520px',
+                    boxShadow: '0 8px 32px rgba(15,23,42,0.1)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     width: '100%',
                     padding: 0,
+                    position: 'relative',
                     ...getSlideFromBottom(0.1 + index * 0.12, isVisible('team')),
                   }}
-                  bodyStyle={{ padding: '22px 22px' }}
+                  bodyStyle={{ padding: 0 }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-8px)'
-                    e.currentTarget.style.boxShadow = '0 22px 50px rgba(30,58,95,0.16)'
+                    e.currentTarget.style.transform = 'translateY(-12px)'
+                    e.currentTarget.style.boxShadow = '0 24px 60px rgba(30,58,95,0.2)'
+                    const gradient = e.currentTarget.querySelector('.card-gradient')
+                    if (gradient) gradient.style.opacity = '0.7'
+                    const img = e.currentTarget.querySelector('.profile-image')
+                    if (img) img.style.transform = 'scale(1.05)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = '0 16px 40px rgba(15,23,42,0.08)'
+                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(15,23,42,0.1)'
+                    const gradient = e.currentTarget.querySelector('.card-gradient')
+                    if (gradient) gradient.style.opacity = '0.3'
+                    const img = e.currentTarget.querySelector('.profile-image')
+                    if (img) img.style.transform = 'scale(1)'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '18px', flexWrap: 'wrap' }}>
+                  {/* Gradient overlay */}
+                  <div 
+                    className="card-gradient"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '140px',
+                      background: index === 0 
+                        ? 'linear-gradient(135deg, rgba(0,174,239,0.08) 0%, rgba(0,166,81,0.08) 100%)'
+                        : 'linear-gradient(135deg, rgba(247,148,29,0.08) 0%, rgba(227,30,36,0.08) 100%)',
+                      opacity: 0.3,
+                      transition: 'opacity 0.4s ease',
+                      zIndex: 1,
+                      pointerEvents: 'none',
+                    }}
+                  />
+                  
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '32px', 
+                    padding: '40px',
+                    position: 'relative',
+                    zIndex: 2,
+                    flexWrap: 'wrap',
+                  }}>
+                    {/* Profile Image */}
                     <div 
-                      className="profile-image-container"
                       style={{
                         position: 'relative',
-                        width: '140px',
-                        height: '140px',
-                        borderRadius: '18px',
-                        overflow: 'hidden',
-                        border: '5px solid #ffffff',
-                        boxShadow: '0 10px 28px rgba(30,58,95,0.16)',
-                        background: 'linear-gradient(135deg, #00aeef1a 0%, #1e3a5f1a 100%)',
                         flexShrink: 0,
                       }}
                     >
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
+                      <div 
                         style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
+                          position: 'relative',
+                          width: '180px',
+                          height: '180px',
+                          borderRadius: '24px',
+                          overflow: 'hidden',
+                          border: '6px solid #ffffff',
+                          boxShadow: '0 16px 40px rgba(30,58,95,0.2)',
+                          background: index === 0
+                            ? 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)'
+                            : 'linear-gradient(135deg, #f7941d 0%, #e31e24 100%)',
+                          padding: '4px',
                         }}
-                      />
-                    </div>
-                    <div style={{ textAlign: 'left', flex: 1 }}>
-                      <Title level={4} style={{ 
-                        color: '#0f172a', 
-                        marginBottom: '6px',
-                        fontSize: '21px',
-                        fontWeight: '800',
-                        letterSpacing: '-0.01em',
-                      }}>
-                        {member.name}
-                      </Title>
-                      <div style={{ 
-                        color: '#00aeef', 
-                        fontWeight: '700', 
-                        marginBottom: '8px',
-                        fontSize: '15px',
-                        letterSpacing: '0.25px',
+                      >
+                        <img 
+                          className="profile-image"
+                          src={member.image} 
+                          alt={member.name}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '18px',
+                            display: 'block',
+                            transition: 'transform 0.5s ease',
+                          }}
+                        />
+                        {/* Decorative ring */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '-8px',
+                          left: '-8px',
+                          right: '-8px',
+                          bottom: '-8px',
+                          borderRadius: '50%',
+                          border: '2px solid',
+                          borderColor: index === 0 ? 'rgba(0,174,239,0.2)' : 'rgba(247,148,29,0.2)',
+                          pointerEvents: 'none',
+                        }} />
+                      </div>
+                      {/* Role badge */}
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '-12px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: index === 0
+                          ? 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)'
+                          : 'linear-gradient(135deg, #f7941d 0%, #e31e24 100%)',
+                        color: '#ffffff',
+                        padding: '8px 20px',
+                        borderRadius: '20px',
+                        fontSize: '12px',
+                        fontWeight: '700',
+                        letterSpacing: '0.5px',
+                        boxShadow: '0 8px 24px rgba(30,58,95,0.25)',
+                        whiteSpace: 'nowrap',
                       }}>
                         {member.role}
                       </div>
-                      <div style={{ 
-                        color: '#718096', 
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        padding: '9px 12px',
-                        background: '#f8fafc',
-                        borderRadius: '12px',
-                        display: 'inline-block',
-                        border: '1px solid rgba(0, 174, 239, 0.1)',
+                    </div>
+
+                    {/* Content */}
+                    <div style={{ flex: 1, minWidth: '280px' }}>
+                      <Title level={2} style={{ 
+                        color: '#0f172a', 
+                        marginBottom: '12px',
+                        fontSize: 'clamp(24px, 3vw, 32px)',
+                        fontWeight: '800',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.2,
                       }}>
-                        {member.specialty}
+                        {member.name}
+                      </Title>
+                      
+                      <div style={{ 
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '20px',
+                        padding: '10px 18px',
+                        background: index === 0
+                          ? 'linear-gradient(135deg, rgba(0,174,239,0.08) 0%, rgba(0,166,81,0.08) 100%)'
+                          : 'linear-gradient(135deg, rgba(247,148,29,0.08) 0%, rgba(227,30,36,0.08) 100%)',
+                        borderRadius: '14px',
+                        border: `1px solid ${index === 0 ? 'rgba(0,174,239,0.2)' : 'rgba(247,148,29,0.2)'}`,
+                      }}>
+                        <div style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          background: index === 0 ? '#00aeef' : '#f7941d',
+                        }} />
+                        <span style={{ 
+                          color: '#1e3a5f', 
+                          fontSize: '15px',
+                          fontWeight: '700',
+                          letterSpacing: '0.3px',
+                        }}>
+                          {member.specialty}
+                        </span>
                       </div>
+
                       <Paragraph style={{ 
-                        marginTop: '10px',
+                        marginTop: '16px',
                         marginBottom: 0,
                         color: '#475569',
-                        fontSize: '13px',
-                        lineHeight: 1.6,
+                        fontSize: '15px',
+                        lineHeight: 1.8,
+                        maxWidth: '600px',
                       }}>
-                        Leading our vision and operations with a relentless focus on quality, growth, and care.
+                        Leading our vision and operations with a relentless focus on quality, growth, and care. 
+                        {index === 0 
+                          ? ' Driving strategic initiatives that transform lives and create lasting impact in the autism care community.'
+                          : ' Overseeing day-to-day operations and ensuring excellence in service delivery across all our centers.'}
                       </Paragraph>
+
+                      {/* Accent line */}
+                      <div style={{
+                        width: '60px',
+                        height: '4px',
+                        background: index === 0
+                          ? 'linear-gradient(90deg, #00aeef 0%, #00a651 100%)'
+                          : 'linear-gradient(90deg, #f7941d 0%, #e31e24 100%)',
+                        marginTop: '24px',
+                        borderRadius: '2px',
+                      }} />
                     </div>
                   </div>
                 </Card>

@@ -66,15 +66,18 @@ const Home = () => {
             style={{
               maxWidth: '1100px',
               margin: '0 auto',
-              background: '#0f172a',
-              borderRadius: '18px',
-              padding: '32px 28px',
-              color: '#e2e8f0',
-              boxShadow: '0 18px 50px rgba(15,23,42,0.18)',
+              background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 50%, #00a651 100%)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: '20px',
+              padding: '38px 32px',
+              color: '#ffffff',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+              position: 'relative',
               display: 'flex',
               flexWrap: 'wrap',
               alignItems: 'center',
               gap: '18px',
+              overflow: 'hidden',
             }}
           >
             <div style={{ flex: '1 1 420px' }}>
@@ -118,7 +121,7 @@ const Home = () => {
                     e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,174,239,0.35)'
                   }}
                 >
-                  Start Quiz
+                  Start Test Now
                 </button>
               </Link>
               <Link to="/appointment">

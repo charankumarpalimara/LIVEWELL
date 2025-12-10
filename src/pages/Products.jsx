@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Card, Input, Select, Typography, Badge, Rate, Button, Tag } from 'antd'
+import { Row, Col, Card, Input, Select, Typography, Badge, Rate, Button, Tag, Checkbox, Divider, Drawer } from 'antd'
 import { ShoppingCartOutlined, SearchOutlined, FilterOutlined, HeartOutlined, HeartFilled, EyeOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
@@ -39,6 +39,7 @@ const Products = () => {
   const [priceRange, setPriceRange] = useState('All')
   const [minRating, setMinRating] = useState('All')
   const [wishlist, setWishlist] = useState([])
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const { addToCart } = useCart()
   const visibleElements = useScrollAnimation()
   const isVisible = (id) => visibleElements.has(id)
@@ -63,6 +64,8 @@ const Products = () => {
   })
 
   const categories = ['All', ...new Set(products.map(p => p.category))]
+  const ratingOptions = ['All', '4.5', '4.0', '3.5']
+  const priceOptions = ['All', '0-25', '25-50', '50-75', '75+']
 
   const priceFilters = {
     All: () => true,
@@ -144,115 +147,17 @@ const Products = () => {
         </Paragraph>
       </div>
 
-      {/* Filters Section */}
-      <div 
-        data-animate-id="filters"
-        style={{ 
-          padding: '28px 20px', 
-          background: '#f8fafc',
-          borderBottom: '1px solid #e5e7eb',
-        }}
-      >
-        <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
-          <Row gutter={[20, 20]} align="middle">
-            <Col xs={24} md={10}>
-              <div style={getSlideFromLeft(0, isVisible('filters'))}>
-                <Input
-                  placeholder="Search products..."
-                  prefix={<SearchOutlined style={{ color: '#2563eb' }} />}
-                  size="large"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{
-                    borderRadius: '14px',
-                    border: '1px solid #e2e8f0',
-                    height: '52px',
-                    background: '#ffffff',
-                    boxShadow: '0 8px 26px rgba(15, 23, 42, 0.06)',
-                    fontWeight: 600,
-                    letterSpacing: '0.2px',
-                  }}
-                />
-              </div>
-            </Col>
-            <Col xs={24} md={14}>
-              <div style={{
-                display: 'flex',
-                gap: '10px',
-                flexWrap: 'wrap',
-                ...getSlideFromRight(0.1, isVisible('filters')),
-              }}>
-                <FilterOutlined style={{ color: '#0b1224', fontSize: '18px', marginTop: '10px' }} />
-                {categories.map((category, index) => (
-                  <Button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    style={{
-                      borderRadius: '50px',
-                      border: selectedCategory === category ? 'none' : '1px solid #2563eb',
-                      background: selectedCategory === category
-                        ? 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)' 
-                        : '#fff',
-                      color: selectedCategory === category ? '#fff' : '#2563eb',
-                      fontWeight: 700,
-                      height: '40px',
-                      padding: '0 20px',
-                      transition: 'all 0.3s ease',
-                      boxShadow: selectedCategory === category ? '0 10px 25px rgba(37,99,235,0.25)' : '0 6px 18px rgba(15,23,42,0.06)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (selectedCategory !== category) {
-                        e.currentTarget.style.transform = 'translateY(-2px)'
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)'
-                    }}
-                  >
-                    {category}
-                  </Button>
-                ))}
-                <Select
-                  value={priceRange}
-                  onChange={setPriceRange}
-                  size="large"
-                  style={{ minWidth: 140, borderRadius: '12px' }}
-                  placeholder="Price"
-                >
-                  <Option value="All">All Prices</Option>
-                  <Option value="0-25">Under ₹25</Option>
-                  <Option value="25-50">₹25 - ₹50</Option>
-                  <Option value="50-75">₹50 - ₹75</Option>
-                  <Option value="75+">Above ₹75</Option>
-                </Select>
-                <Select
-                  value={minRating}
-                  onChange={setMinRating}
-                  size="large"
-                  style={{ minWidth: 140, borderRadius: '12px' }}
-                  placeholder="Rating"
-                >
-                  <Option value="All">All Ratings</Option>
-                  <Option value="4.5">4.5+ stars</Option>
-                  <Option value="4">4.0+ stars</Option>
-                  <Option value="3.5">3.5+ stars</Option>
-                </Select>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </div>
-
-      {/* Products Grid */}
-      <div 
+      <div
         data-animate-id="products"
         style={{ padding: '50px 20px 70px', maxWidth: '1180px', margin: '0 auto' }}
       >
-        <div style={{ 
-          marginBottom: '28px', 
-          display: 'flex', 
-          justifyContent: 'space-between', 
+        <div style={{
+          marginBottom: '28px',
+          display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
           ...getSlideFromBottom(0, isVisible('products')),
         }}>
           <div>
@@ -263,318 +168,513 @@ const Products = () => {
               Browse curated items by category or search keyword.
             </Paragraph>
           </div>
+          {/* Mobile Filter Button */}
+          <Button
+            icon={<FilterOutlined />}
+            type="primary"
+            size="large"
+            onClick={() => setDrawerVisible(true)}
+            style={{
+              display: 'block',
+              background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
+              border: 'none',
+              borderRadius: '12px',
+              fontWeight: 700,
+              boxShadow: '0 8px 24px rgba(0,174,239,0.3)',
+            }}
+            className="mobile-filter-btn"
+          >
+            Filters
+          </Button>
         </div>
 
         <Row gutter={[32, 32]}>
-          {filteredProducts.map((product, index) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={product.id}>
-              <Card
+          {/* Desktop Sidebar - Hidden on Mobile */}
+          <Col xs={0} md={7} lg={6}>
+            <Card
+              style={{
+                borderRadius: '16px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 30px rgba(15,23,42,0.06)',
+                position: 'sticky',
+                top: 100,
+              }}
+              bodyStyle={{ padding: '20px' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                <FilterOutlined style={{ color: '#0b1224' }} />
+                <Title level={5} style={{ margin: 0, color: '#0b1224' }}>Filters</Title>
+              </div>
+              <Input
+                placeholder="Search products..."
+                prefix={<SearchOutlined style={{ color: '#2563eb' }} />}
+                size="large"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
-                  borderRadius: '16px',
-                  overflow: 'hidden',
+                  borderRadius: '12px',
                   border: '1px solid #e2e8f0',
+                  height: '48px',
                   background: '#ffffff',
-                  boxShadow: '0 18px 40px rgba(15,23,42,0.08)',
-                  transition: 'transform 0.28s ease, box-shadow 0.28s ease',
-                  padding: 0,
-                  ...(index % 2 === 0
-                    ? getSlideFromLeft(0.05 + (index * 0.03), isVisible('products'))
-                    : getSlideFromRight(0.05 + (index * 0.03), isVisible('products'))
-                  ),
+                  boxShadow: '0 6px 18px rgba(15, 23, 42, 0.05)',
+                  fontWeight: 600,
+                  letterSpacing: '0.2px',
+                  marginBottom: '16px',
                 }}
-                bodyStyle={{ padding: '18px 18px 20px' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)'
-                  e.currentTarget.style.boxShadow = `0 18px 40px ${categoryColors[product.category] || '#2563eb'}22`
-                  const img = e.currentTarget.querySelector('.product-img')
-                  if (img) img.style.transform = 'scale(1.08)'
-                  const actions = e.currentTarget.querySelector('.product-actions')
-                  if (actions) actions.style.opacity = '1'
-                  const wishlistBtn = e.currentTarget.querySelector('.wishlist-btn')
-                  if (wishlistBtn) wishlistBtn.style.transform = 'scale(1.05)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = '0 18px 40px rgba(15,23,42,0.08)'
-                  const img = e.currentTarget.querySelector('.product-img')
-                  if (img) img.style.transform = 'scale(1)'
-                  const actions = e.currentTarget.querySelector('.product-actions')
-                  if (actions) actions.style.opacity = '0'
-                  const wishlistBtn = e.currentTarget.querySelector('.wishlist-btn')
-                  if (wishlistBtn) wishlistBtn.style.transform = 'scale(1)'
-                }}
-                cover={
-                  <div style={{
-                    position: 'relative',
-                    height: '220px',
-                    overflow: 'hidden',
-                    background: '#f8fafc',
-                  }}>
-                    {/* Top accent border */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: '3px',
-                      background: `linear-gradient(90deg, ${categoryColors[product.category] || '#2563eb'} 0%, ${categoryColors[product.category] || '#22c55e'} 100%)`,
-                      zIndex: 1,
-                    }} />
-                    <img
-                      className="product-img"
-                      src={product.image}
-                      alt={product.name}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                      }}
-                    />
-                    {/* Gradient overlay */}
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: `linear-gradient(to bottom, transparent 50%, ${categoryColors[product.category] || '#00aeef'}20 100%)`,
-                      pointerEvents: 'none',
-                    }} />
-                    {/* Category Badge */}
-                    <Tag
-                      style={{
-                        position: 'absolute',
-                        top: '14px',
-                        left: '14px',
-                        background: '#0f172a',
-                        color: '#e2e8f0',
-                        border: 'none',
-                        borderRadius: '16px',
-                        fontWeight: 700,
-                        fontSize: '11px',
-                        padding: '6px 12px',
-                        letterSpacing: '0.4px',
-                        textTransform: 'uppercase',
-                        zIndex: 2,
-                      }}
-                    >
-                      {product.category}
-                    </Tag>
-                    {/* Wishlist Button */}
-                    <div
-                      className="wishlist-btn"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleWishlist(product.id)
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '15px',
-                        right: '15px',
-                        width: '40px',
-                        height: '40px',
-                        background: 'rgba(255, 255, 255, 0.9)',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        boxShadow: '0 8px 20px rgba(15,23,42,0.12)',
-                        transition: 'all 0.25s ease',
-                        zIndex: 2,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = '#fff'
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)'
-                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.15)'
-                      }}
-                    >
-                      {wishlist.includes(product.id) ? (
-                        <HeartFilled style={{
-                          color: '#e31e24',
-                          fontSize: '18px',
-                          filter: 'drop-shadow(0 2px 4px rgba(227, 30, 36, 0.3))',
-                        }} />
-                      ) : (
-                        <HeartOutlined style={{ color: '#475569', fontSize: '18px' }} />
-                      )}
-                    </div>
-                    {/* Quick Actions */}
-                    <div
-                      className="product-actions"
-                      style={{
-                        position: 'absolute',
-                        bottom: '20px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        display: 'flex',
-                        gap: '10px',
-                        opacity: 0,
-                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                        zIndex: 2,
-                      }}
-                    >
-                      <Link to={`/product/${product.id}`}>
-                        <Button
-                          icon={<EyeOutlined />}
-                          style={{
-                          background: '#ffffff',
-                            border: 'none',
-                          borderRadius: '50%',
-                          width: '46px',
-                          height: '46px',
-                          boxShadow: '0 8px 24px rgba(15,23,42,0.15)',
-                            transition: 'all 0.3s ease',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'scale(1.1) translateY(-2px)'
-                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.25)'
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'scale(1) translateY(0)'
-                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'
-                          }}
-                        />
-                      </Link>
-                      <Button
-                        icon={<ShoppingCartOutlined />}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          addToCart(product)
-                        }}
-                        style={{
-                          background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
-                          border: 'none',
-                          borderRadius: '50%',
-                          width: '46px',
-                          height: '46px',
-                          color: '#fff',
-                          boxShadow: '0 10px 26px rgba(0,174,239,0.25)',
-                          transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(1.1) translateY(-2px)'
-                          e.currentTarget.style.boxShadow = `0 8px 25px ${categoryColors[product.category] || '#00aeef'}50`
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(1) translateY(0)'
-                          e.currentTarget.style.boxShadow = `0 6px 20px ${categoryColors[product.category] || '#00aeef'}40`
-                        }}
-                      />
-                    </div>
-                  </div>
-                }
-              >
-                <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                  <Title 
-                    level={5} 
-                    style={{ 
-                      color: '#0f172a', 
-                      marginBottom: '10px', 
-                      fontSize: '16px',
-                      fontWeight: 800,
-                      lineHeight: '1.5',
-                      minHeight: '44px',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      letterSpacing: '0.2px',
-                    }}
+              />
+              <Divider style={{ margin: '12px 0' }}>Category</Divider>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+                {categories.map((cat) => (
+                  <Checkbox
+                    key={cat}
+                    checked={selectedCategory === cat}
+                    onChange={() => setSelectedCategory(selectedCategory === cat ? 'All' : cat)}
                   >
-                    {product.name}
-                  </Title>
-                </Link>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  marginBottom: '14px',
-                }}>
-                  <Rate
-                    disabled
-                    defaultValue={product.rating}
-                    allowHalf
-                    style={{ fontSize: '15px' }}
-                  />
-                  <span style={{
-                    color: '#718096',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                  }}>
-                    ({product.rating})
-                  </span>
-                </div>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingTop: '12px',
-                  borderTop: '1px solid #f1f5f9',
-                }}>
-                  <div>
-                    <span style={{
-                      fontSize: '22px',
-                      fontWeight: 800,
-                      color: '#0f172a',
-                      letterSpacing: '0.2px',
-                    }}>
-                      ₹{product.price}
-                    </span>
-                    {product.originalPrice && (
-                      <span style={{
-                        fontSize: '14px',
-                        color: '#94a3b8',
-                        textDecoration: 'line-through',
-                        marginLeft: '10px',
-                        fontWeight: 500,
-                      }}>
-                        ₹{product.originalPrice}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', marginTop: '12px', display: 'block' }}>
-                  <Button
-                    type="primary"
-                    block
+                    {cat}
+                  </Checkbox>
+                ))}
+              </div>
+              <Divider style={{ margin: '12px 0' }}>Price</Divider>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+                {priceOptions.map((price) => (
+                  <Checkbox
+                    key={price}
+                    checked={priceRange === price}
+                    onChange={() => setPriceRange(priceRange === price ? 'All' : price)}
+                  >
+                    {price === '0-25' && 'Under ₹25'}
+                    {price === '25-50' && '₹25 - ₹50'}
+                    {price === '50-75' && '₹50 - ₹75'}
+                    {price === '75+' && 'Above ₹75'}
+                    {price === 'All' && 'All Prices'}
+                  </Checkbox>
+                ))}
+              </div>
+              <Divider style={{ margin: '12px 0' }}>Rating</Divider>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {ratingOptions.map((rating) => (
+                  <Checkbox
+                    key={rating}
+                    checked={minRating === rating}
+                    onChange={() => setMinRating(minRating === rating ? 'All' : rating)}
+                  >
+                    {rating === 'All' ? 'All Ratings' : `${rating}+ stars`}
+                  </Checkbox>
+                ))}
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} md={17} lg={18}>
+            <Row gutter={[16, 16]}>
+              {filteredProducts.map((product, index) => (
+                <Col xs={24} sm={12} md={12} lg={8} key={product.id}>
+                  <Card
                     style={{
-                      background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
-                      border: 'none',
-                      borderRadius: '12px',
-                      height: '44px',
-                      fontWeight: 700,
-                      fontSize: '14px',
-                      boxShadow: '0 12px 32px rgba(0,174,239,0.26)',
-                      transition: 'all 0.25s ease',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      border: '1px solid #e2e8f0',
+                      background: '#ffffff',
+                      boxShadow: '0 18px 40px rgba(15,23,42,0.08)',
+                      transition: 'transform 0.28s ease, box-shadow 0.28s ease',
+                      padding: 0,
+                      ...(index % 2 === 0
+                        ? getSlideFromLeft(0.05 + (index * 0.03), isVisible('products'))
+                        : getSlideFromRight(0.05 + (index * 0.03), isVisible('products'))
+                      ),
                     }}
+                    bodyStyle={{ padding: '18px 18px 20px' }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)'
-                      e.currentTarget.style.boxShadow = '0 14px 34px rgba(15,23,42,0.22)'
+                      e.currentTarget.style.transform = 'translateY(-8px)'
+                      e.currentTarget.style.boxShadow = `0 18px 40px ${categoryColors[product.category] || '#2563eb'}22`
+                      const img = e.currentTarget.querySelector('.product-img')
+                      if (img) img.style.transform = 'scale(1.08)'
+                      const actions = e.currentTarget.querySelector('.product-actions')
+                      if (actions) actions.style.opacity = '1'
+                      const wishlistBtn = e.currentTarget.querySelector('.wishlist-btn')
+                      if (wishlistBtn) wishlistBtn.style.transform = 'scale(1.05)'
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(15,23,42,0.18)'
+                      e.currentTarget.style.boxShadow = '0 18px 40px rgba(15,23,42,0.08)'
+                      const img = e.currentTarget.querySelector('.product-img')
+                      if (img) img.style.transform = 'scale(1)'
+                      const actions = e.currentTarget.querySelector('.product-actions')
+                      if (actions) actions.style.opacity = '0'
+                      const wishlistBtn = e.currentTarget.querySelector('.wishlist-btn')
+                      if (wishlistBtn) wishlistBtn.style.transform = 'scale(1)'
                     }}
+                    cover={
+                      <div style={{
+                        position: 'relative',
+                        height: '220px',
+                        overflow: 'hidden',
+                        background: '#f8fafc',
+                      }}>
+                        {/* Top accent border */}
+                        <div style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: '3px',
+                          background: `linear-gradient(90deg, ${categoryColors[product.category] || '#2563eb'} 0%, ${categoryColors[product.category] || '#22c55e'} 100%)`,
+                          zIndex: 1,
+                        }} />
+                        <img
+                          className="product-img"
+                          src={product.image}
+                          alt={product.name}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                          }}
+                        />
+                        {/* Gradient overlay */}
+                        <div style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: `linear-gradient(to bottom, transparent 50%, ${categoryColors[product.category] || '#00aeef'}20 100%)`,
+                          pointerEvents: 'none',
+                        }} />
+                        {/* Category Badge */}
+                        <Tag
+                          style={{
+                            position: 'absolute',
+                            top: '14px',
+                            left: '14px',
+                            background: '#0f172a',
+                            color: '#e2e8f0',
+                            border: 'none',
+                            borderRadius: '16px',
+                            fontWeight: 700,
+                            fontSize: '11px',
+                            padding: '6px 12px',
+                            letterSpacing: '0.4px',
+                            textTransform: 'uppercase',
+                            zIndex: 2,
+                          }}
+                        >
+                          {product.category}
+                        </Tag>
+                        {/* Wishlist Button */}
+                        <div
+                          className="wishlist-btn"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleWishlist(product.id)
+                          }}
+                          style={{
+                            position: 'absolute',
+                            top: '15px',
+                            right: '15px',
+                            width: '40px',
+                            height: '40px',
+                            background: 'rgba(255, 255, 255, 0.9)',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            boxShadow: '0 8px 20px rgba(15,23,42,0.12)',
+                            transition: 'all 0.25s ease',
+                            zIndex: 2,
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = '#fff'
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)'
+                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.15)'
+                          }}
+                        >
+                          {wishlist.includes(product.id) ? (
+                            <HeartFilled style={{
+                              color: '#e31e24',
+                              fontSize: '18px',
+                              filter: 'drop-shadow(0 2px 4px rgba(227, 30, 36, 0.3))',
+                            }} />
+                          ) : (
+                            <HeartOutlined style={{ color: '#475569', fontSize: '18px' }} />
+                          )}
+                        </div>
+                        {/* Quick Actions */}
+                        <div
+                          className="product-actions"
+                          style={{
+                            position: 'absolute',
+                            bottom: '20px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            display: 'flex',
+                            gap: '10px',
+                            opacity: 0,
+                            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                            zIndex: 2,
+                          }}
+                        >
+                          <Link to={`/product/${product.id}`}>
+                            <Button
+                              icon={<EyeOutlined />}
+                              style={{
+                                background: '#ffffff',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '46px',
+                                height: '46px',
+                                boxShadow: '0 8px 24px rgba(15,23,42,0.15)',
+                                transition: 'all 0.3s ease',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'scale(1.1) translateY(-2px)'
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.25)'
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'scale(1) translateY(0)'
+                                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'
+                              }}
+                            />
+                          </Link>
+                          <Button
+                            icon={<ShoppingCartOutlined />}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              addToCart(product)
+                            }}
+                            style={{
+                              background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
+                              border: 'none',
+                              borderRadius: '50%',
+                              width: '46px',
+                              height: '46px',
+                              color: '#fff',
+                              boxShadow: '0 10px 26px rgba(0,174,239,0.25)',
+                              transition: 'all 0.3s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = 'scale(1.1) translateY(-2px)'
+                              e.currentTarget.style.boxShadow = `0 8px 25px ${categoryColors[product.category] || '#00aeef'}50`
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'scale(1) translateY(0)'
+                              e.currentTarget.style.boxShadow = `0 6px 20px ${categoryColors[product.category] || '#00aeef'}40`
+                            }}
+                          />
+                        </div>
+                      </div>
+                    }
                   >
-                    View Details
-                  </Button>
-                </Link>
-              </Card>
-            </Col>
-          ))}
+                    <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
+                      <Title
+                        level={5}
+                        style={{
+                          color: '#0f172a',
+                          marginBottom: '10px',
+                          fontSize: '16px',
+                          fontWeight: 800,
+                          lineHeight: '1.5',
+                          minHeight: '44px',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          letterSpacing: '0.2px',
+                        }}
+                      >
+                        {product.name}
+                      </Title>
+                    </Link>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '14px',
+                    }}>
+                      <Rate
+                        disabled
+                        defaultValue={product.rating}
+                        allowHalf
+                        style={{ fontSize: '15px' }}
+                      />
+                      <span style={{
+                        color: '#718096',
+                        fontSize: '13px',
+                        fontWeight: '600',
+                      }}>
+                        ({product.rating})
+                      </span>
+                    </div>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      paddingTop: '12px',
+                      borderTop: '1px solid #f1f5f9',
+                    }}>
+                      <div>
+                        <span style={{
+                          fontSize: '22px',
+                          fontWeight: 800,
+                          color: '#0f172a',
+                          letterSpacing: '0.2px',
+                        }}>
+                          ₹{product.price}
+                        </span>
+                        {product.originalPrice && (
+                          <span style={{
+                            fontSize: '14px',
+                            color: '#94a3b8',
+                            textDecoration: 'line-through',
+                            marginLeft: '10px',
+                            fontWeight: 500,
+                          }}>
+                            ₹{product.originalPrice}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', marginTop: '12px', display: 'block' }}>
+                      <Button
+                        type="primary"
+                        block
+                        style={{
+                          background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
+                          border: 'none',
+                          borderRadius: '12px',
+                          height: '44px',
+                          fontWeight: 700,
+                          fontSize: '14px',
+                          boxShadow: '0 12px 32px rgba(0,174,239,0.26)',
+                          transition: 'all 0.25s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-2px)'
+                          e.currentTarget.style.boxShadow = '0 14px 34px rgba(15,23,42,0.22)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0)'
+                          e.currentTarget.style.boxShadow = '0 10px 30px rgba(15,23,42,0.18)'
+                        }}
+                      >
+                        View Details
+                      </Button>
+                    </Link>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+
+            {filteredProducts.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '60px 0' }}>
+                <Title level={4} style={{ color: '#888' }}>No products found</Title>
+                <Paragraph style={{ color: '#aaa' }}>Try adjusting your search or filter criteria</Paragraph>
+              </div>
+            )}
+          </Col>
         </Row>
 
-        {filteredProducts.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '60px 0' }}>
-            <Title level={4} style={{ color: '#888' }}>No products found</Title>
-            <Paragraph style={{ color: '#aaa' }}>Try adjusting your search or filter criteria</Paragraph>
+        {/* Mobile Filter Drawer */}
+        <Drawer
+          title={
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FilterOutlined style={{ color: '#0b1224' }} />
+              <span style={{ fontWeight: 700, fontSize: '18px' }}>Filters</span>
+            </div>
+          }
+          placement="left"
+          onClose={() => setDrawerVisible(false)}
+          open={drawerVisible}
+          width={320}
+          style={{ zIndex: 1000 }}
+        >
+          <Input
+            placeholder="Search products..."
+            prefix={<SearchOutlined style={{ color: '#2563eb' }} />}
+            size="large"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              borderRadius: '12px',
+              border: '1px solid #e2e8f0',
+              height: '48px',
+              background: '#ffffff',
+              boxShadow: '0 6px 18px rgba(15, 23, 42, 0.05)',
+              fontWeight: 600,
+              letterSpacing: '0.2px',
+              marginBottom: '20px',
+            }}
+          />
+          <Divider style={{ margin: '16px 0' }}>Category</Divider>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            {categories.map((cat) => (
+              <Checkbox
+                key={cat}
+                checked={selectedCategory === cat}
+                onChange={() => {
+                  setSelectedCategory(selectedCategory === cat ? 'All' : cat)
+                }}
+                style={{ fontSize: '15px' }}
+              >
+                {cat}
+              </Checkbox>
+            ))}
           </div>
-        )}
+          <Divider style={{ margin: '16px 0' }}>Price</Divider>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            {priceOptions.map((price) => (
+              <Checkbox
+                key={price}
+                checked={priceRange === price}
+                onChange={() => setPriceRange(priceRange === price ? 'All' : price)}
+                style={{ fontSize: '15px' }}
+              >
+                {price === '0-25' && 'Under ₹25'}
+                {price === '25-50' && '₹25 - ₹50'}
+                {price === '50-75' && '₹50 - ₹75'}
+                {price === '75+' && 'Above ₹75'}
+                {price === 'All' && 'All Prices'}
+              </Checkbox>
+            ))}
+          </div>
+          <Divider style={{ margin: '16px 0' }}>Rating</Divider>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {ratingOptions.map((rating) => (
+              <Checkbox
+                key={rating}
+                checked={minRating === rating}
+                onChange={() => setMinRating(minRating === rating ? 'All' : rating)}
+                style={{ fontSize: '15px' }}
+              >
+                {rating === 'All' ? 'All Ratings' : `${rating}+ stars`}
+              </Checkbox>
+            ))}
+          </div>
+          <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+            <Button
+              type="primary"
+              block
+              size="large"
+              onClick={() => setDrawerVisible(false)}
+              style={{
+                background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
+                border: 'none',
+                borderRadius: '12px',
+                height: '48px',
+                fontWeight: 700,
+                fontSize: '16px',
+                boxShadow: '0 8px 24px rgba(0,174,239,0.3)',
+              }}
+            >
+              Apply Filters
+            </Button>
+          </div>
+        </Drawer>
       </div>
 
-      <style>{`
+  <style>{`
         @keyframes slideDown {
           from { opacity: 0; transform: translateY(-30px); }
           to { opacity: 1; transform: translateY(0); }
@@ -585,8 +685,16 @@ const Products = () => {
         .ant-input:focus {
           box-shadow: 0 0 0 3px rgba(0,174,239,0.1) !important;
         }
+        .mobile-filter-btn {
+          display: block;
+        }
+        @media (min-width: 768px) {
+          .mobile-filter-btn {
+            display: none !important;
+          }
+        }
       `}</style>
-    </div>
+    </div >
   )
 }
 
