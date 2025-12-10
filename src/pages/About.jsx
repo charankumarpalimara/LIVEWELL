@@ -69,28 +69,16 @@ const About = () => {
 
   const teamMembers = [
     {
-      name: 'Dr. Priya Sharma',
-      role: 'Chief Therapist',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop',
-      specialty: 'Autism Specialist',
+      name: 'Dr. Ananya Rao',
+      role: 'Managing Director',
+      image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&h=300&fit=crop',
+      specialty: 'Strategic Leadership',
     },
     {
-      name: 'Dr. Rajesh Kumar',
-      role: 'Speech Therapist',
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop',
-      specialty: 'Language Development',
-    },
-    {
-      name: 'Dr. Sunita Patel',
-      role: 'Occupational Therapist',
-      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop',
-      specialty: 'Motor Skills',
-    },
-    {
-      name: 'Dr. Amit Verma',
-      role: 'Behavioral Specialist',
-      image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&h=300&fit=crop',
-      specialty: 'ABA Therapy',
+      name: 'Mr. Arjun Mehta',
+      role: 'Chief Executive Officer',
+      image: 'https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop',
+      specialty: 'Operations & Growth',
     },
   ]
 
@@ -620,139 +608,101 @@ const About = () => {
               ...getSlideFromBottom(0.2, isVisible('team')),
             }} />
           </div>
-          <Row gutter={[32, 40]}>
+          <Row gutter={[32, 32]} justify="center" align="top">
             {teamMembers.map((member, index) => (
-              <Col xs={24} sm={12} md={6} key={index}>
+              <Col xs={24} sm={12} md={12} lg={10} key={index} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Card
                   hoverable
                   style={{ 
-                    textAlign: 'center', 
-                    borderRadius: '24px',
-                    overflow: 'visible',
-                    border: 'none',
+                    textAlign: 'left', 
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    border: '1px solid #e2e8f0',
                     background: '#ffffff',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                    padding: '0',
+                    boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
+                    transition: 'all 0.35s ease',
+                    maxWidth: '520px',
+                    width: '100%',
+                    padding: 0,
                     ...getSlideFromBottom(0.1 + index * 0.12, isVisible('team')),
                   }}
-                  bodyStyle={{ padding: '30px 24px' }}
+                  bodyStyle={{ padding: '22px 22px' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)'
-                    e.currentTarget.style.boxShadow = '0 25px 60px rgba(247, 148, 29, 0.25)'
-                    const img = e.currentTarget.querySelector('img')
-                    if (img) img.style.transform = 'scale(1.1)'
-                    const profileImg = e.currentTarget.querySelector('.profile-image-container')
-                    if (profileImg) {
-                      profileImg.style.transform = 'scale(1.05)'
-                      profileImg.style.boxShadow = '0 15px 40px rgba(247, 148, 29, 0.35)'
-                    }
+                    e.currentTarget.style.transform = 'translateY(-8px)'
+                    e.currentTarget.style.boxShadow = '0 22px 50px rgba(30,58,95,0.16)'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
-                    const img = e.currentTarget.querySelector('img')
-                    if (img) img.style.transform = 'scale(1)'
-                    const profileImg = e.currentTarget.querySelector('.profile-image-container')
-                    if (profileImg) {
-                      profileImg.style.transform = 'scale(1)'
-                      profileImg.style.boxShadow = '0 8px 24px rgba(247, 148, 29, 0.25)'
-                    }
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = '0 16px 40px rgba(15,23,42,0.08)'
                   }}
-                  cover={
-                    <div style={{ 
-                      position: 'relative',
-                      padding: '40px 40px 60px',
-                      background: 'linear-gradient(135deg, #f8fbff 0%, #ffffff 100%)',
-                    }}>
-                      {/* Profile Image Container */}
-                      <div 
-                        className="profile-image-container"
-                        style={{
-                          position: 'relative',
-                          width: '160px',
-                          height: '160px',
-                          margin: '0 auto',
-                          borderRadius: '50%',
-                          overflow: 'hidden',
-                          border: '5px solid #ffffff',
-                          boxShadow: '0 8px 24px rgba(247, 148, 29, 0.25)',
-                          background: 'linear-gradient(135deg, #f7941d20 0%, #00aeef20 100%)',
-                          transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                        }}
-                      >
-                        <img 
-                          src={member.image} 
-                          alt={member.name}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            transition: 'transform 0.5s ease',
-                          }}
-                        />
-                        {/* Decorative ring */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '-8px',
-                          left: '-8px',
-                          right: '-8px',
-                          bottom: '-8px',
-                          borderRadius: '50%',
-                          border: '2px solid rgba(247, 148, 29, 0.2)',
-                          pointerEvents: 'none',
-                        }} />
-                      </div>
-                      {/* Decorative badge */}
-                      <div style={{
-                        position: 'absolute',
-                        bottom: '20px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        background: 'linear-gradient(135deg, #f7941d 0%, #00aeef 100%)',
-                        color: '#ffffff',
-                        padding: '6px 16px',
-                        borderRadius: '20px',
-                        fontSize: '11px',
-                        fontWeight: '700',
-                        letterSpacing: '0.5px',
-                        boxShadow: '0 4px 12px rgba(247, 148, 29, 0.3)',
-                        textTransform: 'uppercase',
-                      }}>
-                        Expert
-                      </div>
-                    </div>
-                  }
                 >
-                  <Title level={4} style={{ 
-                    color: '#1e3a5f', 
-                    marginBottom: '8px',
-                    fontSize: '20px',
-                    fontWeight: '800',
-                    letterSpacing: '0.3px',
-                  }}>
-                    {member.name}
-                  </Title>
-                  <div style={{ 
-                    color: '#00aeef', 
-                    fontWeight: '700', 
-                    marginBottom: '8px',
-                    fontSize: '15px',
-                    letterSpacing: '0.3px',
-                  }}>
-                    {member.role}
-                  </div>
-                  <div style={{ 
-                    color: '#718096', 
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    padding: '8px 16px',
-                    background: 'linear-gradient(135deg, #f8fbff 0%, #ffffff 100%)',
-                    borderRadius: '12px',
-                    display: 'inline-block',
-                    border: '1px solid rgba(0, 174, 239, 0.1)',
-                  }}>
-                    {member.specialty}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '18px', flexWrap: 'wrap' }}>
+                    <div 
+                      className="profile-image-container"
+                      style={{
+                        position: 'relative',
+                        width: '140px',
+                        height: '140px',
+                        borderRadius: '18px',
+                        overflow: 'hidden',
+                        border: '5px solid #ffffff',
+                        boxShadow: '0 10px 28px rgba(30,58,95,0.16)',
+                        background: 'linear-gradient(135deg, #00aeef1a 0%, #1e3a5f1a 100%)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                    </div>
+                    <div style={{ textAlign: 'left', flex: 1 }}>
+                      <Title level={4} style={{ 
+                        color: '#0f172a', 
+                        marginBottom: '6px',
+                        fontSize: '21px',
+                        fontWeight: '800',
+                        letterSpacing: '-0.01em',
+                      }}>
+                        {member.name}
+                      </Title>
+                      <div style={{ 
+                        color: '#00aeef', 
+                        fontWeight: '700', 
+                        marginBottom: '8px',
+                        fontSize: '15px',
+                        letterSpacing: '0.25px',
+                      }}>
+                        {member.role}
+                      </div>
+                      <div style={{ 
+                        color: '#718096', 
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        padding: '9px 12px',
+                        background: '#f8fafc',
+                        borderRadius: '12px',
+                        display: 'inline-block',
+                        border: '1px solid rgba(0, 174, 239, 0.1)',
+                      }}>
+                        {member.specialty}
+                      </div>
+                      <Paragraph style={{ 
+                        marginTop: '10px',
+                        marginBottom: 0,
+                        color: '#475569',
+                        fontSize: '13px',
+                        lineHeight: 1.6,
+                      }}>
+                        Leading our vision and operations with a relentless focus on quality, growth, and care.
+                      </Paragraph>
+                    </div>
                   </div>
                 </Card>
               </Col>

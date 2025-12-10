@@ -253,7 +253,7 @@ const Header = () => {
         }}>
 
 
-          <Link to="/quiz" className="cart-link">
+          {/* <Link to="/quiz" className="cart-link">
             <Badge showZero={false}>
               <Button
                 type="primary"
@@ -281,7 +281,7 @@ const Header = () => {
                 <span className="cart-btn-text">Quiz</span>
               </Button>
             </Badge>
-          </Link>
+          </Link> */}
           <Link to="/cart" className="cart-link">
             <Badge count={cartCount} showZero={false}>
               <Button

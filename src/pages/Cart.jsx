@@ -102,7 +102,7 @@ const Cart = () => {
               size="large"
               icon={<ShoppingOutlined />}
               style={{
-                background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+                background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
                 border: 'none',
                 borderRadius: '50px',
                 height: '52px',
@@ -500,7 +500,7 @@ const Cart = () => {
                   style={{
                     height: '55px',
                     borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
+                  background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
                     border: 'none',
                     fontWeight: '700',
                     fontSize: '16px',
@@ -526,18 +526,18 @@ const Cart = () => {
                       height: '50px',
                       borderRadius: '12px',
                       marginTop: '15px',
-                      border: '2px solid #00aeef',
-                      color: '#00aeef',
+                    border: '2px solid #00aeef',
+                    color: '#00aeef',
                       fontWeight: '600',
                       transition: 'all 0.3s ease',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#00aeef'
+                    e.currentTarget.style.background = '#00aeef'
                       e.currentTarget.style.color = '#fff'
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = 'transparent'
-                      e.currentTarget.style.color = '#00aeef'
+                    e.currentTarget.style.color = '#00aeef'
                     }}
                   >
                     Continue Shopping

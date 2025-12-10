@@ -65,7 +65,7 @@ const ProductDetail = () => {
           size="large"
           onClick={() => navigate('/products')}
           style={{
-            background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+            background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
             border: 'none',
             borderRadius: '50px',
             height: '50px',
@@ -91,6 +91,8 @@ const ProductDetail = () => {
     'Toys': '#f7941d',
     'Books': '#662d91',
   }
+
+  const productImages = product?.images && product.images.length > 0 ? product.images : [product.image]
 
   return (
     <div style={{ background: '#fff', minHeight: '80vh' }}>
@@ -147,7 +149,7 @@ const ProductDetail = () => {
               }}
             >
               <img
-                src={product.image}
+                src={productImages[selectedImage]}
                 alt={product.name}
                 style={{
                   width: '100%',
@@ -313,7 +315,7 @@ const ProductDetail = () => {
                   onClick={handleAddToCart}
                   disabled={!product.inStock}
                   style={{
-                    background: 'linear-gradient(135deg, #e31e24 0%, #f7941d 100%)',
+                    background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
                     border: 'none',
                     borderRadius: '50px',
                     height: '55px',
@@ -321,14 +323,15 @@ const ProductDetail = () => {
                     fontWeight: '700',
                     fontSize: '16px',
                     transition: 'all 0.3s ease',
+                    boxShadow: '0 12px 35px rgba(0,174,239,0.35)',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-3px)'
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(227,30,36,0.35)'
+                    e.currentTarget.style.boxShadow = '0 14px 38px rgba(30,58,95,0.42)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'none'
+                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,174,239,0.35)'
                   }}
                 >
                   Add to Cart
@@ -371,6 +374,34 @@ const ProductDetail = () => {
             </div>
           </Col>
         </Row>
+
+        {/* Image thumbnails */}
+        {productImages.length > 1 && (
+          <div style={{ marginTop: '16px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            {productImages.map((img, idx) => (
+              <div
+                key={idx}
+                onClick={() => setSelectedImage(idx)}
+                style={{
+                  width: '90px',
+                  height: '70px',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  border: selectedImage === idx ? '2px solid #00aeef' : '1px solid #e5e7eb',
+                  cursor: 'pointer',
+                  boxShadow: selectedImage === idx ? '0 6px 18px rgba(0,174,239,0.25)' : 'none',
+                  transition: 'all 0.25s ease',
+                }}
+              >
+                <img 
+                  src={img} 
+                  alt={`${product.name} ${idx + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Detailed Information Tabs */}
         <div style={{ marginTop: '80px' }}>

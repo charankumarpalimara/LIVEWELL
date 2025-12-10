@@ -36,6 +36,8 @@ const useScrollAnimation = () => {
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [priceRange, setPriceRange] = useState('All')
+  const [minRating, setMinRating] = useState('All')
   const [wishlist, setWishlist] = useState([])
   const { addToCart } = useCart()
   const visibleElements = useScrollAnimation()
@@ -62,10 +64,20 @@ const Products = () => {
 
   const categories = ['All', ...new Set(products.map(p => p.category))]
 
+  const priceFilters = {
+    All: () => true,
+    '0-25': (p) => p.price <= 25,
+    '25-50': (p) => p.price > 25 && p.price <= 50,
+    '50-75': (p) => p.price > 50 && p.price <= 75,
+    '75+': (p) => p.price > 75,
+  }
+
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory
-    return matchesSearch && matchesCategory
+    const matchesPrice = priceFilters[priceRange](product)
+    const matchesRating = minRating === 'All' || product.rating >= Number(minRating)
+    return matchesSearch && matchesCategory && matchesPrice && matchesRating
   })
 
   const toggleWishlist = (productId) => {
@@ -143,7 +155,7 @@ const Products = () => {
       >
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <Row gutter={[20, 20]} align="middle">
-            <Col xs={24} md={12}>
+            <Col xs={24} md={10}>
               <div style={getSlideFromLeft(0, isVisible('filters'))}>
                 <Input
                   placeholder="Search products..."
@@ -163,7 +175,7 @@ const Products = () => {
                 />
               </div>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={24} md={14}>
               <div style={{
                 display: 'flex',
                 gap: '10px',
@@ -179,7 +191,7 @@ const Products = () => {
                       borderRadius: '50px',
                       border: selectedCategory === category ? 'none' : '1px solid #2563eb',
                       background: selectedCategory === category
-                        ? 'linear-gradient(135deg, #2563eb 0%, #22c55e 100%)' 
+                        ? 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)' 
                         : '#fff',
                       color: selectedCategory === category ? '#fff' : '#2563eb',
                       fontWeight: 700,
@@ -200,6 +212,31 @@ const Products = () => {
                     {category}
                   </Button>
                 ))}
+                <Select
+                  value={priceRange}
+                  onChange={setPriceRange}
+                  size="large"
+                  style={{ minWidth: 140, borderRadius: '12px' }}
+                  placeholder="Price"
+                >
+                  <Option value="All">All Prices</Option>
+                  <Option value="0-25">Under ₹25</Option>
+                  <Option value="25-50">₹25 - ₹50</Option>
+                  <Option value="50-75">₹50 - ₹75</Option>
+                  <Option value="75+">Above ₹75</Option>
+                </Select>
+                <Select
+                  value={minRating}
+                  onChange={setMinRating}
+                  size="large"
+                  style={{ minWidth: 140, borderRadius: '12px' }}
+                  placeholder="Rating"
+                >
+                  <Option value="All">All Ratings</Option>
+                  <Option value="4.5">4.5+ stars</Option>
+                  <Option value="4">4.0+ stars</Option>
+                  <Option value="3.5">3.5+ stars</Option>
+                </Select>
               </div>
             </Col>
           </Row>
@@ -407,13 +444,13 @@ const Products = () => {
                           addToCart(product)
                         }}
                         style={{
-                          background: '#0f172a',
+                          background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
                           border: 'none',
                           borderRadius: '50%',
                           width: '46px',
                           height: '46px',
                           color: '#fff',
-                          boxShadow: '0 8px 24px rgba(15,23,42,0.2)',
+                          boxShadow: '0 10px 26px rgba(0,174,239,0.25)',
                           transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
@@ -503,13 +540,13 @@ const Products = () => {
                     type="primary"
                     block
                     style={{
-                      background: '#0f172a',
+                      background: 'linear-gradient(135deg, #00aeef 0%, #1e3a5f 100%)',
                       border: 'none',
                       borderRadius: '12px',
                       height: '44px',
                       fontWeight: 700,
                       fontSize: '14px',
-                      boxShadow: '0 10px 30px rgba(15,23,42,0.18)',
+                      boxShadow: '0 12px 32px rgba(0,174,239,0.26)',
                       transition: 'all 0.25s ease',
                     }}
                     onMouseEnter={(e) => {
