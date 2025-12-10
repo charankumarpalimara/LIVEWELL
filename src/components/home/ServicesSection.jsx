@@ -33,7 +33,7 @@ const ServicesSection = ({ isVisible }) => {
     <div
       data-animate-id="services"
       style={{ 
-        padding: '70px 30px',
+        padding: 'clamp(40px, 8vw, 70px) clamp(16px, 4vw, 30px)',
         background: 'linear-gradient(180deg, #f8fbff 0%, #ffffff 50%, #f8fbff 100%)',
         position: 'relative',
         overflow: 'hidden',
@@ -63,7 +63,7 @@ const ServicesSection = ({ isVisible }) => {
         zIndex: 0,
       }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1, width: '100%' }}>
         <div style={{ textAlign: 'center', marginBottom: '70px' }}>
           <div style={{
             color: '#00aeef',
@@ -121,7 +121,7 @@ const ServicesSection = ({ isVisible }) => {
             ...getSlideFromBottom(0.2, isVisible('services')),
           }} />
         </div>
-      <Row gutter={[20, 20]} justify="center">
+      <Row gutter={[16, 16]} justify="center">
         {services.map((service, index) => (
           <Col xs={12} sm={8} md={6} lg={4} key={index}>
             <Link to={getServiceUrl(service.name)} style={{ textDecoration: 'none' }}>
@@ -129,16 +129,18 @@ const ServicesSection = ({ isVisible }) => {
                 hoverable
                 style={{
                   border: 'none',
-                  // borderRadius: '12px',
+                  borderRadius: '12px',
                   overflow: 'hidden',
                   background: '#ffffff',  
                   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
                   transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
                   position: 'relative',
+                  width: '100%',
+                  maxWidth: '100%',
                   ...getSlideFromLeft(0.1 + index * 0.08, isVisible('services')),
                 }}
-                bodyStyle={{ padding: '20px' }}
+                bodyStyle={{ padding: 'clamp(16px, 4vw, 20px)' }}
                 cover={
                   <div style={{ 
                     height: '160px', 
@@ -186,14 +188,17 @@ const ServicesSection = ({ isVisible }) => {
               >
                 <div style={{
                   display: 'flex',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   gap: '10px',
+                  width: '100%',
+                  minWidth: 0,
                 }}>
                   <div style={{
-                    fontSize: '28px',
+                    fontSize: 'clamp(20px, 4vw, 28px)',
                     color: service.color,
-                    width: '50px',
-                    height: '50px',
+                    width: 'clamp(40px, 8vw, 50px)',
+                    height: 'clamp(40px, 8vw, 50px)',
+                    minWidth: 'clamp(40px, 8vw, 50px)',
                     borderRadius: '5px',
                     background: `linear-gradient(135deg, ${service.color}20 0%, ${service.color}10 100%)`,
                     display: 'flex',
@@ -208,9 +213,14 @@ const ServicesSection = ({ isVisible }) => {
                   <div style={{ 
                     fontWeight: '800', 
                     color: '#1e3a5f', 
-                    fontSize: '15px', 
+                    fontSize: 'clamp(12px, 3vw, 15px)', 
                     lineHeight: '1.4',
                     letterSpacing: '0.3px',
+                    flex: 1,
+                    minWidth: 0,
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word',
+                    hyphens: 'auto',
                   }}>
                     {service.name}
                   </div>
