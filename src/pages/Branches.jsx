@@ -63,6 +63,13 @@ const Branches = () => {
     transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
   })
 
+  // Branch Image Requirements:
+  // - Recommended size: 800-1000px width × 450-600px height
+  // - Aspect ratio: 16:9 (1.78:1) or 3:2 (1.5:1) works best
+  // - Format: JPG or PNG
+  // - File size: Under 500KB for optimal loading
+  // - Display size: Images are displayed at 180px height with objectFit: 'cover'
+  //   (Images will be cropped to fit while maintaining aspect ratio)
   const branches = [
     // {
     //   id: 1,

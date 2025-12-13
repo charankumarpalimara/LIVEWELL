@@ -15,6 +15,9 @@ import {
 
 const { Title, Paragraph } = Typography
 
+import menImage from '../assets/men.jpg'
+import womenImage from '../assets/women.jpg'
+
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
   const [visibleElements, setVisibleElements] = useState(new Set())
@@ -77,14 +80,14 @@ const About = () => {
       name: 'Dr. Feroz wani',
       role: 'Managing Director',
       // image: ferozImage, // Uncomment when image is added
-      image: 'https://images.unsplash.com/photo-1591980896142-4e36328411ec?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=300&h=300&fit=crop',
+      image: womenImage,
       specialty: 'Strategic Leadership',
     },
     {
       name: 'Dr. Subiya',
       role: 'Chief Executive Officer',
       // image: subiyaImage, // Uncomment when image is added
-      image: 'https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=300&h=300&fit=crop',
+      image: menImage,
       specialty: 'Operations & Growth',
     },
   ]
