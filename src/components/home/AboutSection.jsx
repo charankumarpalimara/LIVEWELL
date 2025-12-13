@@ -54,7 +54,7 @@ const AboutSection = ({ isVisible }) => {
               padding: '8px',
             }}>
               <img
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=450&fit=crop"
+                src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&h=450&fit=crop"
                 alt="Child Therapy Session"
                 style={{
                   width: '100%',

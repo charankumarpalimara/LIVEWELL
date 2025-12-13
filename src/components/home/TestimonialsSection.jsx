@@ -271,7 +271,7 @@ const TestimonialsSection = ({ isVisible }) => {
                   }}>
                     Parent of {testimonial.child}
                   </div>
-                  <div style={{
+                  {/* <div style={{
                     color: '#ffffff',
                     fontSize: '12px',
                     fontWeight: '600',
@@ -284,7 +284,7 @@ const TestimonialsSection = ({ isVisible }) => {
                     textTransform: 'uppercase',
                   }}>
                     {testimonial.service}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Accent border */}

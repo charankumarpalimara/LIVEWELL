@@ -64,89 +64,203 @@ const Branches = () => {
   })
 
   const branches = [
+    // {
+    //   id: 1,
+    //   name: 'Live Well - Hyderabad (Banjara Hills)',
+    //   address: 'Plot No. 8-2-293/82/A/431, Road No. 22, Banjara Hills, Hyderabad - 500034',
+    //   phone: '+91 8977510100',
+    //   email: 'banjarahills@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Telangana',
+    //   city: 'Hyderabad',
+    //   isHeadquarters: true,
+    //   services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+    //   image: secunderabadImage,
+    //   mapUrl: 'https://maps.google.com/?q=Banjara+Hills+Hyderabad',
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Live Well - Bangalore (Koramangala)',
+    //   address: '4th Block, Koramangala, Bangalore - 560034',
+    //   phone: '+91 8977510103',
+    //   email: 'bangalore@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Karnataka',
+    //   city: 'Bangalore',
+    //   isHeadquarters: false,
+    //   services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Behavior Therapy'],
+    //   image: bengaluruImage,
+    //   mapUrl: 'https://maps.google.com/?q=Koramangala+Bangalore',
+    // },
+    // {
+    //   id: 3,
+    //   name: 'Live Well - Chennai (Anna Nagar)',
+    //   address: 'Plot No. 2234, 2nd Avenue, Anna Nagar, Chennai - 600040',
+    //   phone: '+91 8977510104',
+    //   email: 'chennai@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Tamil Nadu',
+    //   city: 'Chennai',
+    //   isHeadquarters: false,
+    //   services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy'],
+    //   image: chennaiImage,
+    //   mapUrl: 'https://maps.google.com/?q=Anna+Nagar+Chennai',
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Live Well - Vijayawada',
+    //   address: 'Door No. 29-5-35, Prakasam Road, Governorpet, Vijayawada - 520002',
+    //   phone: '+91 8977510105',
+    //   email: 'vijayawada@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Andhra Pradesh',
+    //   city: 'Vijayawada',
+    //   isHeadquarters: false,
+    //   services: ['Autism Therapy', 'Speech Therapy', 'Special Education'],
+    //   image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+    //   mapUrl: 'https://maps.google.com/?q=Vijayawada',
+    // },
+    // {
+    //   id: 5,
+    //   name: 'Live Well - Visakhapatnam',
+    //   address: 'Door No. 47-11-16, Dwaraka Nagar, Visakhapatnam - 530016',
+    //   phone: '+91 8977510106',
+    //   email: 'vizag@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Andhra Pradesh',
+    //   city: 'Visakhapatnam',
+    //   isHeadquarters: false,
+    //   services: ['Speech Therapy', 'Occupational Therapy', 'Behavior Therapy'],
+    //   image: vizagImage,
+    //   mapUrl: 'https://maps.google.com/?q=Visakhapatnam',
+    // },
+    // {
+    //   id: 6,
+    //   name: 'Live Well - Pune (Kothrud)',
+    //   address: 'Office No. 12, 3rd Floor, Karve Road, Kothrud, Pune - 411038',
+    //   phone: '+91 8977510107',
+    //   email: 'pune@livewellrehab.com',
+    //   timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+    //   state: 'Maharashtra',
+    //   city: 'Pune',
+    //   isHeadquarters: false,
+    //   services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Play Therapy'],
+    //   image: puneImage,
+    //   mapUrl: 'https://maps.google.com/?q=Kothrud+Pune',
+    // },
     {
-      id: 1,
-      name: 'Live Well - Hyderabad (Banjara Hills)',
-      address: 'Plot No. 8-2-293/82/A/431, Road No. 22, Banjara Hills, Hyderabad - 500034',
-      phone: '+91 8977510100',
-      email: 'banjarahills@livewellrehab.com',
+      id: 7,
+      name: 'Live Well - KPHB Colony',
+      address: 'HiG 208 Dharma Reddy Colony Phase 1, above HDB Financials, beside Post Office, Kukatpally Housing Board Colony, Telangana 500085',
+      phone: '+91 8977510108',
+      email: 'kphb@livewellrehab.com',
       timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
       state: 'Telangana',
       city: 'Hyderabad',
-      isHeadquarters: true,
+      isHeadquarters: false,
       services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
-      image: secunderabadImage,
-      mapUrl: 'https://maps.google.com/?q=Banjara+Hills+Hyderabad',
-    },
-    {
-      id: 2,
-      name: 'Live Well - Bangalore (Koramangala)',
-      address: '4th Block, Koramangala, Bangalore - 560034',
-      phone: '+91 8977510103',
-      email: 'bangalore@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Karnataka',
-      city: 'Bangalore',
-      isHeadquarters: false,
-      services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Behavior Therapy'],
-      image: bengaluruImage,
-      mapUrl: 'https://maps.google.com/?q=Koramangala+Bangalore',
-    },
-    {
-      id: 3,
-      name: 'Live Well - Chennai (Anna Nagar)',
-      address: 'Plot No. 2234, 2nd Avenue, Anna Nagar, Chennai - 600040',
-      phone: '+91 8977510104',
-      email: 'chennai@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Tamil Nadu',
-      city: 'Chennai',
-      isHeadquarters: false,
-      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy'],
-      image: chennaiImage,
-      mapUrl: 'https://maps.google.com/?q=Anna+Nagar+Chennai',
-    },
-    {
-      id: 4,
-      name: 'Live Well - Vijayawada',
-      address: 'Door No. 29-5-35, Prakasam Road, Governorpet, Vijayawada - 520002',
-      phone: '+91 8977510105',
-      email: 'vijayawada@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Andhra Pradesh',
-      city: 'Vijayawada',
-      isHeadquarters: false,
-      services: ['Autism Therapy', 'Speech Therapy', 'Special Education'],
       image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
-      mapUrl: 'https://maps.google.com/?q=Vijayawada',
+      mapUrl: 'https://maps.app.goo.gl/UYTLC4QBiXhxuprs8',
     },
     {
-      id: 5,
-      name: 'Live Well - Visakhapatnam',
-      address: 'Door No. 47-11-16, Dwaraka Nagar, Visakhapatnam - 530016',
-      phone: '+91 8977510106',
-      email: 'vizag@livewellrehab.com',
+      id: 8,
+      name: 'Live Well - Pragati Nagar',
+      address: 'Plot 1035, Flat no 201, Pragathi Nagar, Medchal Malkajgiri, Nizampet, Dt, Telangana 500090.',
+      phone: '+91 8977510109',
+      email: 'pragatinagar@livewellrehab.com',
       timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      state: 'Telangana',
+      city: 'Hyderabad',
+      isHeadquarters: false,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+      mapUrl: 'https://maps.app.goo.gl/oeEDahPb5ZHLHJUo6',
+    },
+    {
+      id: 9,
+      name: 'Live Well - Jammu & Kashmir (Bemina)',
+      address: 'H-No. 33, near Post Office, Alamdar Housing Colony, Colony, Bemina, Srinagar, Jammu and Kashmir 190018, India',
+      phone: '+91 8977510110',
+      email: 'jammu@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      state: 'Jammu & Kashmir',
+      city: 'Srinagar',
+      isHeadquarters: false,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+      mapUrl: 'https://maps.app.goo.gl/quQXxt37PMTdckTj9',
+    },
+    {
+      id: 10,
+      name: 'Live Well - Chanda Nagar',
+      address: 'Plot no 5 first floor, Survey number 361, Dno 4, 127/1,  Chandanagar Road, Busstop, Chanda Nagar, Hyderabad, Telangana 500050',
+      phone: '+91 8977510111',
+      email: 'chandanagar@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      state: 'Telangana',
+      city: 'Hyderabad',
+      isHeadquarters: false,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+      mapUrl: 'https://maps.app.goo.gl/kALEDqgjhYmFcC748',
+    },
+    {
+      id: 11,
+      name: 'Live Well - Jammu & Kashmir (Bemina Main Road)',
+      address: 'H-No. 33, near Post Office, Alamdar Housing Colony, Colony, Bemina, Srinagar, Jammu and Kashmir 190018',
+      phone: '+91 8977510112',
+      email: 'jammu2@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      state: 'Jammu & Kashmir',
+      city: 'Srinagar',
+      isHeadquarters: false,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+      mapUrl: 'https://maps.app.goo.gl/egSPynfcgRXp2YJn9',
+    },
+    {
+      id: 12,
+      name: 'Live Well - Suchitra',
+      address: 'H.No. 06-28, Plot no 1, 2nd floor, Suchitra Rd, Suchitra, Vennala Gadda, Jeedimetla, Hyderabad, Telangana 500055',
+      phone: '+91 8977510113',
+      email: 'suchitra@livewellrehab.com',
+      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
+      state: 'Telangana',
+      city: 'Hyderabad',
+      isHeadquarters: false,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=250&fit=crop&q=80',
+      mapUrl: 'https://maps.app.goo.gl/ddt9VMvfSsNfqk6Q7',
+    },
+    {
+      id: 13,
+      name: 'Live Well - Visakhapatnam',
+      address: 'Coming Soon',
+      phone: 'TBA',
+      email: 'vizag@livewellrehab.com',
+      timing: 'Coming Soon',
       state: 'Andhra Pradesh',
       city: 'Visakhapatnam',
       isHeadquarters: false,
-      services: ['Speech Therapy', 'Occupational Therapy', 'Behavior Therapy'],
+      isComingSoon: true,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
       image: vizagImage,
       mapUrl: 'https://maps.google.com/?q=Visakhapatnam',
     },
     {
-      id: 6,
-      name: 'Live Well - Pune (Kothrud)',
-      address: 'Office No. 12, 3rd Floor, Karve Road, Kothrud, Pune - 411038',
-      phone: '+91 8977510107',
-      email: 'pune@livewellrehab.com',
-      timing: 'Mon - Sat: 8:00 AM - 7:30 PM',
-      state: 'Maharashtra',
-      city: 'Pune',
+      id: 14,
+      name: 'Live Well - Bengaluru',
+      address: 'Coming Soon',
+      phone: 'TBA',
+      email: 'bengaluru@livewellrehab.com',
+      timing: 'Coming Soon',
+      state: 'Karnataka',
+      city: 'Bengaluru',
       isHeadquarters: false,
-      services: ['Autism Therapy', 'Speech Therapy', 'Special Education', 'Play Therapy'],
-      image: puneImage,
-      mapUrl: 'https://maps.google.com/?q=Kothrud+Pune',
+      isComingSoon: true,
+      services: ['Autism Therapy', 'Speech Therapy', 'Occupational Therapy', 'Special Education'],
+      image: bengaluruImage,
+      mapUrl: 'https://maps.google.com/?q=Bengaluru',
     },
   ]
 
@@ -335,6 +449,22 @@ const Branches = () => {
                         <StarFilled /> Headquarters
                       </Tag>
                     )}
+                    {branch.isComingSoon && (
+                      <Tag 
+                        color="red" 
+                        style={{ 
+                          position: 'absolute', 
+                          top: '15px', 
+                          right: '15px',
+                          padding: '5px 12px',
+                          fontSize: '12px',
+                          fontWeight: '600',
+                          borderRadius: '20px',
+                        }}
+                      >
+                        Coming Soon
+                      </Tag>
+                    )}
                     <div style={{
                       position: 'absolute',
                       bottom: '15px',
@@ -358,17 +488,21 @@ const Branches = () => {
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '15px' }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                        <EnvironmentOutlined style={{ color: '#00aeef', fontSize: '16px', marginTop: '3px' }} />
-                        <span style={{ color: '#666', fontSize: '13px', lineHeight: '1.5' }}>{branch.address}</span>
+                        <EnvironmentOutlined style={{ color: branch.isComingSoon ? '#999' : '#00aeef', fontSize: '16px', marginTop: '3px' }} />
+                        <span style={{ color: branch.isComingSoon ? '#999' : '#666', fontSize: '13px', lineHeight: '1.5', fontStyle: branch.isComingSoon ? 'italic' : 'normal' }}>{branch.address}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <PhoneOutlined style={{ color: '#00a651', fontSize: '16px' }} />
-                        <a href={`tel:${branch.phone}`} style={{ color: '#1e3a5f', fontWeight: '600' }}>{branch.phone}</a>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <ClockCircleOutlined style={{ color: '#f7941d', fontSize: '16px' }} />
-                        <span style={{ color: '#666', fontSize: '13px' }}>{branch.timing}</span>
-                      </div>
+                      {!branch.isComingSoon && (
+                        <>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <PhoneOutlined style={{ color: '#00a651', fontSize: '16px' }} />
+                            <a href={`tel:${branch.phone}`} style={{ color: '#1e3a5f', fontWeight: '600' }}>{branch.phone}</a>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <ClockCircleOutlined style={{ color: '#f7941d', fontSize: '16px' }} />
+                            <span style={{ color: '#666', fontSize: '13px' }}>{branch.timing}</span>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     {/* Services */}
@@ -385,37 +519,56 @@ const Branches = () => {
                     </div>
 
                     {/* Actions */}
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                      <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" style={{ flex: 1 }}>
+                    {!branch.isComingSoon ? (
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" style={{ flex: 1 }}>
+                          <Button
+                            block
+                            style={{
+                              borderRadius: '25px',
+                              height: '40px',
+                              fontWeight: '600',
+                              border: '2px solid #00aeef',
+                              color: '#00aeef',
+                            }}
+                          >
+                            <EnvironmentOutlined /> Directions
+                          </Button>
+                        </a>
+                        <a href={`tel:${branch.phone}`} style={{ flex: 1 }}>
+                          <Button
+                            type="primary"
+                            block
+                            style={{
+                              borderRadius: '25px',
+                              height: '40px',
+                              fontWeight: '600',
+                              background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
+                              border: 'none',
+                            }}
+                          >
+                            <PhoneOutlined /> Call Now
+                          </Button>
+                        </a>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', gap: '10px' }}>
                         <Button
                           block
+                          disabled
                           style={{
                             borderRadius: '25px',
                             height: '40px',
                             fontWeight: '600',
-                            border: '2px solid #00aeef',
-                            color: '#00aeef',
+                            background: '#f5f5f5',
+                            color: '#999',
+                            border: '1px solid #e8e8e8',
                           }}
                         >
-                          <EnvironmentOutlined /> Directions
+                          Coming Soon
                         </Button>
-                      </a>
-                      <a href={`tel:${branch.phone}`} style={{ flex: 1 }}>
-                        <Button
-                          type="primary"
-                          block
-                          style={{
-                            borderRadius: '25px',
-                            height: '40px',
-                            fontWeight: '600',
-                            background: 'linear-gradient(135deg, #00aeef 0%, #00a651 100%)',
-                            border: 'none',
-                          }}
-                        >
-                          <PhoneOutlined /> Call Now
-                        </Button>
-                      </a>
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </Card>
               </Col>

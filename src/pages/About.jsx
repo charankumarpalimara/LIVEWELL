@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Typography, Timeline } from 'antd'
+// import ferozImage from '../assets/feroz-wani.jpg'
+// import subiyaImage from '../assets/subiya.jpg'
 import { 
   TrophyFilled, 
   TeamOutlined, 
@@ -67,17 +69,22 @@ const About = () => {
     transition: `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
   })
 
+  // TODO: Add team member photos to src/assets/ folder and uncomment the imports above
+  // Recommended image names: feroz-wani.jpg, subiya.jpg
+  // Then replace the image URLs below with: ferozImage and subiyaImage
   const teamMembers = [
     {
-      name: 'Dr. Ananya Rao',
+      name: 'Dr. Feroz wani',
       role: 'Managing Director',
-      image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&h=300&fit=crop',
+      // image: ferozImage, // Uncomment when image is added
+      image: 'https://images.unsplash.com/photo-1591980896142-4e36328411ec?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=300&h=300&fit=crop',
       specialty: 'Strategic Leadership',
     },
     {
-      name: 'Mr. Arjun Mehta',
+      name: 'Dr. Subiya',
       role: 'Chief Executive Officer',
-      image: 'https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop',
+      // image: subiyaImage, // Uncomment when image is added
+      image: 'https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=300&h=300&fit=crop',
       specialty: 'Operations & Growth',
     },
   ]
