@@ -336,9 +336,9 @@ const Contact = () => {
       {/* Branches Section */}
       <div 
         data-animate-id="branches"
-        style={{ padding: '50px 30px', maxWidth: '1200px', background: '#f8fbff' }}
+        style={{ padding: '50px 30px', maxWidth: '1400px', background: '#f8fbff' }}
       >
-        <div style={{ margin: '0 auto' }}>
+        <div style={{  maxWidth: '1400px',  margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <div style={{ 
               color: '#00aeef', 
