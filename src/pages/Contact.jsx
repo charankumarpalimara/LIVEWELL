@@ -671,7 +671,7 @@ const Contact = () => {
                   {[
                     { icon: <PhoneOutlined />, label: 'Call Now', value: '+91 89775 10100', color: '#e31e24' },
                     { icon: <WhatsAppOutlined />, label: 'WhatsApp', value: '+91 89775 10100', color: '#25d366' },
-                    { icon: <GlobalOutlined />, label: 'Website', value: 'https://livewellrehabilitationnetwork.com', color: '#f7941d' },
+                    // { icon: <GlobalOutlined />, label: 'Website', value: 'https://livewellrehabilitationnetwork.com', color: '#f7941d' },
                   ].map((item, index) => (
                     <Col xs={24} key={index}>
                       <div
